@@ -484,7 +484,8 @@ a.paper-cites:hover { color: var(--accent-text); }
 .graph-link .t-links path { fill: none; stroke: #8a8a8a; stroke-width: 1.4; }
 
 .catalogue-body { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 0; align-items: start; }
-.filters { position: sticky; top: 64px; max-height: calc(100vh - 64px); overflow-y: auto; overscroll-behavior: contain; padding: 18px 20px 24px 32px; background: var(--surface); border-right: 1px solid var(--line); scrollbar-width: thin; align-self: stretch; }
+.filters { position: sticky; top: 64px; max-height: calc(100vh - 64px); overflow-y: auto; overscroll-behavior: contain; padding: 18px 20px 24px 32px; background: var(--surface); border-right: 1px solid var(--line); scrollbar-width: thin; align-self: start; }
+.catalogue-body { background: linear-gradient(to right, var(--surface) 250px, transparent 250px); }
 .facet { border-top: 0; padding: 0 0 14px; }
 .facet summary { font-family: var(--serif); font-size: 16px; font-weight: 700; letter-spacing: .02em; padding: 4px 0; }
 .facet-options { margin-top: 2px; }
@@ -711,3 +712,4 @@ img.avatar { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; b
 .people-side .person { align-items: center; gap: 20px; }
 .people-side img.avatar { width: 112px; height: 112px; }
 .people-side .person h3 { font-size: 24px; }
+@media (max-width: 860px) { .catalogue-body { background: none; } }
