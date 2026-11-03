@@ -78,6 +78,11 @@
       "publication": "bowman-1999-thesis",
       "role": "surveyed",
       "where": "5.3.3"
+    },
+    {
+      "publication": "bowman-2004-3dui",
+      "role": "surveyed",
+      "where": "5.4.5, p. 164"
     }
   ],
   "relationships": [
