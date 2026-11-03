@@ -112,20 +112,15 @@ export default function Catalogue() {
             <g className="t-links">
               <path d="M18 52 38 30 62 40 86 18 104 34M38 30 50 62 62 40 80 58 104 34M18 52 50 62" />
             </g>
-            <g className="t-nodes">
-              <circle cx="18" cy="52" r="4" />
-              <circle cx="38" cy="30" r="5" />
-              <circle cx="50" cy="62" r="3.5" />
-              <circle cx="86" cy="18" r="4" />
-              <circle cx="80" cy="58" r="3.5" />
-              <circle cx="104" cy="34" r="4.5" />
-            </g>
-            <circle className="t-focus" cx="62" cy="40" r="7" />
+            <circle cx="18" cy="52" r="5" fill="#3f6fb0" />
+            <circle cx="38" cy="30" r="6" fill="#4f8a4b" />
+            <circle cx="50" cy="62" r="4.5" fill="#c08a2e" />
+            <circle cx="86" cy="18" r="5" fill="#7a4fa3" />
+            <circle cx="80" cy="58" r="4.5" fill="#2f8f8a" />
+            <circle cx="104" cy="34" r="5.5" fill="#3f6fb0" />
+            <circle cx="62" cy="40" r="8" fill="#e0475b" stroke="#fff" strokeWidth="2" />
           </svg>
-          <span>
-            <strong>Similarity graph</strong>
-            <span>Find the techniques closest to yours</span>
-          </span>
+          <strong>Similarity graph</strong>
         </Link>
       </section>
 
