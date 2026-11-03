@@ -2,11 +2,13 @@
   "id": "bubble-raycasting",
   "name": "Bubble Raycasting",
   "aliases": [
-    "BubbleRay"
+    "BubbleRay",
+    "BubbleRay-A",
+    "BubbleRay-E"
   ],
   "year": 2020,
-  "summary": "A ray-casting variation that integrates a bubble mechanism to improve 3D target acquisition in virtual reality.",
-  "howItWorks": "The user points toward the target with a ray. Instead of selecting only the exact ray intersection, the system applies a bubble-like selection region around the ray to determine the most likely target.",
+  "summary": "Ray-casting with a bubble: when the controller ray misses, the object closest to it is selected anyway, shown by a disc tangent to that object and a curved line to it, so the user never has to hit the target exactly.",
+  "howItWorks": "If the ray passes through objects, the first one is selected. Otherwise the object nearest to the ray is selected, measured either as the 3D distance from the ray to the object's surface (BubbleRay-E) or as the angle between them seen from the hand (BubbleRay-A). A semi-transparent disc, drawn on a sphere around the user's eyes so it slides smoothly between targets, is tangent to the chosen object, and a Bézier curve from the controller points to it; the trigger confirms. The angular version worked better, especially for partly hidden targets, because the empty space around them still counts. Experiment 1 (12 participants, HTC Vive, ten spheres at near, middle and far depths): BubbleRay-A 20.9 s per scene, BubbleRay-E 23.1 s, Heuristic Ray 26.2 s, 3D Bubble Cursor 27.4 s, Quad Cone 30.9 s, Naive Ray 46.2 s and Go-Go 56.2 s; error rates 1.8%, 2.7%, 4.4%, 1.0%, 0.4%, 23.5% and 15.0%. Experiment 2 (12 participants, dense, occluded and dense-plus-occluded layouts): the bubble rays were fast but error-prone in dense scenes, while Quad Cone was slowest with the fewest errors.",
   "advantages": [
     "Selecting small, dense, or difficult-to-point-at targets in VR when standard ray-casting requires too much precision."
   ],
@@ -19,8 +21,7 @@
   ],
   "attributes": {
     "selectionTool": [
-      "ray",
-      "volume"
+      "ray"
     ],
     "toolOrigin": [
       "hand"
@@ -38,10 +39,12 @@
       "button"
     ],
     "targetDistance": [
+      "near",
+      "near-distant",
       "far"
     ],
     "handlesOcclusion": [
-      "no"
+      "partly"
     ],
     "environment": [
       "vr"
@@ -59,7 +62,7 @@
   "publications": [
     {
       "publication": "legacy-paper-bubble-raycasting",
-      "role": "reference"
+      "role": "introduced"
     },
     {
       "publication": "seed-yu-2024",
@@ -73,24 +76,35 @@
   ],
   "relationships": [
     {
-      "technique": "cone-casting",
-      "type": "related",
-      "note": "Carried over from the old catalogue; no source yet."
-    },
-    {
       "technique": "bubble-cursor",
-      "type": "related",
-      "note": "Carried over from the old catalogue; no source yet."
+      "type": "extends",
+      "note": "Brings the bubble cursor's nearest-target rule to ray-casting."
     },
     {
-      "technique": "aperture-selection",
-      "type": "related",
-      "note": "Carried over from the old catalogue; no source yet."
+      "technique": "raycasting",
+      "type": "compared-with",
+      "source": "legacy-paper-bubble-raycasting"
+    },
+    {
+      "technique": "go-go",
+      "type": "compared-with",
+      "source": "legacy-paper-bubble-raycasting"
+    },
+    {
+      "technique": "intenselect",
+      "type": "compared-with",
+      "source": "legacy-paper-bubble-raycasting",
+      "note": "Compared with Heuristic Ray, a scoring ray based on IntenSelect."
+    },
+    {
+      "technique": "quadcone",
+      "type": "compared-with",
+      "source": "legacy-paper-bubble-raycasting"
     }
   ],
   "review": {
     "status": "draft",
-    "notes": "Attributes drafted by Claude from the technique description and the 2013 survey classification; not yet checked against the paper.",
+    "notes": "Rewritten from the full text in Nov 2026. Attributes coded by Claude; not yet reviewed by the team.",
     "uncertain": []
   }
 }

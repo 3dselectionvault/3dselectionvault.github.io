@@ -72,6 +72,10 @@
     {
       "publication": "shi-2026-moa",
       "role": "evaluated"
+    },
+    {
+      "publication": "legacy-paper-bubble-raycasting",
+      "role": "evaluated"
     }
   ],
   "relationships": [
