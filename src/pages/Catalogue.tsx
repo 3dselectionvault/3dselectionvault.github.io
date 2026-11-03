@@ -1,11 +1,27 @@
 import { useMemo, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { attributes, techniques, valueLabel } from '../lib/data';
 import { countValues, search, type Filters, type SortKey } from '../lib/search';
 import { citePubsOf } from '../lib/citations';
 import SelectionBar from '../SelectionBar';
+import ToolGlyph from '../ToolGlyph';
+import { publications } from '../lib/data';
 
-const OPEN_BY_DEFAULT = new Set(['selectionTool', 'inputModality', 'disambiguation']);
+const OPEN_BY_DEFAULT = new Set(['environment', 'selectionTool', 'inputModality', 'disambiguation', 'targetDistance', 'handlesOcclusion']);
+
+// Columns of the table after the name and year, in order.
+const COLUMNS: { attr: string; label: string; className?: string }[] = [
+  { attr: 'environment', label: 'Environment', className: 'wrap' },
+  { attr: 'selectionTool', label: 'Tool' },
+  { attr: 'inputModality', label: 'Input', className: 'opt wrap' },
+  { attr: 'disambiguation', label: 'Disambiguation', className: 'opt wrap' },
+  { attr: 'targetDistance', label: 'Distance' },
+  { attr: 'handlesOcclusion', label: 'Occlusion', className: 'opt2' },
+];
+// Short labels for the table: drop the explanation in brackets.
+const short = (attr: string, v: string) => valueLabel(attr, v).replace(/ \(.*\)/, '');
+const cell = (vals: string[] | undefined, attr: string) =>
+  vals && vals.length ? vals.map((v) => short(attr, v)).join(', ') : '—';
 
 // Filter state lives in the URL so a filtered view can be shared as a link.
 function readFilters(params: URLSearchParams): Filters {
@@ -19,6 +35,9 @@ function readFilters(params: URLSearchParams): Filters {
 
 export default function Catalogue() {
   const [params, setParams] = useSearchParams();
+  const navigate = useNavigate();
+  // On phones the filter groups start closed so the list is visible.
+  const narrow = typeof window !== 'undefined' && window.matchMedia('(max-width: 860px)').matches;
   const query = params.get('q') ?? '';
   const sort = (params.get('sort') as SortKey) ?? 'name';
   const filters = useMemo(() => readFilters(params), [params]);
@@ -64,17 +83,31 @@ export default function Catalogue() {
     .map((a) => ({ attr: a, counts: countValues(techniques, a.id) }))
     .filter((g) => g.counts.size > 0);
 
+  const pickAllShown = () =>
+    setPicked((cur) => {
+      const next = new Set(cur);
+      for (const t of results) allShownPicked ? next.delete(t.id) : next.add(t.id);
+      return next;
+    });
+
   return (
     <div className="catalogue">
-      <section className="intro-row">
-        <div className="intro">
+      <section className="cat-hero">
+        <div className="cat-title">
           <h1>3D selection techniques</h1>
           <p>
-            A catalogue of techniques for selecting objects in virtual and mixed reality, each linked
-            to the papers that introduce and evaluate it.
+            {techniques.length} techniques · {publications.length} papers
           </p>
         </div>
-        <Link to="/graph" className="graph-teaser">
+        <input
+          type="search"
+          className="hero-search"
+          placeholder="Search names, descriptions, authors, papers"
+          value={query}
+          onChange={(e) => update('q', e.target.value || null)}
+          aria-label="Search techniques"
+        />
+        <Link to="/graph" className="graph-link">
           <svg viewBox="0 0 120 80" aria-hidden="true">
             <g className="t-links">
               <path d="M18 52 38 30 62 40 86 18 104 34M38 30 50 62 62 40 80 58 104 34M18 52 50 62" />
@@ -89,28 +122,19 @@ export default function Catalogue() {
             </g>
             <circle className="t-focus" cx="62" cy="40" r="7" />
           </svg>
-          <span className="teaser-text">
-            <strong>Which techniques should you compare against?</strong>
-            <span>Explore the similarity graph, or place your own technique to find its nearest neighbours.</span>
-            <span className="teaser-cta">Open the similarity graph →</span>
+          <span>
+            <strong>Similarity graph</strong>
+            <span>Find the techniques closest to yours</span>
           </span>
         </Link>
       </section>
 
       <div className="catalogue-body">
         <aside className="filters" aria-label="Filters">
-          <div className="filters-head">
-            <h2>Filter</h2>
-            {active > 0 && (
-              <button type="button" className="link-button" onClick={clearAll}>
-                Clear {active}
-              </button>
-            )}
-          </div>
           {facetGroups.map(({ attr, counts }) => {
             const activeHere = filters[attr.id]?.length ?? 0;
             return (
-              <details key={attr.id} className="facet" open={OPEN_BY_DEFAULT.has(attr.id) || activeHere > 0}>
+              <details key={attr.id} className="facet" open={(!narrow && OPEN_BY_DEFAULT.has(attr.id)) || activeHere > 0}>
                 <summary title={attr.description}>
                   <span>{attr.label}</span>
                   {activeHere > 0 && <span className="facet-active">{activeHere}</span>}
@@ -121,9 +145,10 @@ export default function Catalogue() {
                     .map((v) => {
                       const on = filters[attr.id]?.includes(v.id) ?? false;
                       return (
-                        <label key={v.id} className={on ? 'facet-option on' : 'facet-option'}>
+                        <label key={v.id} className={on ? 'facet-option on' : 'facet-option'} title={v.label}>
                           <input type="checkbox" checked={on} onChange={() => toggle(attr.id, v.id)} />
-                          <span>{v.label}</span>
+                          {attr.id === 'selectionTool' && <ToolGlyph tool={v.id} size={16} />}
+                          <span className="facet-label">{short(attr.id, v.id)}</span>
                           <span className="count">{counts.get(v.id)}</span>
                         </label>
                       );
@@ -139,14 +164,16 @@ export default function Catalogue() {
 
         <section className="results" aria-live="polite">
           <div className="toolbar">
-            <input
-              type="search"
-              className="search"
-              placeholder="Search names, descriptions, authors, papers"
-              value={query}
-              onChange={(e) => update('q', e.target.value || null)}
-              aria-label="Search techniques"
-            />
+            <p className="result-count">
+              {results.length === techniques.length
+                ? `${results.length} techniques`
+                : `${results.length} of ${techniques.length} techniques`}
+            </p>
+            {active > 0 && (
+              <button type="button" className="link-button" onClick={clearAll}>
+                Clear {active} filter{active === 1 ? '' : 's'}
+              </button>
+            )}
             <select
               value={sort}
               onChange={(e) => update('sort', e.target.value === 'name' ? null : e.target.value)}
@@ -157,33 +184,6 @@ export default function Catalogue() {
               <option value="year-asc">Oldest first</option>
             </select>
           </div>
-          {results.length > 0 && (
-            <div className="cite-hint">
-              <svg className="cite-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 3v12m0 0-4.5-4.5M12 15l4.5-4.5M4 17v2.5A1.5 1.5 0 0 0 5.5 21h13a1.5 1.5 0 0 0 1.5-1.5V17" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
-              <p>
-                Tick <span className="cite-tag">Cite</span> on the techniques you want and download their papers as a
-                BibTeX (.bib) file.
-              </p>
-              <button
-                type="button"
-                className="button button-ghost"
-                onClick={() =>
-                  setPicked((cur) => {
-                    const next = new Set(cur);
-                    for (const t of results) allShownPicked ? next.delete(t.id) : next.add(t.id);
-                    return next;
-                  })
-                }
-              >
-                {allShownPicked ? 'Unselect all shown' : `Select all ${results.length} shown`}
-              </button>
-            </div>
-          )}
-          <p className="result-count">
-            {results.length === techniques.length
-              ? `${results.length} techniques`
-              : `${results.length} of ${techniques.length} techniques`}
-          </p>
 
           {results.length === 0 ? (
             <div className="empty">
@@ -193,40 +193,62 @@ export default function Catalogue() {
               </button>
             </div>
           ) : (
-            <ul className="grid">
-              {results.map((t) => (
-                <li key={t.id} className={picked.has(t.id) ? 'card-wrap picked' : 'card-wrap'}>
-                  <label className="card-select" title="Add its paper to a BibTeX download">
-                    <span>Cite</span>
-                    <input
-                      type="checkbox"
-                      checked={picked.has(t.id)}
-                      onChange={() => flip(t.id)}
-                      aria-label={`Select ${t.name}`}
-                    />
-                  </label>
-                  <Link to={`/technique/${t.id}`} className="card">
-                    <div className="card-top">
-                      <h3>{t.name}</h3>
-                      {t.year != null && <span className="year">{t.year}</span>}
-                    </div>
-                    <p>{t.summary}</p>
-                    <div className="chips">
-                      {(t.attributes.inputModality ?? []).map((v) => (
-                        <span key={v} className="chip">
-                          {valueLabel('inputModality', v)}
-                        </span>
-                      ))}
-                      {(t.attributes.targetDistance ?? []).map((v) => (
-                        <span key={v} className={`chip chip-${v}`}>
-                          {valueLabel('targetDistance', v).replace(/ \(.*\)/, '')}
-                        </span>
-                      ))}
-                    </div>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <table className="tech-table">
+              <thead>
+                <tr>
+                  <th className="g" aria-label="Selection tool" />
+                  <th>Technique</th>
+                  <th className="n">Year</th>
+                  {COLUMNS.map((c) => (
+                    <th key={c.attr} className={c.className}>
+                      {c.label}
+                    </th>
+                  ))}
+                  <th className="n opt2">Papers</th>
+                  <th className="ck">
+                    <label title={allShownPicked ? 'Unselect all shown' : 'Select all shown for BibTeX'}>
+                      Cite
+                      <input type="checkbox" checked={allShownPicked} onChange={pickAllShown} aria-label="Select all shown" />
+                    </label>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {results.map((t) => (
+                  <tr
+                    key={t.id}
+                    className={picked.has(t.id) ? 'picked' : undefined}
+                    onClick={(e) => {
+                      if ((e.target as HTMLElement).closest('a, input, label')) return;
+                      navigate(`/technique/${t.id}`);
+                    }}
+                  >
+                    <td className="g">
+                      <ToolGlyph tool={t.attributes.selectionTool?.[0]} />
+                    </td>
+                    <td className="nm">
+                      <Link to={`/technique/${t.id}`}>{t.name}</Link>
+                      <span>{t.summary}</span>
+                    </td>
+                    <td className="n">{t.year ?? '—'}</td>
+                    {COLUMNS.map((c) => (
+                      <td key={c.attr} className={c.className}>
+                        {cell(t.attributes[c.attr], c.attr)}
+                      </td>
+                    ))}
+                    <td className="n opt2">{t.publications.length}</td>
+                    <td className="ck">
+                      <input
+                        type="checkbox"
+                        checked={picked.has(t.id)}
+                        onChange={() => flip(t.id)}
+                        aria-label={`Cite ${t.name}`}
+                      />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           )}
         </section>
       </div>
