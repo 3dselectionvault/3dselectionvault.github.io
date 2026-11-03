@@ -20,7 +20,7 @@ const ERAS = [
   { id: 'e3', label: '2010–2019', test: (y: number) => y < 2020, color: '#2f8f8a' },
   { id: 'e4', label: '2020 onwards', test: () => true, color: '#c08a2e' },
 ];
-const REVIEW_COLOR = '#b23a48';
+const REVIEW_COLOR = '#1d5fbf';
 
 interface PNode {
   id: string;
