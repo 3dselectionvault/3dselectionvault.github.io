@@ -695,3 +695,16 @@ a.paper-cites:hover { color: var(--accent-text); }
 img.avatar { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; background: none; }
 @media (max-width: 1100px) { .can-do { grid-template-columns: repeat(2, minmax(0, 1fr)); } .can-do li:nth-child(4n + 1) { padding-left: 24px; border-left: 1px solid var(--line); } .can-do li:nth-child(odd) { padding-left: 0; border-left: 0; } }
 @media (max-width: 760px) { .about-band { padding: 0 16px; } .about-band .band-stats { margin-top: 0; } .can-do { grid-template-columns: 1fr; } .can-do li, .can-do li + li { padding: 16px 0; border-left: 0; } .intro-text p { font-size: 16.5px; } }
+
+/* About intro with people beside it */
+.intro-grid { display: grid; grid-template-columns: 280px minmax(0, 760px) minmax(280px, 1fr); gap: 32px; align-items: start; }
+.intro-grid > h2 { font-size: 34px; font-weight: 700; }
+.intro-people { padding-left: 32px; border-left: 1px solid var(--line); }
+.intro-people h2 { font-size: 26px; font-weight: 700; }
+.intro-people > p { margin: 2px 0 10px; }
+.people-side { grid-template-columns: 1fr; border-top: 0; }
+.people-side .person { padding: 14px 0; border-top: 1px solid var(--line); }
+.people-side .person + .person { padding-left: 0; border-left: 0; }
+.people-side .person p { margin: 0; }
+@media (max-width: 1200px) { .intro-grid { grid-template-columns: 220px minmax(0, 1fr); } .intro-people { grid-column: 2; padding-left: 0; border-left: 0; } }
+@media (max-width: 760px) { .intro-grid { grid-template-columns: 1fr; gap: 12px; } .intro-people { grid-column: auto; } }

@@ -63,15 +63,18 @@ export default function About() {
       </header>
 
       <section className="about-block about-intro">
-        <div className="block-head">
+        <div className="intro-grid">
           <h2>About the vault</h2>
           <div className="intro-text">
             <p>
-              Selection, pointing out the object you want to act on, is one of the most basic tasks in any 3D user
-              interface. Since the 1990s researchers have proposed hundreds of ways to do it in virtual reality,
-              augmented and mixed reality, desktop 3D and projection displays: ray casting and the virtual hand,
-              cones and volumes, gaze and head pointing, techniques that refine a choice step by step, and techniques
-              that reach objects hidden behind others.
+              3D selection is one of the fundamental tasks in virtual environments. In{' '}
+              <em>3D User Interfaces: Theory and Practice</em>, Bowman, Kruijff, LaViola and Poupyrev treat selection,
+              picking out the object or objects the user wants to work with, as one of the canonical manipulation
+              tasks alongside positioning and rotation, and nearly every other action on an object starts with it.
+              Since the early 1990s, researchers have proposed hundreds of ways to select in virtual reality, augmented
+              and mixed reality, desktop 3D and projection displays: ray casting and the virtual hand, cones and
+              volumes, gaze and head pointing, techniques that refine a choice step by step, and techniques that reach
+              objects hidden behind others.
             </p>
             <p>
               These techniques are spread across many conferences and journals and are described in different terms,
@@ -86,6 +89,28 @@ export default function About() {
               filtered, compared like for like and placed in a similarity map.
             </p>
           </div>
+          <aside className="intro-people" id="people" aria-label="People">
+            <h2>People</h2>
+            <p className="muted small">Concordia University, Montréal</p>
+            <div className="people people-side">
+              <div className="person">
+                <img className="avatar" src={rumeysaPhoto} alt="" width="72" height="72" />
+                <div>
+                  <h3>Rumeysa Turkmen</h3>
+                  <p>PhD candidate</p>
+                  <p className="muted small">Computer Science and Software Engineering</p>
+                </div>
+              </div>
+              <div className="person">
+                <img className="avatar" src={anilPhoto} alt="" width="72" height="72" />
+                <div>
+                  <h3>Anil Ufuk Batmaz</h3>
+                  <p>Assistant Professor</p>
+                  <p className="muted small">Computer Science and Software Engineering</p>
+                </div>
+              </div>
+            </div>
+          </aside>
         </div>
       </section>
 
@@ -179,30 +204,6 @@ export default function About() {
         </div>
       </section>
 
-      <section className="about-block" id="people">
-        <div className="block-head">
-          <h2>People</h2>
-          <p>The vault is maintained at Concordia University in Montréal, Canada.</p>
-        </div>
-        <div className="people">
-          <div className="person">
-            <img className="avatar" src={rumeysaPhoto} alt="" width="72" height="72" />
-            <div>
-              <h3>Rumeysa Turkmen</h3>
-              <p>PhD candidate</p>
-              <p className="muted small">Department of Computer Science and Software Engineering, Concordia University</p>
-            </div>
-          </div>
-          <div className="person">
-            <img className="avatar" src={anilPhoto} alt="" width="72" height="72" />
-            <div>
-              <h3>Anil Ufuk Batmaz</h3>
-              <p>Assistant Professor</p>
-              <p className="muted small">Department of Computer Science and Software Engineering, Concordia University</p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <section className="about-steps about-foot">
         <div>
