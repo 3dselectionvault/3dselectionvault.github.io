@@ -107,6 +107,10 @@
       "publication": "bowman-2004-3dui",
       "role": "surveyed",
       "where": "5.4.3, p. 160"
+    },
+    {
+      "publication": "legacy-paper-bubble-raycasting",
+      "role": "evaluated"
     }
   ],
   "relationships": [

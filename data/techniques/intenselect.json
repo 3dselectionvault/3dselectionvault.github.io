@@ -77,6 +77,10 @@
     {
       "publication": "weller-2021-lenselect",
       "role": "evaluated"
+    },
+    {
+      "publication": "legacy-paper-bubble-raycasting",
+      "role": "evaluated"
     }
   ],
   "relationships": [],
