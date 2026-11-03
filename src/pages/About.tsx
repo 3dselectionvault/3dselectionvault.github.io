@@ -2,6 +2,8 @@ import { useEffect, useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { REPO_URL, attributes, publications, schemeStatus, techniques } from '../lib/data';
 import { countValues } from '../lib/search';
+import anilPhoto from '../assets/people/anil-batmaz.jpg';
+import rumeysaPhoto from '../assets/people/rumeysa-turkmen.jpg';
 
 const MAX_WEIGHT = Math.max(...attributes.map((a) => a.weight));
 
@@ -36,11 +38,6 @@ export default function About() {
   return (
     <div className="about">
       <header className="about-band">
-        <h1>A shared map of 3D selection techniques</h1>
-        <p>
-          An open catalogue of techniques for selecting objects in virtual and mixed reality. When you design a new
-          technique, it shows you the existing ones closest to yours, so you know what to compare against.
-        </p>
         <div className="band-stats">
           <Link to="/">
             <strong>{techniques.length}</strong>
@@ -65,33 +62,81 @@ export default function About() {
         </div>
       </header>
 
-      <section className="about-steps" aria-label="How it works">
-        <div>
-          <span className="step-n">1</span>
-          <h2>Collect</h2>
-          <p>
-            Each technique gets one record, linked to the paper that introduced it and to the studies and surveys
-            that evaluated it.
-          </p>
-          <Link to="/">Browse the catalogue</Link>
+      <section className="about-block about-intro">
+        <div className="block-head">
+          <h2>About the vault</h2>
+          <div className="intro-text">
+            <p>
+              Selection, pointing out the object you want to act on, is one of the most basic tasks in any 3D user
+              interface. Since the 1990s researchers have proposed hundreds of ways to do it in virtual reality,
+              augmented and mixed reality, desktop 3D and projection displays: ray casting and the virtual hand,
+              cones and volumes, gaze and head pointing, techniques that refine a choice step by step, and techniques
+              that reach objects hidden behind others.
+            </p>
+            <p>
+              These techniques are spread across many conferences and journals and are described in different terms,
+              so it is hard to see what already exists, how two techniques differ, or which ones a new technique
+              should be compared against in a study.
+            </p>
+            <p>
+              The 3D Selection Vault gathers them in one place. Each technique has its own record, linked to the
+              paper that introduced it and to the studies and surveys that evaluated it. Every technique is coded on
+              the same {attributes.length} attributes, from the selection tool and where it starts to how the user
+              confirms and whether hidden targets can be reached. Because the coding is shared, techniques can be
+              filtered, compared like for like and placed in a similarity map.
+            </p>
+          </div>
         </div>
-        <div>
-          <span className="step-n">2</span>
-          <h2>Code</h2>
-          <p>Every technique is described with the same {attributes.length} attributes, so any two can be compared like for like.</p>
-          <a href="#/about#attributes" onClick={scrollToAttrs}>
-            See the attributes
-          </a>
+      </section>
+
+      <section className="about-block" aria-labelledby="can-do">
+        <div className="block-head">
+          <h2 id="can-do">What you can do</h2>
         </div>
-        <div>
-          <span className="step-n">3</span>
-          <h2>Compare</h2>
-          <p>
-            Shared attributes give a similarity score. The graph places similar techniques together, and you can
-            drop in your own to find its neighbours.
-          </p>
-          <Link to="/graph">Open the similarity graph</Link>
-        </div>
+        <ul className="can-do">
+          <li>
+            <h3>Find techniques by attribute</h3>
+            <p>Filter the catalogue by environment, selection tool, input, disambiguation, distance and more, or search by name, description or author.</p>
+            <Link to="/">Open the catalogue</Link>
+          </li>
+          <li>
+            <h3>Read each technique at a glance</h3>
+            <p>Every technique page shows how it works, its nine attributes, the papers behind it and the techniques related or most similar to it.</p>
+            <Link to="/technique/raycasting">See an example</Link>
+          </li>
+          <li>
+            <h3>Find the papers</h3>
+            <p>Browse all {publications.length} papers with their DOIs, see which techniques each one introduces or evaluates, and how often they cite each other.</p>
+            <Link to="/papers">Browse papers</Link>
+          </li>
+          <li>
+            <h3>Download BibTeX</h3>
+            <p>Tick the techniques or papers you need and download one .bib file for your reference manager, or copy a single entry.</p>
+            <Link to="/">Pick techniques to cite</Link>
+          </li>
+          <li>
+            <h3>Explore the similarity graph</h3>
+            <p>A 3D map where techniques that share more attributes sit closer together. Click one to see its nearest neighbours and what they have in common.</p>
+            <Link to="/graph">Open the similarity graph</Link>
+          </li>
+          <li>
+            <h3>Place your own technique</h3>
+            <p>Describe a new technique with the same attributes and the graph shows which existing techniques it is closest to: the ones to compare against.</p>
+            <Link to="/graph">Place a technique</Link>
+          </li>
+          <li>
+            <h3>Follow the citations</h3>
+            <p>A 3D citation graph links the papers in the vault, so you can trace how techniques built on each other over time.</p>
+            <Link to="/graph?view=citations">Open the citation graph</Link>
+          </li>
+          <li>
+            <h3>Suggest a correction</h3>
+            <p>Every record can be checked and edited on GitHub. Suggest a missing technique or a coding you disagree with.</p>
+            <a href={`${REPO_URL}/issues/new/choose`} target="_blank" rel="noreferrer">
+              Suggest a technique
+            </a>
+          </li>
+        </ul>
       </section>
 
       <section className="about-block" id="attributes">
@@ -141,7 +186,7 @@ export default function About() {
         </div>
         <div className="people">
           <div className="person">
-            <span className="avatar" aria-hidden="true">RT</span>
+            <img className="avatar" src={rumeysaPhoto} alt="" width="72" height="72" />
             <div>
               <h3>Rumeysa Turkmen</h3>
               <p>PhD candidate</p>
@@ -149,7 +194,7 @@ export default function About() {
             </div>
           </div>
           <div className="person">
-            <span className="avatar" aria-hidden="true">AUB</span>
+            <img className="avatar" src={anilPhoto} alt="" width="72" height="72" />
             <div>
               <h3>Anil Ufuk Batmaz</h3>
               <p>Assistant Professor</p>

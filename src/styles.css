@@ -677,3 +677,21 @@ a.paper-cites:hover { color: var(--accent-text); }
   .people { grid-template-columns: 1fr; }
   .person + .person { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
 }
+
+/* About: stats-only band, intro text, capability grid, photos */
+.about-band { padding: 0 32px; }
+.about-band .band-stats { margin-top: 0; border-top: 0; }
+.about-intro { padding-top: 44px; }
+.intro-text { max-width: 760px; }
+.intro-text p { margin: 0 0 14px; color: var(--text); font-size: 17.5px; line-height: 1.65; }
+.can-do { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 2px solid var(--text); }
+.can-do li { padding: 20px 24px 24px 0; border-bottom: 1px solid var(--line); }
+.can-do li + li { padding-left: 24px; border-left: 1px solid var(--line); }
+.can-do li:nth-child(4n + 1) { padding-left: 0; border-left: 0; }
+.can-do h3 { font-size: 21px; font-weight: 700; margin-bottom: 6px; }
+.can-do p { margin: 0 0 10px; color: var(--muted); font-size: 15px; line-height: 1.55; }
+.can-do a { font-weight: 600; text-decoration: none; }
+.can-do a:hover { text-decoration: underline; }
+img.avatar { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; background: none; }
+@media (max-width: 1100px) { .can-do { grid-template-columns: repeat(2, minmax(0, 1fr)); } .can-do li:nth-child(4n + 1) { padding-left: 24px; border-left: 1px solid var(--line); } .can-do li:nth-child(odd) { padding-left: 0; border-left: 0; } }
+@media (max-width: 760px) { .about-band { padding: 0 16px; } .about-band .band-stats { margin-top: 0; } .can-do { grid-template-columns: 1fr; } .can-do li, .can-do li + li { padding: 16px 0; border-left: 0; } .intro-text p { font-size: 16.5px; } }
