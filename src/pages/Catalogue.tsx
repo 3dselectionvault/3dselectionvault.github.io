@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { attributes, techniques, valueLabel } from '../lib/data';
 import { countValues, search, type Filters, type SortKey } from '../lib/search';
@@ -7,7 +7,7 @@ import SelectionBar from '../SelectionBar';
 import ToolGlyph from '../ToolGlyph';
 import { publications } from '../lib/data';
 
-const OPEN_BY_DEFAULT = new Set(['environment', 'selectionTool', 'inputModality', 'disambiguation', 'targetDistance', 'handlesOcclusion']);
+const OPEN_BY_DEFAULT = new Set<string>();
 
 // Columns of the table after the name and year, in order.
 const COLUMNS: { attr: string; label: string; className?: string }[] = [
@@ -37,6 +37,26 @@ export default function Catalogue() {
   const [params, setParams] = useSearchParams();
   const navigate = useNavigate();
   // On phones the filter groups start closed so the list is visible.
+  // Keep the filter column exactly as tall as the visible window below the header, so its end is always reachable.
+  const asideRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const fit = () => {
+      const el = asideRef.current;
+      if (!el || window.matchMedia('(max-width: 860px)').matches) {
+        if (el) el.style.maxHeight = '';
+        return;
+      }
+      const top = Math.max(64, el.getBoundingClientRect().top);
+      el.style.maxHeight = `${window.innerHeight - top}px`;
+    };
+    fit();
+    window.addEventListener('scroll', fit, { passive: true });
+    window.addEventListener('resize', fit);
+    return () => {
+      window.removeEventListener('scroll', fit);
+      window.removeEventListener('resize', fit);
+    };
+  }, []);
   const narrow = typeof window !== 'undefined' && window.matchMedia('(max-width: 860px)').matches;
   const query = params.get('q') ?? '';
   const sort = (params.get('sort') as SortKey) ?? 'name';
@@ -125,7 +145,7 @@ export default function Catalogue() {
       </section>
 
       <div className="catalogue-body">
-        <aside className="filters" aria-label="Filters">
+        <aside className="filters" aria-label="Filters" ref={asideRef}>
           {facetGroups.map(({ attr, counts }) => {
             const activeHere = filters[attr.id]?.length ?? 0;
             return (
@@ -159,11 +179,11 @@ export default function Catalogue() {
 
         <section className="results" aria-live="polite">
           <div className="toolbar">
-            <p className="result-count">
-              {results.length === techniques.length
-                ? `${results.length} techniques`
-                : `${results.length} of ${techniques.length} techniques`}
-            </p>
+            {results.length !== techniques.length && (
+              <p className="result-count">
+                {results.length} of {techniques.length} techniques shown
+              </p>
+            )}
             {active > 0 && (
               <button type="button" className="link-button" onClick={clearAll}>
                 Clear {active} filter{active === 1 ? '' : 's'}

@@ -80,7 +80,7 @@ export default function Papers() {
         <div className="cite-hint">
           <svg className="cite-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 3v12m0 0-4.5-4.5M12 15l4.5-4.5M4 17v2.5A1.5 1.5 0 0 0 5.5 21h13a1.5 1.5 0 0 0 1.5-1.5V17" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
           <p>
-            Tick the papers you want and download them as a BibTeX (.bib) file.
+            Check the papers you want and download them as a BibTeX (.bib) file.
           </p>
           <button
             type="button"
@@ -102,8 +102,13 @@ export default function Papers() {
       <ol className="paper-list">
         {rows.map((p) => {
           const href = pubHref(p);
-          const techs = techniquesOfPub(p.id).filter((x) => x.role !== 'surveyed');
-          const surveyed = techniquesOfPub(p.id).filter((x) => x.role === 'surveyed').length;
+          const all = techniquesOfPub(p.id);
+          const review = isReview(p);
+          // For surveys and theses, list only the techniques the vault knows from this source alone.
+          const unique = review ? all.filter((x) => x.technique.publications.every((l) => l.publication === p.id)) : [];
+          const techs = review ? unique : all.filter((x) => x.role !== 'surveyed');
+          const surveyed = review ? all.length : all.filter((x) => x.role === 'surveyed').length;
+          const kindWord = p.type === 'thesis' ? 'thesis' : 'survey';
           return (
             <li key={p.id} className={picked.has(p.id) ? 'paper picked' : 'paper'}>
               <label className="paper-select">
@@ -125,18 +130,37 @@ export default function Papers() {
                   {p.year ? ` · ${p.year}` : ''}
                   {p.venue ? ` · ${p.venue}` : ''}
                 </p>
-                {techs.length > 0 && (
+                {review ? (
                   <p className="paper-techs">
-                    {techs.map((x, i) => (
+                    <span className="muted">
+                      Covers {surveyed} technique{surveyed === 1 ? '' : 's'} in the vault
+                      {unique.length > 0
+                        ? ` · ${unique.length} found only in this ${kindWord}: `
+                        : ` · none found only in this ${kindWord}`}
+                    </span>
+                    {unique.map((x, i) => (
                       <span key={x.technique.id}>
                         {i > 0 && ', '}
                         <Link to={`/technique/${x.technique.id}`}>{x.technique.name}</Link>
-                        {x.role === 'evaluated' && <span className="muted"> (evaluated)</span>}
                       </span>
                     ))}
                   </p>
+                ) : (
+                  <>
+                    {techs.length > 0 && (
+                      <p className="paper-techs">
+                        {techs.map((x, i) => (
+                          <span key={x.technique.id}>
+                            {i > 0 && ', '}
+                            <Link to={`/technique/${x.technique.id}`}>{x.technique.name}</Link>
+                            {x.role === 'evaluated' && <span className="muted"> (evaluated)</span>}
+                          </span>
+                        ))}
+                      </p>
+                    )}
+                    {surveyed > 0 && <p className="paper-techs muted">Covered in {surveyed} technique record{surveyed === 1 ? '' : 's'} as a survey source</p>}
+                  </>
                 )}
-                {surveyed > 0 && <p className="paper-techs muted">Covers {surveyed} techniques in the vault</p>}
                 {inCitationGraph(p.id) && (
                   <p className="paper-techs small">
                     <Link to={citationGraphHref(p.id)}>See it in the citation graph</Link>
