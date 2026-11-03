@@ -2,16 +2,24 @@ import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { attributes, editUrl, getPublication, getTechnique, techniques, valueLabel } from '../lib/data';
 import { nearest } from '../lib/similarity';
-import { toBibtex } from '../lib/bibtex';
+import { downloadBibtex, toBibtex } from '../lib/bibtex';
+import ToolGlyph from '../ToolGlyph';
 import { citationGraphHref, citePubsOf, inCitationGraph } from '../lib/citations';
 import type { Publication, PublicationLink, Relationship } from '../lib/types';
 
 const ROLE_LABEL: Record<PublicationLink['role'], string> = {
-  introduced: 'Introduces the technique',
-  evaluated: 'Evaluates the technique',
-  surveyed: 'Survey covering the technique',
-  reference: 'Reference (role not yet classified)',
+  introduced: 'Introduced',
+  evaluated: 'Evaluated',
+  surveyed: 'Survey',
+  reference: 'Reference',
 };
+const ROLE_TITLE: Record<PublicationLink['role'], string> = {
+  introduced: 'This paper introduces the technique',
+  evaluated: 'This paper evaluates the technique',
+  surveyed: 'A survey covering the technique',
+  reference: 'Reference, role not yet classified',
+};
+const short = (attr: string, v: string) => valueLabel(attr, v).replace(/ \(.*\)/, '');
 const ROLE_ORDER: PublicationLink['role'][] = ['introduced', 'evaluated', 'reference', 'surveyed'];
 
 const REL_LABEL: Record<Relationship['type'], string> = {
@@ -76,24 +84,62 @@ export default function TechniquePage() {
   const coded = attributes.filter((a) => (t.attributes[a.id] ?? []).length > 0).length;
   const uncertain = new Set(t.review.uncertain ?? []);
 
+  const allPubs = citePubsOf(t);
+  const env = (t.attributes.environment ?? []).map((v) => short('environment', v)).join(', ');
+
   return (
     <article className="technique">
-      <Link to="/" className="back">
-        ← All techniques
-      </Link>
-
-      <header className="technique-head">
-        <h1>{t.name}</h1>
-        <p className="meta">
-          {t.year != null ? <span>{t.year}</span> : <span>Year unknown</span>}
-          {t.aliases && t.aliases.length > 0 && <span>Also known as {t.aliases.join(', ')}</span>}
-          {t.tasks.length > 1 && <span>Also used for {t.tasks.filter((x) => x !== 'selection').join(', ')}</span>}
-        </p>
-        <p className="lead">{t.summary}</p>
+      <header className="tech-hero">
+        <Link to="/" className="back">
+          ← All techniques
+        </Link>
+        <div className="tech-hero-row">
+          <div className="tech-glyph">
+            <ToolGlyph tool={t.attributes.selectionTool?.[0]} size={44} />
+          </div>
+          <div className="tech-title">
+            <h1>{t.name}</h1>
+            <p>
+              {[
+                t.year != null ? String(t.year) : 'Year unknown',
+                env,
+                t.aliases && t.aliases.length ? `Also known as ${t.aliases.join(', ')}` : '',
+                t.tasks.length > 1 ? `Also used for ${t.tasks.filter((x) => x !== 'selection').join(', ')}` : '',
+              ]
+                .filter(Boolean)
+                .join(' · ')}
+            </p>
+          </div>
+          <div className="tech-actions">
+            <button type="button" className="hero-btn primary" disabled={!allPubs.length} onClick={() => downloadBibtex(allPubs)}>
+              Download BibTeX
+            </button>
+            <Link to={`/graph?t=${t.id}`} className="hero-btn">
+              Show in graph
+            </Link>
+          </div>
+        </div>
       </header>
 
-      <div className="technique-body">
-        <div className="technique-main">
+      <dl className="attr-strip">
+        {attributes.map((a) => {
+          const vals = t.attributes[a.id] ?? [];
+          const unsure = vals.length > 0 && uncertain.has(a.id);
+          return (
+            <div key={a.id} title={a.description}>
+              <dt>{a.label}</dt>
+              <dd className={vals.length ? '' : 'muted'}>
+                {vals.length ? vals.map((v) => short(a.id, v)).join(', ') : '—'}
+                {unsure && <span className="unsure-dot" title="Best guess, still to be checked against the paper" aria-label="not yet confirmed" />}
+              </dd>
+            </div>
+          );
+        })}
+      </dl>
+
+      <div className="tech-body">
+        <div className="tech-main">
+          <p className="lead">{t.summary}</p>
           {t.howItWorks && (
             <section>
               <h2>How it works</h2>
@@ -127,56 +173,61 @@ export default function TechniquePage() {
           )}
 
           <section>
-            <h2>Publications</h2>
+            <h2>Papers</h2>
             {pubs.length === 0 && <p className="muted">No publications linked yet.</p>}
-            <ul className="pub-list">
+            <ul className="paper-rows">
               {pubs.map((link) => {
                 const p = getPublication(link.publication);
                 if (!p) return null;
                 const href = p.doi ? `https://doi.org/${p.doi}` : p.url;
                 return (
                   <li key={link.publication}>
-                    <span className="pub-role">{ROLE_LABEL[link.role]}</span>
-                    <span className="pub-title">
-                      {href ? (
-                        <a href={href} target="_blank" rel="noreferrer">
-                          {p.title}
-                        </a>
-                      ) : (
-                        p.title
-                      )}
+                    <span className={`role-tag role-${link.role}`} title={ROLE_TITLE[link.role]}>
+                      {ROLE_LABEL[link.role]}
                     </span>
-                    <span className="pub-meta">
-                      {cite(p)}
-                      {p.venue ? ` · ${p.venue}` : ''}
-                      {link.where ? ` · ${link.where}` : ''}
-                    </span>
-                    <span className="pub-actions">
-                      <CopyBibtex bibtex={toBibtex(p)} />
-                      {inCitationGraph(p.id) && (
-                        <Link className="small" to={citationGraphHref(p.id)}>
-                          See it in the citation graph
-                        </Link>
-                      )}
-                    </span>
+                    <div>
+                      <span className="pr-title">
+                        {href ? (
+                          <a href={href} target="_blank" rel="noreferrer">
+                            {p.title}
+                          </a>
+                        ) : (
+                          p.title
+                        )}
+                      </span>
+                      <span className="pr-meta">
+                        {cite(p)}
+                        {p.venue ? ` · ${p.venue}` : ''}
+                        {link.where ? ` · ${link.where}` : ''}
+                      </span>
+                      <span className="pr-actions">
+                        <CopyBibtex bibtex={toBibtex(p)} />
+                        {inCitationGraph(p.id) && <Link to={citationGraphHref(p.id)}>Citation graph</Link>}
+                      </span>
+                    </div>
                   </li>
                 );
               })}
             </ul>
           </section>
+        </div>
 
+        <aside className="tech-side">
           {(t.relationships?.length ?? 0) > 0 && (
             <section>
               <h2>Related techniques</h2>
-              <ul className="rel-list">
+              <ul className="tech-links">
                 {t.relationships!.map((r) => {
                   const other = getTechnique(r.technique);
                   if (!other) return null;
                   return (
                     <li key={`${r.type}-${r.technique}`}>
-                      <span className="rel-type">{REL_LABEL[r.type]}</span>{' '}
-                      <Link to={`/technique/${other.id}`}>{other.name}</Link>
-                      {r.note && <span className="muted"> · {r.note}</span>}
+                      <ToolGlyph tool={other.attributes.selectionTool?.[0]} size={18} />
+                      <div>
+                        <Link to={`/technique/${other.id}`}>{other.name}</Link>
+                        <span className="rel-type">{REL_LABEL[r.type]}</span>
+                        {r.note && <span className="rel-note">{r.note}</span>}
+                      </div>
                     </li>
                   );
                 })}
@@ -186,65 +237,33 @@ export default function TechniquePage() {
           {similar.length > 0 && (
             <section>
               <h2>Most similar by attributes</h2>
-              <ul className="rel-list">
-                {similar.map(({ technique: o, similarity: s }) => (
+              <ul className="tech-links">
+                {similar.map(({ technique: o, similarity: sim }) => (
                   <li key={o.id}>
-                    <span className="rel-type">{Math.round(s.score * 100)}%</span>{' '}
-                    <Link to={`/technique/${o.id}`}>{o.name}</Link>
+                    <ToolGlyph tool={o.attributes.selectionTool?.[0]} size={18} />
+                    <div>
+                      <Link to={`/technique/${o.id}`}>{o.name}</Link>
+                      <span className="rel-type">{Math.round(sim.score * 100)}% shared attributes</span>
+                    </div>
                   </li>
                 ))}
               </ul>
-              <p className="small">
-                <Link to={`/graph?t=${t.id}`}>See it in the similarity graph</Link>
-                {mainPub && (
-                  <>
-                    {' · '}
-                    <Link to={citationGraphHref(mainPub.id)}>See its paper in the citation graph</Link>
-                  </>
-                )}
+              <p className="side-links">
+                <Link to={`/graph?t=${t.id}`}>Similarity graph</Link>
+                {mainPub && <Link to={citationGraphHref(mainPub.id)}>Citation graph</Link>}
               </p>
             </section>
           )}
-        </div>
-
-        <aside className="technique-side">
-          <section className="panel">
-            <h2>Attributes</h2>
-            <p className="muted small">
-              {coded} of {attributes.length} coded
-              {uncertain.size > 0 && ` · ? = not yet confirmed`}
-            </p>
-            <dl className="attr-list">
-              {attributes.map((a) => {
-                const vals = t.attributes[a.id] ?? [];
-                return (
-                  <div key={a.id}>
-                    <dt title={a.description}>{a.label}</dt>
-                    <dd className={vals.length ? '' : 'muted'}>
-                      {vals.length ? vals.map((v) => valueLabel(a.id, v)).join(', ') : 'Not coded'}
-                      {vals.length > 0 && uncertain.has(a.id) && (
-                        <span className="unsure" title="Best guess, still to be checked against the paper">
-                          ?
-                        </span>
-                      )}
-                    </dd>
-                  </div>
-                );
-              })}
-            </dl>
-          </section>
-
-          <section className="panel">
-            <h2>Record</h2>
-            <p className={`review review-${t.review.status}`}>{REVIEW_LABEL[t.review.status]}</p>
-            <p className="small">
-              <a href={editUrl(`data/techniques/${t.id}.json`)} target="_blank" rel="noreferrer">
-                Suggest a correction on GitHub
-              </a>
-            </p>
-          </section>
         </aside>
       </div>
+
+      <p className="record-line">
+        {REVIEW_LABEL[t.review.status]} · {coded} of {attributes.length} attributes coded
+        {uncertain.size > 0 && ' · a dot marks a value still to be confirmed'} ·{' '}
+        <a href={editUrl(`data/techniques/${t.id}.json`)} target="_blank" rel="noreferrer">
+          Suggest a correction on GitHub
+        </a>
+      </p>
     </article>
   );
 }
