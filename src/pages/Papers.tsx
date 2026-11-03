@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import SelectionBar from '../SelectionBar';
-import { citationGraphHref, inCitationGraph, isReview, pubHref, shortAuthors, sortedPublications, techniquesOfPub } from '../lib/citations';
+import { citePubsOf, citationGraphHref, inCitationGraph, isReview, pubHref, shortAuthors, sortedPublications, techniquesOfPub } from '../lib/citations';
 
 type Sort = 'year' | 'title';
 type Kind = 'all' | 'papers' | 'reviews';
@@ -104,11 +104,12 @@ export default function Papers() {
           const href = pubHref(p);
           const all = techniquesOfPub(p.id);
           const review = isReview(p);
-          // For surveys and theses, list only the techniques the vault knows from this source alone.
-          const unique = review ? all.filter((x) => x.technique.publications.every((l) => l.publication === p.id)) : [];
-          const techs = review ? unique : all.filter((x) => x.role !== 'surveyed');
+          const techs = all.filter((x) => x.role !== 'surveyed');
           const surveyed = review ? all.length : all.filter((x) => x.role === 'surveyed').length;
-          const kindWord = p.type === 'thesis' ? 'thesis' : 'survey';
+          // Distinct vault papers behind the techniques a survey or thesis covers.
+          const coveredPapers = review
+            ? new Set(all.flatMap((x) => citePubsOf(x.technique).map((q) => q.id)).filter((id) => id !== p.id)).size
+            : 0;
           return (
             <li key={p.id} className={picked.has(p.id) ? 'paper picked' : 'paper'}>
               <label className="paper-select">
@@ -131,19 +132,10 @@ export default function Papers() {
                   {p.venue ? ` · ${p.venue}` : ''}
                 </p>
                 {review ? (
-                  <p className="paper-techs">
-                    <span className="muted">
-                      Covers {surveyed} technique{surveyed === 1 ? '' : 's'} in the vault
-                      {unique.length > 0
-                        ? ` · ${unique.length} found only in this ${kindWord}: `
-                        : ` · none found only in this ${kindWord}`}
-                    </span>
-                    {unique.map((x, i) => (
-                      <span key={x.technique.id}>
-                        {i > 0 && ', '}
-                        <Link to={`/technique/${x.technique.id}`}>{x.technique.name}</Link>
-                      </span>
-                    ))}
+                  <p className="paper-techs muted">
+                    {surveyed > 0
+                      ? `Covers ${surveyed} technique${surveyed === 1 ? '' : 's'}${coveredPapers > 0 ? ` from ${coveredPapers} paper${coveredPapers === 1 ? '' : 's'}` : ''} in the vault`
+                      : 'No techniques in the vault linked to it yet'}
                   </p>
                 ) : (
                   <>
