@@ -708,3 +708,6 @@ img.avatar { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; b
 .people-side .person p { margin: 0; }
 @media (max-width: 1200px) { .intro-grid { grid-template-columns: 220px minmax(0, 1fr); } .intro-people { grid-column: 2; padding-left: 0; border-left: 0; } }
 @media (max-width: 760px) { .intro-grid { grid-template-columns: 1fr; gap: 12px; } .intro-people { grid-column: auto; } }
+.people-side .person { align-items: center; gap: 20px; }
+.people-side img.avatar { width: 112px; height: 112px; }
+.people-side .person h3 { font-size: 24px; }

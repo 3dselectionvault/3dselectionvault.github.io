@@ -67,14 +67,9 @@ export default function About() {
           <h2>About the vault</h2>
           <div className="intro-text">
             <p>
-              3D selection is one of the fundamental tasks in virtual environments. In{' '}
-              <em>3D User Interfaces: Theory and Practice</em>, Bowman, Kruijff, LaViola and Poupyrev treat selection,
-              picking out the object or objects the user wants to work with, as one of the canonical manipulation
-              tasks alongside positioning and rotation, and nearly every other action on an object starts with it.
-              Since the early 1990s, researchers have proposed hundreds of ways to select in virtual reality, augmented
-              and mixed reality, desktop 3D and projection displays: ray casting and the virtual hand, cones and
-              volumes, gaze and head pointing, techniques that refine a choice step by step, and techniques that reach
-              objects hidden behind others.
+              3D selection is one of the fundamental tasks in virtual environments. Since the early 1990s,
+              researchers have proposed hundreds of ways to select in virtual reality, augmented and mixed reality,
+              desktop 3D and projection displays.
             </p>
             <p>
               These techniques are spread across many conferences and journals and are described in different terms,
@@ -94,7 +89,7 @@ export default function About() {
             <p className="muted small">Concordia University, Montréal</p>
             <div className="people people-side">
               <div className="person">
-                <img className="avatar" src={rumeysaPhoto} alt="" width="72" height="72" />
+                <img className="avatar" src={rumeysaPhoto} alt="" width="112" height="112" />
                 <div>
                   <h3>Rumeysa Turkmen</h3>
                   <p>PhD candidate</p>
@@ -102,7 +97,7 @@ export default function About() {
                 </div>
               </div>
               <div className="person">
-                <img className="avatar" src={anilPhoto} alt="" width="72" height="72" />
+                <img className="avatar" src={anilPhoto} alt="" width="112" height="112" />
                 <div>
                   <h3>Anil Ufuk Batmaz</h3>
                   <p>Assistant Professor</p>
