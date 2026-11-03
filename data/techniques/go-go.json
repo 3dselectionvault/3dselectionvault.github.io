@@ -102,6 +102,11 @@
     {
       "publication": "yin-2019-handheldar",
       "role": "evaluated"
+    },
+    {
+      "publication": "bowman-2004-3dui",
+      "role": "surveyed",
+      "where": "5.4.3, p. 160"
     }
   ],
   "relationships": [

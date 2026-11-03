@@ -55,6 +55,11 @@
       "publication": "leusmann-2021",
       "role": "surveyed",
       "where": "4.3.2"
+    },
+    {
+      "publication": "bowman-2004-3dui",
+      "role": "surveyed",
+      "where": "5.4.2, p. 157"
     }
   ],
   "relationships": [

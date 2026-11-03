@@ -67,6 +67,11 @@
       "publication": "bowman-1999-thesis",
       "role": "surveyed",
       "where": "5.5"
+    },
+    {
+      "publication": "bowman-2004-3dui",
+      "role": "surveyed",
+      "where": "5.4.2, p. 157 (sticky finger)"
     }
   ],
   "relationships": [],
