@@ -25,10 +25,16 @@ export default function App() {
       <header className="site-header">
         <Link to="/" className="brand" aria-label="3D Selection Vault home">
           <span className="brand-mark" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="22" height="22">
-              <path d="M12 2 21 7v10l-9 5-9-5V7z" fill="none" stroke="currentColor" strokeWidth="1.6" />
-              <path d="M3 7l9 5 9-5M12 12v10" fill="none" stroke="currentColor" strokeWidth="1.6" />
-              <circle cx="12" cy="12" r="2.2" fill="currentColor" stroke="none" />
+            <svg viewBox="0 0 24 24" width="24" height="24">
+              <path d="M2 7V2h5M17 2h5v5M22 17v5h-5M7 22H2v-5" fill="none" stroke="currentColor" strokeWidth="1.7" />
+              <path d="M12 6l5.2 3-5.2 3-5.2-3z" fill="#6f9fe6" />
+              <path
+                d="M12 6l5.2 3v6L12 18l-5.2-3V9z M6.8 9 12 12l5.2-3M12 12v6"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinejoin="round"
+              />
             </svg>
           </span>
           <span>3D Selection Vault</span>
