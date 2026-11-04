@@ -729,18 +729,24 @@ img.avatar { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; b
 /* Catalogue subtitle in the body face */
 .cat-title p { font-family: var(--font); font-size: 17px; font-weight: 400; letter-spacing: 0; color: #a8a8a8; }
 
-/* About: "What you can do" band */
-.about-band { padding: 34px 32px 0; }
-.about-band h1 { font-size: 40px; font-weight: 700; margin: 0 0 22px; color: #fff; }
-.do-tiles { list-style: none; margin: 0 -32px; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid #2a2a2a; }
-.do-tiles li { border-left: 1px solid #2a2a2a; border-bottom: 1px solid #2a2a2a; }
+/* About: jump band + feature tiles */
+.about-band { padding: 0 32px; }
+.about-jump { display: flex; flex-wrap: wrap; gap: 4px; padding: 14px 0 16px; }
+.about-jump a { padding: 8px 14px; border: 1px solid #333; border-radius: 6px; color: #e6e6e6; font-family: "Barlow Condensed", sans-serif; font-size: 18px; font-weight: 600; text-decoration: none; transition: background .15s, border-color .15s; }
+.about-jump a:hover, .about-jump a:focus-visible { background: #fff; border-color: #fff; color: #0b0b0b; }
+.about-block, .about-foot { scroll-margin-top: 80px; }
+#people { scroll-margin-top: 80px; }
+.do-tiles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 2px solid var(--text); }
+.do-tiles li { border-left: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .do-tiles li:nth-child(4n + 1) { border-left: 0; }
-.do-tiles a { display: flex; flex-direction: column; height: 100%; padding: 20px 32px 22px; color: #fff; text-decoration: none; transition: background .15s; }
-.do-tiles a:hover, .do-tiles a:focus-visible { background: #1d1d1d; }
-.do-num { font-family: "Barlow Condensed", sans-serif; font-size: 15px; font-weight: 600; color: #6f9fe6; letter-spacing: .04em; }
-.do-tiles h3 { margin: 6px 0 8px; font-size: 21px; font-weight: 600; color: #fff; }
-.do-tiles p { margin: 0 0 16px; color: #a8a8a8; font-size: 15px; line-height: 1.5; }
-.do-go { margin-top: auto; font-weight: 600; font-size: 15px; color: #6f9fe6; }
-.do-tiles a:hover .do-go { color: #9cc0f5; text-decoration: underline; }
-@media (max-width: 1100px) { .do-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } .do-tiles li:nth-child(4n + 1) { border-left: 1px solid #2a2a2a; } .do-tiles li:nth-child(odd) { border-left: 0; } }
-@media (max-width: 640px) { .about-band { padding: 24px 16px 0; } .about-band h1 { font-size: 30px; } .do-tiles { grid-template-columns: 1fr; margin: 0 -16px; } .do-tiles li { border-left: 0 !important; } .do-tiles a { padding: 16px; } }
+.do-tiles a { display: flex; flex-direction: column; height: 100%; padding: 20px 24px 22px; color: var(--text); text-decoration: none; transition: background .15s; }
+.do-tiles li:nth-child(4n + 1) a { padding-left: 0; }
+.do-tiles a:hover, .do-tiles a:focus-visible { background: var(--pill-bg); }
+.do-tiles li:nth-child(4n + 1) a:hover { padding-left: 12px; margin-left: -12px; }
+.do-num { font-family: "Barlow Condensed", sans-serif; font-size: 15px; font-weight: 600; color: var(--accent-text); letter-spacing: .04em; }
+.do-tiles h3 { margin: 6px 0 8px; font-size: 21px; font-weight: 700; }
+.do-tiles p { margin: 0 0 16px; color: var(--muted); font-size: 15px; line-height: 1.5; }
+.do-go { margin-top: auto; font-weight: 600; font-size: 15px; color: var(--accent-text); }
+.do-tiles a:hover .do-go { text-decoration: underline; }
+@media (max-width: 1100px) { .do-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } .do-tiles li:nth-child(4n + 1) { border-left: 1px solid var(--line); } .do-tiles li:nth-child(odd) { border-left: 0; } .do-tiles li:nth-child(4n + 1) a { padding-left: 24px; } .do-tiles li:nth-child(odd) a { padding-left: 0; } }
+@media (max-width: 640px) { .about-band { padding: 0 16px; } .about-jump a { font-size: 16px; padding: 6px 10px; } .do-tiles { grid-template-columns: 1fr; } .do-tiles li { border-left: 0 !important; } .do-tiles a, .do-tiles li a { padding: 16px 0; } }
