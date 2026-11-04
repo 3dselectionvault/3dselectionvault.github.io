@@ -77,13 +77,12 @@ function NeighbourList({ items, onPick }: { items: Neighbour[]; onPick: (id: str
   );
 }
 
-function SimilarityGraph() {
+function SimilarityGraph({ mode }: { mode: 'explore' | 'mine' }) {
   const [params, setParams] = useSearchParams();
   const selected = params.get('t') ?? '';
   const colorBy = (COLOR_BY as readonly string[]).includes(params.get('color') ?? '')
     ? (params.get('color') as string)
     : 'selectionTool';
-  const [mode, setMode] = useState<'explore' | 'mine'>(params.get('mode') === 'mine' ? 'mine' : 'explore');
   const [mine, setMine] = useState<Coding>({});
   const [query, setQuery] = useState('');
   const [themeTick, setThemeTick] = useState(0);
@@ -97,10 +96,14 @@ function SimilarityGraph() {
     else next.delete(k);
     setParams(next, { replace: true });
   };
-  const pick = (id: string) => {
-    setMode('explore');
-    setParam('t', id);
-  };
+  // Picking a technique always shows it in the similarity view; a design in progress is kept.
+  const pick = (id: string) =>
+    setParams((prev) => {
+      const next = new URLSearchParams(prev);
+      next.delete('view');
+      next.set('t', id);
+      return next;
+    });
 
   const mineCoded = Object.values(mine).some((v) => v.length > 0);
   const mineNeighbours = useMemo(
@@ -285,20 +288,24 @@ function SimilarityGraph() {
     <div>
       <div className="graph-head">
         <div className="graph-intro">
-          <h1>Similarity graph</h1>
-          <p>
-            Techniques that share more attributes sit closer together. Click one to see its nearest neighbours and
-            what they have in common.
-          </p>
+          {mode === 'mine' ? (
+            <>
+              <h1>Design a new technique</h1>
+              <p>
+                Pick attribute values for your technique on the right. It appears in the graph next to the existing
+                techniques it is most similar to.
+              </p>
+            </>
+          ) : (
+            <>
+              <h1>Similarity graph</h1>
+              <p>
+                Techniques that share more attributes sit closer together. Click one to see its nearest neighbours and
+                what they have in common.
+              </p>
+            </>
+          )}
         </div>
-        <button
-          type="button"
-          className={mode === 'mine' ? 'place-cta on' : 'place-cta'}
-          onClick={() => setMode('mine')}
-        >
-          <strong>Design a new technique</strong>
-          <span>Pick attribute values for a new technique and see which existing techniques are most similar to it.</span>
-        </button>
       </div>
 
       <div className="graph-layout">
@@ -328,27 +335,6 @@ function SimilarityGraph() {
         </div>
 
         <aside className="graph-panel">
-          <div className="tabs" role="tablist">
-            <button
-              type="button"
-              role="tab"
-              aria-selected={mode === 'explore'}
-              className={mode === 'explore' ? 'on' : ''}
-              onClick={() => setMode('explore')}
-            >
-              Explore
-            </button>
-            <button
-              type="button"
-              role="tab"
-              aria-selected={mode === 'mine'}
-              className={mode === 'mine' ? 'on' : ''}
-              onClick={() => setMode('mine')}
-            >
-              Design a new technique
-            </button>
-          </div>
-
           {mode === 'explore' && (
             <div className="panel-body">
               <div className="graph-search">
@@ -464,22 +450,33 @@ function SimilarityGraph() {
   );
 }
 
-/** The graph page holds two views: technique similarity and paper citations. */
+type View = 'similarity' | 'design' | 'citations';
+const VIEWS: [View, string][] = [
+  ['similarity', 'Technique similarity'],
+  ['design', 'Design a new technique'],
+  ['citations', 'Paper citations'],
+];
+
+/** The graph page holds three views: technique similarity, designing a new technique, and paper citations. */
 export default function GraphPage() {
   const [params, setParams] = useSearchParams();
-  const view = params.get('view') === 'citations' ? 'citations' : 'similarity';
-  const go = (v: 'similarity' | 'citations') => setParams(v === 'citations' ? { view: v } : {}, { replace: false });
+  const raw = params.get('view') ?? (params.get('mode') === 'mine' ? 'design' : '');
+  const view: View = raw === 'citations' || raw === 'design' ? raw : 'similarity';
+  const go = (v: View) => setParams(v === 'similarity' ? {} : { view: v }, { replace: false });
   return (
     <div className="graph-page">
       <div className="view-switch" role="tablist" aria-label="Graph">
-        <button type="button" role="tab" aria-selected={view === 'similarity'} className={view === 'similarity' ? 'on' : ''} onClick={() => go('similarity')}>
-          Technique similarity
-        </button>
-        <button type="button" role="tab" aria-selected={view === 'citations'} className={view === 'citations' ? 'on' : ''} onClick={() => go('citations')}>
-          Paper citations
-        </button>
+        {VIEWS.map(([id, label]) => (
+          <button key={id} type="button" role="tab" aria-selected={view === id} className={view === id ? 'on' : ''} onClick={() => go(id)}>
+            {label}
+          </button>
+        ))}
       </div>
-      {view === 'citations' ? <CitationGraph key="c" /> : <SimilarityGraph key="s" />}
+      {view === 'citations' ? (
+        <CitationGraph key="c" />
+      ) : (
+        <SimilarityGraph key="s" mode={view === 'design' ? 'mine' : 'explore'} />
+      )}
     </div>
   );
 }
