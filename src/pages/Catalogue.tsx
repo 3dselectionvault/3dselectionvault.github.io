@@ -114,7 +114,7 @@ export default function Catalogue() {
     <div className="catalogue">
       <section className="cat-hero">
         <div className="cat-title">
-          <h1>3D selection techniques</h1>
+          <h1>3D Selection Techniques</h1>
           <p>
             {techniques.length} techniques · {publications.length} papers
           </p>
