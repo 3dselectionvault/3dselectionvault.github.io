@@ -37,7 +37,6 @@ export default function Papers() {
     return list;
   }, [q, sort, kind]);
 
-  const reviews = sortedPublications.filter(isReview).length;
   const [picked, setPicked] = useState<Set<string>>(new Set());
   const flip = (id: string) =>
     setPicked((cur) => {
@@ -48,13 +47,15 @@ export default function Papers() {
     });
   const allShownPicked = rows.length > 0 && rows.every((p) => picked.has(p.id));
 
+  const pubYears = sortedPublications.map((p) => p.year).filter((y): y is number => y != null);
+  const yearSpan = `${Math.min(...pubYears)}–${Math.max(...pubYears)}`;
+
   return (
     <div className="papers">
       <header className="papers-head">
         <h1>Papers</h1>
         <p className="muted">
-          The {sortedPublications.length} publications behind the vault: the papers that introduce or evaluate each
-          technique, and the {reviews} surveys and theses the catalogue was built from.
+          {sortedPublications.length} papers · {yearSpan}
         </p>
       </header>
 

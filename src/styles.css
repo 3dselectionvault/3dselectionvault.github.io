@@ -728,3 +728,19 @@ img.avatar { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; b
 @media (max-width: 860px) { .graph-head { grid-template-columns: 1fr; } }
 /* Catalogue subtitle in the body face */
 .cat-title p { font-family: var(--font); font-size: 17px; font-weight: 400; letter-spacing: 0; color: #a8a8a8; }
+
+/* About: "What you can do" band */
+.about-band { padding: 34px 32px 0; }
+.about-band h1 { font-size: 40px; font-weight: 700; margin: 0 0 22px; color: #fff; }
+.do-tiles { list-style: none; margin: 0 -32px; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid #2a2a2a; }
+.do-tiles li { border-left: 1px solid #2a2a2a; border-bottom: 1px solid #2a2a2a; }
+.do-tiles li:nth-child(4n + 1) { border-left: 0; }
+.do-tiles a { display: flex; flex-direction: column; height: 100%; padding: 20px 32px 22px; color: #fff; text-decoration: none; transition: background .15s; }
+.do-tiles a:hover, .do-tiles a:focus-visible { background: #1d1d1d; }
+.do-num { font-family: "Barlow Condensed", sans-serif; font-size: 15px; font-weight: 600; color: #6f9fe6; letter-spacing: .04em; }
+.do-tiles h3 { margin: 6px 0 8px; font-size: 21px; font-weight: 600; color: #fff; }
+.do-tiles p { margin: 0 0 16px; color: #a8a8a8; font-size: 15px; line-height: 1.5; }
+.do-go { margin-top: auto; font-weight: 600; font-size: 15px; color: #6f9fe6; }
+.do-tiles a:hover .do-go { color: #9cc0f5; text-decoration: underline; }
+@media (max-width: 1100px) { .do-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } .do-tiles li:nth-child(4n + 1) { border-left: 1px solid #2a2a2a; } .do-tiles li:nth-child(odd) { border-left: 0; } }
+@media (max-width: 640px) { .about-band { padding: 24px 16px 0; } .about-band h1 { font-size: 30px; } .do-tiles { grid-template-columns: 1fr; margin: 0 -16px; } .do-tiles li { border-left: 0 !important; } .do-tiles a { padding: 16px; } }
