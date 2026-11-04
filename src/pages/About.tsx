@@ -12,7 +12,7 @@ const shortDescription = (d: string) => {
 };
 
 const TILES: { title: string; text: string; to: string; go: string; external?: boolean }[] = [
-  { title: 'Place your own technique', text: 'Code a new technique with the same attributes and see which existing ones to compare it against.', to: '/graph?mode=mine', go: 'Place a technique' },
+  { title: 'Design a new technique', text: 'Pick attribute values for a new technique and see which existing techniques are most similar to it.', to: '/graph?mode=mine', go: 'Start designing' },
   { title: 'Find techniques by attribute', text: 'Filter by environment, selection tool, input, disambiguation, distance and occlusion, or search by name and author.', to: '/', go: 'Open the catalogue' },
   { title: 'Read a technique at a glance', text: 'How it works, its attributes, the papers behind it and the techniques most similar to it.', to: '/technique/raycasting', go: 'See an example' },
   { title: 'Find the papers', text: `All ${publications.length} papers with DOIs, and which techniques each one introduces or evaluates.`, to: '/papers', go: 'Browse papers' },
