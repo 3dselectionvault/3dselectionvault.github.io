@@ -5,17 +5,11 @@ import { countValues } from '../lib/search';
 import anilPhoto from '../assets/people/anil-batmaz.jpg';
 import rumeysaPhoto from '../assets/people/rumeysa-turkmen.jpg';
 
-const MAX_WEIGHT = Math.max(...attributes.map((a) => a.weight));
-
-function Weight({ value }: { value: number }) {
-  return (
-    <span className="weight" title={`Weight ${value} of ${MAX_WEIGHT} in the similarity score`}>
-      {Array.from({ length: MAX_WEIGHT }, (_, i) => (
-        <span key={i} className={i < value ? 'on' : ''} />
-      ))}
-    </span>
-  );
-}
+// Only the opening clause: the values themselves are listed beside it.
+const shortDescription = (d: string) => {
+  const first = d.split(/(?<=\.)\s/)[0];
+  return first.includes(':') ? `${first.split(':')[0]}.` : first;
+};
 
 export default function About() {
   const { hash } = useLocation();
@@ -78,10 +72,8 @@ export default function About() {
             </p>
             <p>
               The 3D Selection Vault gathers them in one place. Each technique has its own record, linked to the
-              paper that introduced it and to the studies and surveys that evaluated it. Every technique is coded on
-              the same {attributes.length} attributes, from the selection tool and where it starts to how the user
-              confirms and whether hidden targets can be reached. Because the coding is shared, techniques can be
-              filtered, compared like for like and placed in a similarity map.
+              paper that introduced it and to the studies and surveys that evaluated it. Each technique is coded on {attributes.length} attributes. Because the coding is shared, techniques can be filtered,
+              compared like for like and placed in a similarity map.
             </p>
           </div>
           <aside className="intro-people" id="people" aria-label="People">
@@ -163,8 +155,7 @@ export default function About() {
         <div className="block-head">
           <h2>Attribute scheme</h2>
           <p>
-            The dots show how much each attribute counts in the similarity score. Click a value to see the
-            techniques that have it.
+            Click a value to see the techniques that have it.
             {schemeStatus === 'draft' &&
               " The scheme is a draft; selection tool, tool origin, motor and visual space, and disambiguation follow Argelaguet and Andujar's 2013 survey."}
           </p>
@@ -176,13 +167,12 @@ export default function About() {
               <article key={a.id} className="attr-row">
                 <div className="attr-name">
                   <h3>{a.label}</h3>
-                  <Weight value={a.weight} />
                   <span className="attr-foot">
                     {a.multiple ? 'Several values' : 'One value'}
                     {a.basis ? ` · ${a.basis === 'Addition' ? 'added for this vault' : a.basis}` : ''}
                   </span>
                 </div>
-                <p>{a.description}</p>
+                <p>{shortDescription(a.description)}</p>
                 <ul className="value-chips">
                   {a.values.map((v) => (
                     <li key={v.id}>

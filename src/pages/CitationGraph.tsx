@@ -165,7 +165,7 @@ export default function CitationGraph() {
         const node = n as PNode;
         if (!focus.has(node.id)) return null;
         const s = new SpriteText(node.label, node.id === sel?.id ? 7 : 4.5, text);
-        s.fontFace = '"Source Sans 3 Variable", sans-serif';
+        s.fontFace = '"Barlow", sans-serif';
         s.fontWeight = node.id === sel?.id ? '700' : '500';
         s.backgroundColor = cssVar('--bg') + 'cc';
         s.padding = 1.2;

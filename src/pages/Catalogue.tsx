@@ -219,7 +219,6 @@ export default function Catalogue() {
                       {c.label}
                     </th>
                   ))}
-                  <th className="n opt2">Papers</th>
                   <th className="ck">
                     <label title={allShownPicked ? 'Unselect all shown' : 'Select all shown for BibTeX'}>
                       Cite
@@ -251,7 +250,6 @@ export default function Catalogue() {
                         {cell(t.attributes[c.attr], c.attr)}
                       </td>
                     ))}
-                    <td className="n opt2">{t.publications.length}</td>
                     <td className="ck">
                       <input
                         type="checkbox"
