@@ -713,3 +713,18 @@ img.avatar { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; b
 .people-side img.avatar { width: 112px; height: 112px; }
 .people-side .person h3 { font-size: 24px; }
 @media (max-width: 860px) { .catalogue-body { background: none; } }
+
+/* Graph page: intro beside a prominent "place your own technique" call */
+.graph-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 460px); gap: 32px; align-items: end; margin-bottom: 20px; }
+.graph-head .graph-intro { margin-bottom: 0; }
+.graph-intro p { margin: 0; color: var(--text); font-size: 17px; }
+.place-cta { display: grid; gap: 4px; text-align: left; padding: 16px 20px; border: 0; border-radius: 4px; background: var(--ink-bar); color: #fff; cursor: pointer; font: inherit; }
+.place-cta strong { font-family: var(--serif); font-size: 24px; font-weight: 700; letter-spacing: .01em; }
+.place-cta strong::after { content: ' →'; }
+.place-cta span { color: #bdbdbd; font-size: 14.5px; line-height: 1.4; }
+.place-cta:hover { background: #262626; }
+.place-cta.on { outline: 3px solid var(--accent-text); outline-offset: 2px; }
+.tabs button:nth-child(2) { color: var(--text); }
+@media (max-width: 860px) { .graph-head { grid-template-columns: 1fr; } }
+/* Catalogue subtitle in the body face */
+.cat-title p { font-family: var(--font); font-size: 17px; font-weight: 400; letter-spacing: 0; color: #a8a8a8; }

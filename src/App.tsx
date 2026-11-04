@@ -8,7 +8,7 @@ import ThemeToggle from './ThemeToggle';
 
 // The 3D graph pulls in three.js, so it loads only when someone opens it.
 const GraphPage = lazy(() => import('./pages/Graph'));
-import { REPO_URL, techniques } from './lib/data';
+import { REPO_URL } from './lib/data';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -78,7 +78,7 @@ export default function App() {
       </main>
       <footer className="site-footer">
         <span>
-          {techniques.length} techniques · Open data under MIT
+          Turkmen and Batmaz, 2026 · Open data under MIT
         </span>
       </footer>
     </div>

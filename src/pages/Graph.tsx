@@ -29,6 +29,8 @@ interface GLink {
   source: string | GNode;
   target: string | GNode;
   score: number;
+  /** Drawn to show a selected technique's neighbours; does not pull on the layout. */
+  extra?: boolean;
 }
 
 const cssVar = (name: string) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
@@ -124,7 +126,25 @@ function SimilarityGraph() {
     return i < 0 ? PALETTE[PALETTE.length - 1] : PALETTE[i % PALETTE.length];
   };
 
-  const baseLinks = useMemo(() => similarityLinks(attributes, techniques, 3), []);
+  const baseLinks = useMemo(() => {
+    const links = similarityLinks(attributes, techniques, 3);
+    // Give every technique at least one link, to its closest match, so no dot floats on its own.
+    const linked = new Set(links.flatMap((l) => [idOf(l.source as string), idOf(l.target as string)]));
+    for (const t of techniques) {
+      if (linked.has(t.id)) continue;
+      const [nb] = nearest(attributes, t.attributes, techniques, 1, t.id);
+      if (nb) {
+        links.push({ source: t.id, target: nb.technique.id, score: nb.similarity.score });
+        linked.add(t.id);
+      }
+    }
+    return links;
+  }, []);
+  const degree = useMemo(() => {
+    const d = new Map<string, number>();
+    for (const l of baseLinks) for (const e of [idOf(l.source as string), idOf(l.target as string)]) d.set(e, (d.get(e) ?? 0) + 1);
+    return d;
+  }, [baseLinks]);
 
   // Create the graph once.
   useEffect(() => {
@@ -142,6 +162,7 @@ function SimilarityGraph() {
         if (!node.mine) pick(node.id);
       });
     g.d3Force('link')?.distance((l: GLink) => 20 + (1 - l.score) * 160);
+    g.d3Force('link')?.strength((l: GLink) => (l.extra ? 0 : 1 / Math.min(degree.get(idOf(l.source)) ?? 1, degree.get(idOf(l.target)) ?? 1)));
     g.d3Force('charge')?.strength(-60);
     graph.current = g;
 
@@ -185,9 +206,19 @@ function SimilarityGraph() {
       for (const n of mineNeighbours.slice(0, 5))
         links.push({ source: MINE, target: n.technique.id, score: n.similarity.score });
     }
+    // Connect a selected technique to every neighbour listed in the panel, so none floats unlinked.
+    if (mode === 'explore' && sel) {
+      const have = new Set(links.map((l) => `${idOf(l.source)}>${idOf(l.target)}`));
+      for (const n of selNeighbours) {
+        const a = sel.id;
+        const b = n.technique.id;
+        if (!have.has(`${a}>${b}`) && !have.has(`${b}>${a}`))
+          links.push({ source: a, target: b, score: n.similarity.score, extra: true });
+      }
+    }
     g.graphData({ nodes, links });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [colorBy, mode, mineCoded, mineNeighbours, baseLinks]);
+  }, [colorBy, mode, mineCoded, mineNeighbours, baseLinks, sel, selNeighbours]);
 
   // Styling follows the focus.
   useEffect(() => {
@@ -213,7 +244,7 @@ function SimilarityGraph() {
         const node = n as GNode;
         if (!focusSet.has(node.id)) return null;
         const s = new SpriteText(node.name, node.id === focusId ? 9 : 6.5, text);
-        s.fontFace = '"Source Sans 3 Variable", sans-serif';
+        s.fontFace = '"Barlow", sans-serif';
         s.fontWeight = node.id === focusId ? '700' : '500';
         s.position.y = node.id === focusId ? 15 : 11;
         s.backgroundColor = cssVar('--bg') + 'cc';
@@ -223,12 +254,12 @@ function SimilarityGraph() {
       }) as never)
       .linkColor((l: object) => {
         const link = l as GLink;
-        const on = focusSet.has(idOf(link.source)) && focusSet.has(idOf(link.target));
+        const on = (idOf(link.source) === focusId || idOf(link.target) === focusId) && focusSet.has(idOf(link.source)) && focusSet.has(idOf(link.target));
         return focused ? (on ? accent : dim) : cssVar('--muted');
       })
       .linkWidth((l: object) => {
         const link = l as GLink;
-        return focusSet.has(idOf(link.source)) && focusSet.has(idOf(link.target)) && focused ? 1.2 : 0;
+        return focused && (idOf(link.source) === focusId || idOf(link.target) === focusId) && focusSet.has(idOf(link.source)) && focusSet.has(idOf(link.target)) ? 1.4 : 0;
       });
   }, [focusSet, focusId, colorBy, groupValues, themeTick]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -252,13 +283,22 @@ function SimilarityGraph() {
 
   return (
     <div>
-      <div className="graph-intro">
-        <h1>Similarity graph</h1>
-        <p className="muted">
-          Techniques that share more attributes sit closer together and are linked. Pick one to see its nearest
-          neighbours and what they have in common, or place your own technique to find which existing ones to
-          compare it with.
-        </p>
+      <div className="graph-head">
+        <div className="graph-intro">
+          <h1>Similarity graph</h1>
+          <p>
+            Techniques that share more attributes sit closer together. Click one to see its nearest neighbours and
+            what they have in common.
+          </p>
+        </div>
+        <button
+          type="button"
+          className={mode === 'mine' ? 'place-cta on' : 'place-cta'}
+          onClick={() => setMode('mine')}
+        >
+          <strong>Place your own technique</strong>
+          <span>Describe your technique with the vault's attributes and see which existing techniques to compare it against.</span>
+        </button>
       </div>
 
       <div className="graph-layout">
@@ -305,7 +345,7 @@ function SimilarityGraph() {
               className={mode === 'mine' ? 'on' : ''}
               onClick={() => setMode('mine')}
             >
-              Place my technique
+              Place your own technique
             </button>
           </div>
 
@@ -416,8 +456,8 @@ function SimilarityGraph() {
       </div>
 
       <p className="small muted graph-note">
-        Similarity is the weighted overlap of the attributes both techniques have coded (weights from the{' '}
-        <Link to="/about#attributes">attribute scheme</Link>). Most codings are still drafts, so treat the graph as a
+        Similarity is the overlap of the <Link to="/about#attributes">attributes</Link> both techniques have
+        coded. Most codings are still drafts, so treat the graph as a
         starting point for your related-work search, not a final answer.
       </p>
     </div>
