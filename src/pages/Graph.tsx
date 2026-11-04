@@ -296,8 +296,8 @@ function SimilarityGraph() {
           className={mode === 'mine' ? 'place-cta on' : 'place-cta'}
           onClick={() => setMode('mine')}
         >
-          <strong>Place your own technique</strong>
-          <span>Describe your technique with the vault's attributes and see which existing techniques to compare it against.</span>
+          <strong>Design a new technique</strong>
+          <span>Pick attribute values for a new technique and see which existing techniques are most similar to it.</span>
         </button>
       </div>
 
@@ -345,7 +345,7 @@ function SimilarityGraph() {
               className={mode === 'mine' ? 'on' : ''}
               onClick={() => setMode('mine')}
             >
-              Place your own technique
+              Design a new technique
             </button>
           </div>
 
@@ -401,7 +401,7 @@ function SimilarityGraph() {
           {mode === 'mine' && (
             <div className="panel-body">
               <p className="small muted">
-                Tick what describes your technique. Leave an attribute empty if it does not apply or you are not
+                Check what describes your new technique. Leave an attribute empty if it does not apply or you are not
                 sure; it is then left out of the comparison.
               </p>
               <form className="mine-form" onSubmit={(e) => e.preventDefault()}>
