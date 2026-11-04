@@ -22,6 +22,14 @@ const TILES: { title: string; text: string; to: string; go: string; external?: b
   { title: 'Suggest a correction', text: 'Every record is open on GitHub. Suggest a missing technique or a coding you disagree with.', to: `${REPO_URL}/issues/new/choose`, go: 'Suggest a technique', external: true },
 ];
 
+const SECTIONS = [
+  { id: 'about-the-vault', label: 'About the vault' },
+  { id: 'features', label: 'What you can do' },
+  { id: 'attributes', label: 'Attribute scheme' },
+  { id: 'people', label: 'People' },
+  { id: 'contribute', label: 'Contribute' },
+];
+
 export default function About() {
   const { hash } = useLocation();
   useEffect(() => {
@@ -34,34 +42,25 @@ export default function About() {
   );
   const reviewed = techniques.filter((t) => t.review.status === 'reviewed').length;
 
+  const jump = (id: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    window.history.replaceState(null, '', `#/about#${id}`);
+  };
+
   return (
     <div className="about">
-      <header className="about-band" aria-labelledby="can-do">
-        <h1 id="can-do">What you can do</h1>
-        <ul className="do-tiles">
-          {TILES.map((t, i) => {
-            const body = (
-              <>
-                <span className="do-num">{String(i + 1).padStart(2, '0')}</span>
-                <h3>{t.title}</h3>
-                <p>{t.text}</p>
-                <span className="do-go">{t.go} →</span>
-              </>
-            );
-            return (
-              <li key={t.title}>
-                {t.external ? (
-                  <a href={t.to} target="_blank" rel="noreferrer">{body}</a>
-                ) : (
-                  <Link to={t.to}>{body}</Link>
-                )}
-              </li>
-            );
-          })}
-        </ul>
+      <header className="about-band">
+        <nav className="about-jump" aria-label="On this page">
+          {SECTIONS.map((x) => (
+            <a key={x.id} href={`#/about#${x.id}`} onClick={jump(x.id)}>
+              {x.label}
+            </a>
+          ))}
+        </nav>
       </header>
 
-      <section className="about-block about-intro">
+      <section className="about-block about-intro" id="about-the-vault">
         <div className="intro-grid">
           <h2>About the vault</h2>
           <div className="intro-text">
@@ -106,6 +105,33 @@ export default function About() {
         </div>
       </section>
 
+      <section className="about-block" id="features" aria-labelledby="can-do">
+        <div className="block-head">
+          <h2 id="can-do">What you can do</h2>
+        </div>
+        <ul className="do-tiles">
+          {TILES.map((t, i) => {
+            const body = (
+              <>
+                <span className="do-num">{String(i + 1).padStart(2, '0')}</span>
+                <h3>{t.title}</h3>
+                <p>{t.text}</p>
+                <span className="do-go">{t.go} →</span>
+              </>
+            );
+            return (
+              <li key={t.title}>
+                {t.external ? (
+                  <a href={t.to} target="_blank" rel="noreferrer">{body}</a>
+                ) : (
+                  <Link to={t.to}>{body}</Link>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+
       <section className="about-block" id="attributes">
         <div className="block-head">
           <h2>Attribute scheme</h2>
@@ -142,7 +168,7 @@ export default function About() {
       </section>
 
 
-      <section className="about-steps about-foot">
+      <section className="about-steps about-foot" id="contribute">
         <div>
           <h2>Contribute</h2>
           <p>
