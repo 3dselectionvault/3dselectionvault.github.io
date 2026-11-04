@@ -22,14 +22,6 @@ const TILES: { title: string; text: string; to: string; go: string; external?: b
   { title: 'Suggest a correction', text: 'Every record is open on GitHub. Suggest a missing technique or a coding you disagree with.', to: `${REPO_URL}/issues/new/choose`, go: 'Suggest a technique', external: true },
 ];
 
-const SECTIONS = [
-  { id: 'about-the-vault', label: 'About the vault' },
-  { id: 'features', label: 'Features' },
-  { id: 'attributes', label: 'Attribute scheme' },
-  { id: 'people', label: 'People' },
-  { id: 'contribute', label: 'Contribute' },
-];
-
 export default function About() {
   const { hash } = useLocation();
   useEffect(() => {
@@ -40,26 +32,9 @@ export default function About() {
     () => new Map(attributes.map((a) => [a.id, countValues(techniques, a.id)])),
     [],
   );
-  const reviewed = techniques.filter((t) => t.review.status === 'reviewed').length;
-
-  const jump = (id: string) => (e: React.MouseEvent) => {
-    e.preventDefault();
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-    window.history.replaceState(null, '', `#/about#${id}`);
-  };
 
   return (
     <div className="about">
-      <header className="about-band">
-        <nav className="about-jump" aria-label="On this page">
-          {SECTIONS.map((x) => (
-            <a key={x.id} href={`#/about#${x.id}`} onClick={jump(x.id)}>
-              {x.label}
-            </a>
-          ))}
-        </nav>
-      </header>
-
       <section className="about-block about-intro" id="about-the-vault">
         <div className="intro-grid">
           <h2>About the vault</h2>
@@ -82,7 +57,12 @@ export default function About() {
           </div>
           <aside className="intro-people" id="people" aria-label="People">
             <h2>People</h2>
-            <p className="muted small">Concordia University, Montréal</p>
+            <p className="muted small">
+              <a href="https://users.encs.concordia.ca/~abatmaz/" target="_blank" rel="noreferrer">
+                EXIT Lab
+              </a>
+              , Concordia University · Montréal, QC, Canada
+            </p>
             <div className="people people-side">
               <div className="person">
                 <img className="avatar" src={rumeysaPhoto} alt="" width="112" height="112" />
@@ -168,48 +148,6 @@ export default function About() {
       </section>
 
 
-      <section className="about-steps about-foot" id="contribute">
-        <div>
-          <h2>Contribute</h2>
-          <p>
-            Missing a technique, or spotted a coding you disagree with? Suggest it with the technique's name and its
-            original paper, or edit its data file and open a pull request.
-          </p>
-          <p className="about-actions">
-            <a className="button" href={`${REPO_URL}/issues/new/choose`} target="_blank" rel="noreferrer">
-              Suggest a technique
-            </a>
-            <a className="button button-ghost" href={REPO_URL} target="_blank" rel="noreferrer">
-              View on GitHub
-            </a>
-          </p>
-        </div>
-        <div>
-          <h2>The data</h2>
-          <p>
-            Each technique is one JSON file in{' '}
-            <a href={`${REPO_URL}/tree/main/data/techniques`} target="_blank" rel="noreferrer">
-              data/techniques
-            </a>{' '}
-            and each paper one file in{' '}
-            <a href={`${REPO_URL}/tree/main/data/publications`} target="_blank" rel="noreferrer">
-              data/publications
-            </a>
-            . Every change is checked automatically before it appears on the site.
-          </p>
-          <p className="muted small">
-            {reviewed} of {techniques.length} techniques reviewed so far; the rest are draft codings awaiting a check
-            against their papers.
-          </p>
-        </div>
-        <div>
-          <h2>Licence</h2>
-          <p>
-            The site's code and the catalogue data are released under the MIT licence. Papers, figures and videos
-            linked from the vault belong to their authors and publishers.
-          </p>
-        </div>
-      </section>
     </div>
   );
 }
