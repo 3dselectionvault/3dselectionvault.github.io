@@ -757,3 +757,10 @@ img.avatar { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; b
 .view-switch button:hover { background: var(--pill-bg); }
 .view-switch button.on { background: var(--text); color: var(--bg); border-color: var(--text); box-shadow: none; }
 @media (max-width: 640px) { .view-switch button { padding: 8px 12px; font-size: 17px; } }
+
+/* Graph: set handed over from the filtered catalogue */
+.from-set { margin: 0 0 16px; padding: 12px 14px; border-left: 3px solid var(--accent-text); background: var(--pill-bg); }
+.from-set p { margin: 0 0 6px; }
+.from-list { list-style: none; margin: 8px 0 0; padding: 0; max-height: 220px; overflow-y: auto; columns: 2; column-gap: 14px; font-size: 14px; }
+.from-list li { break-inside: avoid; padding: 2px 0; }
+.from-list .link-button { text-align: left; }
