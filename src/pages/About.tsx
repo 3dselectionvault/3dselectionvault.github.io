@@ -67,7 +67,11 @@ export default function About() {
               <div className="person">
                 <img className="avatar" src={rumeysaPhoto} alt="" width="112" height="112" />
                 <div>
-                  <h3>Rumeysa Turkmen</h3>
+                  <h3>
+                    <a href="https://scholar.google.com/citations?user=8QnruUEAAAAJ" target="_blank" rel="noreferrer" title="Google Scholar profile">
+                      Rumeysa Turkmen
+                    </a>
+                  </h3>
                   <p>PhD candidate</p>
                   <p className="muted small">Computer Science and Software Engineering</p>
                 </div>
@@ -75,7 +79,11 @@ export default function About() {
               <div className="person">
                 <img className="avatar" src={anilPhoto} alt="" width="112" height="112" />
                 <div>
-                  <h3>Anil Ufuk Batmaz</h3>
+                  <h3>
+                    <a href="https://scholar.google.com/citations?user=PEsMslcAAAAJ&hl=en" target="_blank" rel="noreferrer" title="Google Scholar profile">
+                      Anil Ufuk Batmaz
+                    </a>
+                  </h3>
                   <p>Assistant Professor</p>
                   <p className="muted small">Computer Science and Software Engineering</p>
                 </div>
