@@ -8,7 +8,7 @@ import ThemeToggle from './ThemeToggle';
 
 // The 3D graph pulls in three.js, so it loads only when someone opens it.
 const GraphPage = lazy(() => import('./pages/Graph'));
-import { REPO_URL } from './lib/data';
+import { REPO_URL, getTechnique } from './lib/data';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -25,6 +25,23 @@ declare global {
 }
 
 // The site uses hash routes, so GoatCounter would see every page as the same URL. Count each route ourselves.
+// Keep the browser tab title in step with the page (the build writes the same titles into each page's HTML).
+function PageTitle() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    const m = pathname.match(/^\/technique\/([^/]+)/);
+    const name = m ? getTechnique(m[1])?.name : null;
+    const titles: Record<string, string> = {
+      '/graph': 'Graphs',
+      '/papers': 'Papers',
+      '/about': 'About',
+    };
+    const page = name ?? titles[pathname];
+    document.title = page ? `${page} · 3D Selection Vault` : '3D Selection Vault';
+  }, [pathname]);
+  return null;
+}
+
 function CountPageView() {
   const { pathname, search } = useLocation();
   // Filters and selections change the query string; only a new page or graph view counts as a visit.
@@ -45,6 +62,7 @@ export default function App() {
   return (
     <div className="shell">
       <ScrollToTop />
+      <PageTitle />
       <CountPageView />
       <header className="site-header">
         <Link to="/" className="brand" aria-label="3D Selection Vault home">
