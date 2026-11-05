@@ -78,6 +78,14 @@ function NeighbourList({ items, onPick }: { items: Neighbour[]; onPick: (id: str
   );
 }
 
+// Move the camera so the node sits in front of it, a little way out.
+function flyTo(g: ForceGraph3DInstance, node: GNode) {
+  if (node.x == null) return;
+  const d = Math.hypot(node.x, node.y ?? 0, node.z ?? 0) || 1;
+  const r = 1 + 320 / d;
+  g.cameraPosition({ x: node.x * r, y: (node.y ?? 0) * r, z: (node.z ?? 0) * r }, node as never, 900);
+}
+
 function SimilarityGraph({ mode }: { mode: 'explore' | 'mine' }) {
   const [params, setParams] = useSearchParams();
   const selected = params.get('t') ?? '';
@@ -177,7 +185,9 @@ function SimilarityGraph({ mode }: { mode: 'explore' | 'mine' }) {
       .cooldownTicks(160)
       .onNodeClick((n: object) => {
         const node = n as GNode;
-        if (!node.mine) pick(node.id);
+        // Your own technique is not in the vault, so clicking it just brings it into view.
+        if (node.mine) flyTo(g, node);
+        else pick(node.id);
       });
     g.d3Force('link')?.distance((l: GLink) => 20 + (1 - l.score) * 160);
     g.d3Force('link')?.strength((l: GLink) => (l.extra ? 0 : 1 / Math.min(degree.get(idOf(l.source)) ?? 1, degree.get(idOf(l.target)) ?? 1)));
@@ -299,10 +309,7 @@ function SimilarityGraph({ mode }: { mode: 'explore' | 'mine' }) {
     if (!g || !focusId) return;
     const t = setTimeout(() => {
       const node = (g.graphData().nodes as GNode[]).find((n) => n.id === focusId);
-      if (!node || node.x == null) return;
-      const d = Math.hypot(node.x, node.y ?? 0, node.z ?? 0) || 1;
-      const r = 1 + 320 / d;
-      g.cameraPosition({ x: node.x * r, y: (node.y ?? 0) * r, z: (node.z ?? 0) * r }, node as never, 900);
+      if (node) flyTo(g, node);
     }, 500);
     return () => clearTimeout(t);
   }, [focusId]);
