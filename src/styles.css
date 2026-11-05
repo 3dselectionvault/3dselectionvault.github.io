@@ -764,3 +764,8 @@ img.avatar { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; b
 .from-list { list-style: none; margin: 8px 0 0; padding: 0; max-height: 220px; overflow-y: auto; columns: 2; column-gap: 14px; font-size: 14px; }
 .from-list li { break-inside: avoid; padding: 2px 0; }
 .from-list .link-button { text-align: left; }
+
+.graph-link-idle { border-style: dashed; background: transparent; cursor: default; color: #a8a8a8; white-space: normal; max-width: 300px; line-height: 1.3; font-size: 14.5px; }
+.graph-link-idle:hover { background: transparent; border-color: #5a5a5a; color: #a8a8a8; }
+.graph-link-idle svg { opacity: .45; flex: none; }
+.filters .filters-title { margin: 0 0 12px; font-family: var(--serif); font-size: 22px; font-weight: 700; text-transform: none; letter-spacing: 0; color: var(--text); }

@@ -86,12 +86,17 @@ function SimilarityGraph({ mode }: { mode: 'explore' | 'mine' }) {
     : 'selectionTool';
   // A set of techniques handed over from a filtered catalogue (?from=<catalogue query string>).
   const from = params.get('from') ?? '';
+  const idsParam = params.get('ids') ?? '';
   const fromSet = useMemo(() => {
+    if (idsParam) {
+      const hits = idsParam.split(',').map((id) => getTechnique(id)).filter((t): t is NonNullable<typeof t> => !!t);
+      return hits.length ? hits : null;
+    }
     if (!from) return null;
     const p = new URLSearchParams(from);
     const hits = search(techniques, p.get('q') ?? '', readFilters(p), 'name');
     return hits.length ? hits : null;
-  }, [from]);
+  }, [from, idsParam]);
   const fromIds = useMemo(() => new Set(fromSet?.map((t) => t.id) ?? []), [fromSet]);
   const [mine, setMine] = useState<Coding>({});
   const [query, setQuery] = useState('');
@@ -369,13 +374,25 @@ function SimilarityGraph({ mode }: { mode: 'explore' | 'mine' }) {
                 <div className="from-set">
                   <p>
                     <strong>
-                      {fromSet.length} technique{fromSet.length === 1 ? '' : 's'} from your filters
+                      {fromSet.length} technique{fromSet.length === 1 ? '' : 's'}{' '}
+                      {idsParam ? 'you checked' : 'from your filters'}
                     </strong>{' '}
                     are highlighted.
                   </p>
                   <p className="small">
-                    <Link to={`/?${from}`}>Back to the list</Link> ·{' '}
-                    <button type="button" className="link-button" onClick={() => setParam('from', null)}>
+                    <Link to={idsParam ? '/' : `/?${from}`}>Back to the list</Link> ·{' '}
+                    <button
+                      type="button"
+                      className="link-button"
+                      onClick={() =>
+                        setParams((prev) => {
+                          const next = new URLSearchParams(prev);
+                          next.delete('from');
+                          next.delete('ids');
+                          return next;
+                        })
+                      }
+                    >
                       Show all techniques
                     </button>
                   </p>
