@@ -1,6 +1,6 @@
 import { Component, StrictMode, type ReactNode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import '@fontsource/barlow/400.css';
 import '@fontsource/barlow/500.css';
@@ -58,16 +58,23 @@ class Boundary extends Component<{ children: ReactNode }, { failed: boolean }> {
   }
 }
 
-// HashRouter keeps every page working on GitHub Pages without server rewrites.
+const BASE = import.meta.env.BASE_URL; // e.g. /3d-selection-vault/
+// Links from before the switch to real paths looked like …/#/technique/raycasting. Send them to the new address.
+if (location.hash.startsWith('#/')) {
+  history.replaceState(null, '', BASE + location.hash.slice(2));
+}
+
+// Every page is also written out as its own HTML file at build time (scripts/prerender.mjs),
+// so real paths work on GitHub Pages and search engines can read each technique.
 createRoot(root, {
   onUncaughtError: (error) => showFailure(String((error as Error)?.stack ?? error)),
   onRecoverableError: (error) => note(String((error as Error)?.stack ?? error)),
 }).render(
   <StrictMode>
     <Boundary>
-      <HashRouter>
+      <BrowserRouter basename={BASE.replace(/\/$/, '')}>
         <App />
-      </HashRouter>
+      </BrowserRouter>
     </Boundary>
   </StrictMode>,
 );
