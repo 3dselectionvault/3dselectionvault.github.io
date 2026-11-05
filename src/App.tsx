@@ -43,7 +43,7 @@ export default function App() {
           <NavLink to="/" end>
             Techniques
           </NavLink>
-          <NavLink to="/graph">Graph</NavLink>
+          <NavLink to="/graph">Graphs</NavLink>
           <NavLink to="/papers">Papers</NavLink>
           <NavLink to="/about">About</NavLink>
         </nav>
