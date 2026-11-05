@@ -72,6 +72,12 @@ export default function Catalogue() {
   const pickedPubs = pickedTechs.flatMap(citePubsOf);
   const noPaper = pickedTechs.filter((t) => citePubsOf(t).length === 0).length;
   const allShownPicked = results.length > 0 && results.every((t) => picked.has(t.id));
+  // Checked techniques win over the filtered list; with neither, the button waits.
+  const graphTarget = picked.size
+    ? { to: `/graph?ids=${[...picked].join(',')}`, label: `Show ${picked.size === 1 ? 'the checked one' : `these ${picked.size} checked`} in the graph` }
+    : isFiltered && results.length
+      ? { to: `/graph?from=${encodeURIComponent(graphFrom)}`, label: `Show ${results.length === 1 ? 'this one' : `these ${results.length}`} in the graph` }
+      : null;
   const active = Object.values(filters).reduce((n, v) => n + v.length, 0);
 
   const update = (key: string, value: string | null) => {
@@ -124,8 +130,8 @@ export default function Catalogue() {
           onChange={(e) => update('q', e.target.value || null)}
           aria-label="Search techniques"
         />
-        {isFiltered && results.length > 0 && (
-        <Link to={`/graph?from=${encodeURIComponent(graphFrom)}`} className="graph-link">
+        {graphTarget ? (
+          <Link to={graphTarget.to} className="graph-link">
           <svg viewBox="0 0 120 80" aria-hidden="true">
             <g className="t-links">
               <path d="M18 52 38 30 62 40 86 18 104 34M38 30 50 62 62 40 80 58 104 34M18 52 50 62" />
@@ -138,15 +144,30 @@ export default function Catalogue() {
             <circle cx="104" cy="34" r="5.5" fill="#3f6fb0" />
             <circle cx="62" cy="40" r="8" fill="#e0475b" stroke="#fff" strokeWidth="2" />
           </svg>
-          <strong>
-            Show {results.length === 1 ? 'this one' : `these ${results.length}`} in the graph
-          </strong>
-        </Link>
+            <strong>{graphTarget.label}</strong>
+          </Link>
+        ) : (
+          <div className="graph-link graph-link-idle">
+          <svg viewBox="0 0 120 80" aria-hidden="true">
+            <g className="t-links">
+              <path d="M18 52 38 30 62 40 86 18 104 34M38 30 50 62 62 40 80 58 104 34M18 52 50 62" />
+            </g>
+            <circle cx="18" cy="52" r="5" fill="#3f6fb0" />
+            <circle cx="38" cy="30" r="6" fill="#4f8a4b" />
+            <circle cx="50" cy="62" r="4.5" fill="#c08a2e" />
+            <circle cx="86" cy="18" r="5" fill="#7a4fa3" />
+            <circle cx="80" cy="58" r="4.5" fill="#2f8f8a" />
+            <circle cx="104" cy="34" r="5.5" fill="#3f6fb0" />
+            <circle cx="62" cy="40" r="8" fill="#e0475b" stroke="#fff" strokeWidth="2" />
+          </svg>
+            <span>Filter or check techniques to see them in the graph</span>
+          </div>
         )}
       </section>
 
       <div className="catalogue-body">
         <aside className="filters" aria-label="Filters" ref={asideRef}>
+          <h2 className="filters-title">Filters</h2>
           {facetGroups.map(({ attr, counts }) => {
             const activeHere = filters[attr.id]?.length ?? 0;
             return (
