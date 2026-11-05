@@ -18,10 +18,34 @@ function ScrollToTop() {
   return null;
 }
 
+declare global {
+  interface Window {
+    goatcounter?: { count: (vars: { path: string; title?: string }) => void };
+  }
+}
+
+// The site uses hash routes, so GoatCounter would see every page as the same URL. Count each route ourselves.
+function CountPageView() {
+  const { pathname, search } = useLocation();
+  // Filters and selections change the query string; only a new page or graph view counts as a visit.
+  const view = pathname === '/graph' ? new URLSearchParams(search).get('view') : null;
+  const path = pathname + (view ? `/${view}` : '');
+  useEffect(() => {
+    let tries = 0;
+    const send = () => {
+      if (window.goatcounter?.count) window.goatcounter.count({ path, title: document.title });
+      else if (tries++ < 20) setTimeout(send, 250);
+    };
+    send();
+  }, [path]);
+  return null;
+}
+
 export default function App() {
   return (
     <div className="shell">
       <ScrollToTop />
+      <CountPageView />
       <header className="site-header">
         <Link to="/" className="brand" aria-label="3D Selection Vault home">
           <span className="brand-mark" aria-hidden="true">
@@ -84,7 +108,7 @@ export default function App() {
       </main>
       <footer className="site-footer">
         <span>
-          Turkmen and Batmaz, 2026 · Open data under MIT
+          Turkmen and Batmaz, 2026 · Open data under MIT · Visits are counted anonymously, without cookies
         </span>
       </footer>
     </div>
