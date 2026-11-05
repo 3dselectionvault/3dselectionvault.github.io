@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { attributes, techniques, valueLabel } from '../lib/data';
-import { countValues, search, type Filters, type SortKey } from '../lib/search';
+import { countValues, readFilters, search, type SortKey } from '../lib/search';
 import { citePubsOf } from '../lib/citations';
 import SelectionBar from '../SelectionBar';
 import ToolGlyph from '../ToolGlyph';
@@ -22,16 +22,6 @@ const COLUMNS: { attr: string; label: string; className?: string }[] = [
 const short = (attr: string, v: string) => valueLabel(attr, v).replace(/ \(.*\)/, '');
 const cell = (vals: string[] | undefined, attr: string) =>
   vals && vals.length ? vals.map((v) => short(attr, v)).join(', ') : '—';
-
-// Filter state lives in the URL so a filtered view can be shared as a link.
-function readFilters(params: URLSearchParams): Filters {
-  const f: Filters = {};
-  for (const a of attributes) {
-    const v = params.get(a.id);
-    if (v) f[a.id] = v.split(',');
-  }
-  return f;
-}
 
 export default function Catalogue() {
   const [params, setParams] = useSearchParams();
@@ -63,6 +53,13 @@ export default function Catalogue() {
   const filters = useMemo(() => readFilters(params), [params]);
 
   const results = useMemo(() => search(techniques, query, filters, sort), [query, filters, sort]);
+  const isFiltered = query.trim() !== '' || Object.keys(filters).length > 0;
+  // The graph re-runs the same search, so it gets the filter part of the URL (not the sort).
+  const graphFrom = (() => {
+    const p = new URLSearchParams(params);
+    p.delete('sort');
+    return p.toString();
+  })();
   const [picked, setPicked] = useState<Set<string>>(new Set());
   const flip = (id: string) =>
     setPicked((cur) => {
@@ -127,7 +124,8 @@ export default function Catalogue() {
           onChange={(e) => update('q', e.target.value || null)}
           aria-label="Search techniques"
         />
-        <Link to="/graph" className="graph-link">
+        {isFiltered && results.length > 0 && (
+        <Link to={`/graph?from=${encodeURIComponent(graphFrom)}`} className="graph-link">
           <svg viewBox="0 0 120 80" aria-hidden="true">
             <g className="t-links">
               <path d="M18 52 38 30 62 40 86 18 104 34M38 30 50 62 62 40 80 58 104 34M18 52 50 62" />
@@ -140,8 +138,11 @@ export default function Catalogue() {
             <circle cx="104" cy="34" r="5.5" fill="#3f6fb0" />
             <circle cx="62" cy="40" r="8" fill="#e0475b" stroke="#fff" strokeWidth="2" />
           </svg>
-          <strong>Similarity graph</strong>
+          <strong>
+            Show {results.length === 1 ? 'this one' : `these ${results.length}`} in the graph
+          </strong>
         </Link>
+        )}
       </section>
 
       <div className="catalogue-body">

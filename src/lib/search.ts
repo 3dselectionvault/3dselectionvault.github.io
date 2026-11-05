@@ -1,9 +1,19 @@
 import type { Technique } from './types';
-import { getPublication } from './data';
+import { attributes, getPublication } from './data';
 
 /** Selected values per attribute id. Within one attribute values are OR-ed; across attributes AND-ed. */
 export type Filters = Record<string, string[]>;
 export type SortKey = 'name' | 'year-asc' | 'year-desc';
+
+/** Filter state lives in the URL (one parameter per attribute, values comma-separated) so a filtered view can be shared. */
+export function readFilters(params: URLSearchParams): Filters {
+  const f: Filters = {};
+  for (const a of attributes) {
+    const v = params.get(a.id);
+    if (v) f[a.id] = v.split(',');
+  }
+  return f;
+}
 
 const normalise = (s: string) =>
   s

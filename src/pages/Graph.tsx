@@ -4,6 +4,7 @@ import ForceGraph3D, { type ForceGraph3DInstance } from '3d-force-graph';
 import SpriteText from 'three-spritetext';
 import { attributes, getTechnique, techniques, valueLabel } from '../lib/data';
 import { citePubsOf } from '../lib/citations';
+import { readFilters, search } from '../lib/search';
 import { downloadBibtex } from '../lib/bibtex';
 import { nearest, similarityLinks, type Coding, type Neighbour } from '../lib/similarity';
 import CitationGraph from './CitationGraph';
@@ -83,6 +84,15 @@ function SimilarityGraph({ mode }: { mode: 'explore' | 'mine' }) {
   const colorBy = (COLOR_BY as readonly string[]).includes(params.get('color') ?? '')
     ? (params.get('color') as string)
     : 'selectionTool';
+  // A set of techniques handed over from a filtered catalogue (?from=<catalogue query string>).
+  const from = params.get('from') ?? '';
+  const fromSet = useMemo(() => {
+    if (!from) return null;
+    const p = new URLSearchParams(from);
+    const hits = search(techniques, p.get('q') ?? '', readFilters(p), 'name');
+    return hits.length ? hits : null;
+  }, [from]);
+  const fromIds = useMemo(() => new Set(fromSet?.map((t) => t.id) ?? []), [fromSet]);
   const [mine, setMine] = useState<Coding>({});
   const [query, setQuery] = useState('');
   const [themeTick, setThemeTick] = useState(0);
@@ -231,13 +241,20 @@ function SimilarityGraph({ mode }: { mode: 'explore' | 'mine' }) {
     const text = cssVar('--text');
     const accent = cssVar('--accent');
     const focused = focusSet.size > 0;
+    const inSet = !focused && fromIds.size > 0;
     g.nodeColor((n: object) => {
       const node = n as GNode;
       if (node.mine) return accent;
       if (focused && !focusSet.has(node.id)) return dim;
+      if (inSet && !fromIds.has(node.id)) return dim;
       return colorOf(node.group);
     })
-      .nodeVal((n: object) => ((n as GNode).id === focusId ? 3 : focusSet.has((n as GNode).id) ? 1.6 : 1))
+      .nodeVal((n: object) => {
+        const id = (n as GNode).id;
+        if (id === focusId) return 3;
+        if (focusSet.has(id)) return 1.6;
+        return inSet && fromIds.has(id) ? 1.8 : 1;
+      })
       .nodeLabel((n: object) => {
         const node = n as GNode;
         return `<div class="graph-tip"><b>${node.name}</b>${node.year ? ` · ${node.year}` : ''}</div>`;
@@ -245,7 +262,8 @@ function SimilarityGraph({ mode }: { mode: 'explore' | 'mine' }) {
       .nodeThreeObjectExtend(true)
       .nodeThreeObject(((n: object) => {
         const node = n as GNode;
-        if (!focusSet.has(node.id)) return null;
+        const labelled = focusSet.has(node.id) || (inSet && fromIds.has(node.id) && fromIds.size <= 25);
+        if (!labelled) return null;
         const s = new SpriteText(node.name, node.id === focusId ? 9 : 6.5, text);
         s.fontFace = '"Barlow", sans-serif';
         s.fontWeight = node.id === focusId ? '700' : '500';
@@ -258,13 +276,15 @@ function SimilarityGraph({ mode }: { mode: 'explore' | 'mine' }) {
       .linkColor((l: object) => {
         const link = l as GLink;
         const on = (idOf(link.source) === focusId || idOf(link.target) === focusId) && focusSet.has(idOf(link.source)) && focusSet.has(idOf(link.target));
+        if (inSet) return fromIds.has(idOf(link.source)) && fromIds.has(idOf(link.target)) ? accent : dim;
         return focused ? (on ? accent : dim) : cssVar('--muted');
       })
       .linkWidth((l: object) => {
         const link = l as GLink;
+        if (inSet) return fromIds.has(idOf(link.source)) && fromIds.has(idOf(link.target)) ? 1 : 0;
         return focused && (idOf(link.source) === focusId || idOf(link.target) === focusId) && focusSet.has(idOf(link.source)) && focusSet.has(idOf(link.target)) ? 1.4 : 0;
       });
-  }, [focusSet, focusId, colorBy, groupValues, themeTick]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [focusSet, focusId, fromIds, colorBy, groupValues, themeTick]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Fly to the focused node once the layout has placed it.
   useEffect(() => {
@@ -279,6 +299,14 @@ function SimilarityGraph({ mode }: { mode: 'explore' | 'mine' }) {
     }, 500);
     return () => clearTimeout(t);
   }, [focusId]);
+
+  // Frame the handed-over set once the layout has settled.
+  useEffect(() => {
+    const g = graph.current;
+    if (!g || !fromIds.size || focusId) return;
+    const t = setTimeout(() => g.zoomToFit(900, 60, (n: object) => fromIds.has((n as GNode).id)), 1200);
+    return () => clearTimeout(t);
+  }, [fromIds]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const matches = query.trim()
     ? techniques.filter((t) => t.name.toLowerCase().includes(query.trim().toLowerCase())).slice(0, 8)
@@ -337,6 +365,33 @@ function SimilarityGraph({ mode }: { mode: 'explore' | 'mine' }) {
         <aside className="graph-panel">
           {mode === 'explore' && (
             <div className="panel-body">
+              {fromSet && (
+                <div className="from-set">
+                  <p>
+                    <strong>
+                      {fromSet.length} technique{fromSet.length === 1 ? '' : 's'} from your filters
+                    </strong>{' '}
+                    are highlighted.
+                  </p>
+                  <p className="small">
+                    <Link to={`/?${from}`}>Back to the list</Link> ·{' '}
+                    <button type="button" className="link-button" onClick={() => setParam('from', null)}>
+                      Show all techniques
+                    </button>
+                  </p>
+                  {!sel && (
+                    <ul className="from-list">
+                      {fromSet.map((t) => (
+                        <li key={t.id}>
+                          <button type="button" className="link-button" onClick={() => pick(t.id)}>
+                            {t.name}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              )}
               <div className="graph-search">
                 <input
                   type="search"
