@@ -221,8 +221,10 @@ function SimilarityGraph({ mode }: { mode: 'explore' | 'mine' }) {
     const links: GLink[] = baseLinks.map((l) => ({ ...l }));
     if (mode === 'mine' && mineCoded) {
       nodes.push(keep({ id: MINE, name: 'Your technique', group: mine[colorBy]?.[0] ?? '', mine: true }));
-      for (const n of mineNeighbours.slice(0, 5))
-        links.push({ source: MINE, target: n.technique.id, score: n.similarity.score });
+      // The closest five pull your technique into place; the rest of the listed neighbours are drawn but do not pull.
+      mineNeighbours.forEach((n, i) =>
+        links.push({ source: MINE, target: n.technique.id, score: n.similarity.score, extra: i >= 5 }),
+      );
     }
     // Connect a selected technique to every neighbour listed in the panel, so none floats unlinked.
     if (mode === 'explore' && sel) {
