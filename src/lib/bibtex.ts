@@ -70,7 +70,7 @@ export function toBibtexFile(pubs: Publication[]): string {
     if (n > 0) key += String.fromCharCode(97 + n); // smith2020a, smith2020b…
     out.push(toBibtex(p, key));
   }
-  return `% Exported from the 3D Selection Vault — https://rumeysaturkmen.github.io/3d-selection-vault/\n% ${out.length} entries\n\n${out.join('\n\n')}\n`;
+  return `% Exported from the 3D Selection Vault — https://3dselectionvault.github.io/\n% ${out.length} entries\n\n${out.join('\n\n')}\n`;
 }
 
 export function downloadBibtex(pubs: Publication[], name = '3d-selection-vault.bib') {

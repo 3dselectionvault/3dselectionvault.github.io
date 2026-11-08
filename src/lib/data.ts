@@ -31,5 +31,5 @@ export function valueLabel(attributeId: string, valueId: string): string {
   return getAttribute(attributeId)?.values.find((v) => v.id === valueId)?.label ?? valueId;
 }
 
-export const REPO_URL = 'https://github.com/rumeysaturkmen/3d-selection-vault';
+export const REPO_URL = 'https://github.com/3dselectionvault/3dselectionvault.github.io';
 export const editUrl = (path: string) => `${REPO_URL}/edit/main/${path}`;

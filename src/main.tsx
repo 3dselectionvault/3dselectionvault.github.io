@@ -58,7 +58,7 @@ class Boundary extends Component<{ children: ReactNode }, { failed: boolean }> {
   }
 }
 
-const BASE = import.meta.env.BASE_URL; // e.g. /3d-selection-vault/
+const BASE = import.meta.env.BASE_URL; // "/" on 3dselectionvault.github.io
 // Links from before the switch to real paths looked like …/#/technique/raycasting. Send them to the new address.
 if (location.hash.startsWith('#/')) {
   history.replaceState(null, '', BASE + location.hash.slice(2));

@@ -5,8 +5,8 @@
 import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 
-const BASE = process.env.VAULT_BASE ?? '/3d-selection-vault/';
-const ORIGIN = process.env.VAULT_ORIGIN ?? 'https://rumeysaturkmen.github.io';
+const BASE = process.env.VAULT_BASE ?? '/';
+const ORIGIN = process.env.VAULT_ORIGIN ?? 'https://3dselectionvault.github.io';
 const SITE = ORIGIN + BASE;
 const dist = 'dist';
 
@@ -34,7 +34,19 @@ if (!shell.includes('<div id="root"></div>')) throw new Error('dist/index.html h
 
 function page({ path, title, description, body }) {
   const url = SITE + path;
+  // On the home page, tell Google the site's name (shown above results instead of the address).
+  const siteName = path
+    ? []
+    : [
+        `<script type="application/ld+json">${JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'WebSite',
+          name: '3D Selection Vault',
+          url: SITE,
+        })}</script>`,
+      ];
   const head = [
+    ...siteName,
     `<title>${esc(title)}</title>`,
     `<meta name="description" content="${esc(description)}" />`,
     `<link rel="canonical" href="${esc(url)}" />`,

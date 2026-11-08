@@ -2,7 +2,7 @@
 
 An open catalogue of techniques for selecting objects in virtual and mixed reality.
 
-**Site:** https://rumeysaturkmen.github.io/3d-selection-vault/
+**Site:** https://3dselectionvault.github.io/
 
 Each technique is coded against a shared set of attributes and linked to the papers that introduce and evaluate it. The goal is a 3D similarity graph: describe a new technique and see which existing ones are closest, and so which to compare against in a paper.
 
