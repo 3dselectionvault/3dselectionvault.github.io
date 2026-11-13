@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect } from 'react';
+import { lazy, Suspense, useEffect, type ReactNode } from 'react';
 import { Link, NavLink, Route, Routes, useLocation } from 'react-router-dom';
 import Catalogue from './pages/Catalogue';
 import TechniquePage from './pages/Technique';
@@ -25,6 +25,18 @@ declare global {
 }
 
 // The site uses hash routes, so GoatCounter would see every page as the same URL. Count each route ourselves.
+// On the home page the site name is the page's main heading (it is what Google shows as the site name);
+// elsewhere each page has its own heading and the name is just a link home.
+function Brand({ children }: { children: ReactNode }) {
+  const { pathname } = useLocation();
+  const link = (
+    <Link to="/" className="brand" aria-label="3D Selection Vault home">
+      {children}
+    </Link>
+  );
+  return pathname === '/' ? <h1 className="brand-heading">{link}</h1> : link;
+}
+
 // Keep the browser tab title in step with the page (the build writes the same titles into each page's HTML).
 function PageTitle() {
   const { pathname } = useLocation();
@@ -65,7 +77,7 @@ export default function App() {
       <PageTitle />
       <CountPageView />
       <header className="site-header">
-        <Link to="/" className="brand" aria-label="3D Selection Vault home">
+        <Brand>
           <span className="brand-mark" aria-hidden="true">
             <svg viewBox="0 0 24 24" width="24" height="24">
               <path d="M2 7V2h5M17 2h5v5M22 17v5h-5M7 22H2v-5" fill="none" stroke="currentColor" strokeWidth="1.7" />
@@ -80,7 +92,7 @@ export default function App() {
             </svg>
           </span>
           <span>3D Selection Vault</span>
-        </Link>
+        </Brand>
         <nav className="site-nav" aria-label="Main">
           <NavLink to="/" end>
             Techniques

@@ -80,7 +80,7 @@ urls.push(
     title: '3D Selection Vault',
     description:
       'An open database and visualization of 3D selection techniques for virtual and augmented reality: filter by attribute, compare similar techniques, and download BibTeX.',
-    body: `<main><h1>3D Selection Techniques</h1><p>An open database and visualization of techniques for selecting objects in virtual and augmented reality.</p><ul>${techniques
+    body: `<main><h1>3D Selection Vault</h1><h2>3D Selection Techniques</h2><p>An open database and visualization of techniques for selecting objects in virtual and augmented reality.</p><ul>${techniques
       .map((t) => `<li>${link(`technique/${t.id}`, t.name)}${t.year ? ` (${t.year})` : ''}: ${esc(clip(t.summary, 140))}</li>`)
       .join('')}</ul></main>`,
   }),
