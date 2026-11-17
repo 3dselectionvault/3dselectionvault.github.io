@@ -1,0 +1,76 @@
+{
+  "id": "vergence-conecast",
+  "name": "Vergence ConeCast",
+  "aliases": [],
+  "year": 2025,
+  "summary": "A hands-free EyeExpand: a gaze cone reaching to the vergence point gathers objects, which are laid out on a disc in front of the user, and the target copy is then selected by gaze.",
+  "howItWorks": "The cone starts between the eyes and ends just past the vergence point, its angle set by the measured error. A wink spreads the captured objects on a circular plane, keeping their relative positions, and a second gaze selection and wink picks the copy, selecting the original. It was the most accurate of the four but the slowest. The study (Varjo Aero) had users select atoms in a cluttered molecule model, confirming with a wink, which beat dwell and double blink in an earlier test.",
+  "advantages": [
+    "Most accurate; handles occlusion."
+  ],
+  "limitations": [
+    "Two steps, so slowest."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "cone",
+      "ray"
+    ],
+    "toolOrigin": [
+      "eye"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "progressive"
+    ],
+    "inputModality": [
+      "gaze"
+    ],
+    "confirmation": [
+      "gesture"
+    ],
+    "targetDistance": [
+      "far"
+    ],
+    "handlesOcclusion": [
+      "yes"
+    ]
+  },
+  "tags": [
+    "gaze",
+    "vergence",
+    "hands-free"
+  ],
+  "publications": [
+    {
+      "publication": "correia-2025-eyedepth",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "eyeexpand",
+      "type": "variant-of",
+      "note": "Replaces EyeExpand's controller trigger with eye-only confirmation and sets the cone depth from vergence."
+    },
+    {
+      "technique": "vergence-spherecast",
+      "type": "compared-with",
+      "note": "Introduced with the other vergence-based techniques in the same thesis."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": []
+  }
+}

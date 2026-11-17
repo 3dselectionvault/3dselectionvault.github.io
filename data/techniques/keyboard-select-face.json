@@ -1,0 +1,75 @@
+{
+  "id": "keyboard-select-face",
+  "name": "KeyboardSelect",
+  "aliases": [],
+  "year": 2026,
+  "summary": "Each face of the polyhedron shows a number; turning the left palm towards oneself opens a number pad on which the right hand types the face's number.",
+  "howItWorks": "Far-field aiming becomes a discrete key press, so hand jitter no longer matters. It was among the three best techniques, with low error rates, but finding numbers took time. Tested with 16 participants selecting single faces on regular polyhedra (4, 6 or 12 faces, two sizes) with tracked hands.",
+  "advantages": [
+    "Few errors; immune to jitter."
+  ],
+  "limitations": [
+    "Slow to find numbers; less liked on complex models."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "other"
+    ],
+    "toolOrigin": [
+      "both-hands"
+    ],
+    "motorVisualSpace": [
+      "offset"
+    ],
+    "disambiguation": [
+      "manual"
+    ],
+    "inputModality": [
+      "hand"
+    ],
+    "confirmation": [
+      "touch"
+    ],
+    "targetDistance": [
+      "near"
+    ],
+    "handlesOcclusion": [
+      "no"
+    ]
+  },
+  "tags": [
+    "face selection",
+    "freehand",
+    "component selection"
+  ],
+  "publications": [
+    {
+      "publication": "qi-2026-polyhedron-faces",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "pinch-rotate-face",
+      "type": "compared-with",
+      "note": "Introduced with seven other face-selection techniques in the same study."
+    },
+    {
+      "technique": "raycasting",
+      "type": "related",
+      "note": "The study's baseline (DragRotate) rotates the object with one hand and selects with a hand ray."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": []
+  }
+}

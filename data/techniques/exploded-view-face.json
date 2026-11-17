@@ -1,0 +1,76 @@
+{
+  "id": "exploded-view-face",
+  "name": "ExplodedView",
+  "aliases": [],
+  "year": 2026,
+  "summary": "Each left-hand pinch pushes a polyhedron's faces apart along their normals, so a hand ray can reach faces that were hidden or crowded.",
+  "howItWorks": "Faces move out and rotate slightly while keeping their order; selection uses the hand ray. Tested with 16 participants selecting single faces on regular polyhedra (4, 6 or 12 faces, two sizes) with tracked hands.",
+  "advantages": [
+    "Reveals crowded and hidden faces.",
+    "Rated enjoyable."
+  ],
+  "limitations": [
+    "Temporarily breaks the object's shape."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "ray"
+    ],
+    "toolOrigin": [
+      "both-hands"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "manual"
+    ],
+    "inputModality": [
+      "hand"
+    ],
+    "confirmation": [
+      "pinch"
+    ],
+    "targetDistance": [
+      "near"
+    ],
+    "handlesOcclusion": [
+      "yes"
+    ]
+  },
+  "tags": [
+    "face selection",
+    "freehand",
+    "component selection"
+  ],
+  "publications": [
+    {
+      "publication": "qi-2026-polyhedron-faces",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "pinch-rotate-face",
+      "type": "compared-with",
+      "note": "Introduced with seven other face-selection techniques in the same study."
+    },
+    {
+      "technique": "raycasting",
+      "type": "related",
+      "note": "The study's baseline (DragRotate) rotates the object with one hand and selects with a hand ray."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": []
+  }
+}

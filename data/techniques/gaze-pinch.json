@@ -73,6 +73,10 @@
     {
       "publication": "bao-2023-gazeguidance",
       "role": "evaluated"
+    },
+    {
+      "publication": "jo-2025-manual-free-gaze",
+      "role": "evaluated"
     }
   ],
   "relationships": [

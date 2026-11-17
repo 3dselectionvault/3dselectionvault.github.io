@@ -126,6 +126,10 @@
     {
       "publication": "looser-2007-lenses",
       "role": "evaluated"
+    },
+    {
+      "publication": "li-2026-running",
+      "role": "evaluated"
     }
   ],
   "relationships": [

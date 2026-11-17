@@ -1,0 +1,75 @@
+{
+  "id": "sphere-connector-face",
+  "name": "SphereConnector",
+  "aliases": [],
+  "year": 2026,
+  "summary": "Each face of a polyhedron gets a small proxy sphere just off its centre, sized by face area, so a hand ray can hit the sphere instead of the thin face.",
+  "howItWorks": "The left hand rotates the object; the right hand's ray selects either the face or its sphere, which enlarges the target and reduces jitter errors. Tested with 16 participants selecting single faces on regular polyhedra (4, 6 or 12 faces, two sizes) with tracked hands.",
+  "advantages": [
+    "Larger targets for the ray."
+  ],
+  "limitations": [
+    "Spheres add visual clutter."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "ray"
+    ],
+    "toolOrigin": [
+      "both-hands"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "manual"
+    ],
+    "inputModality": [
+      "hand"
+    ],
+    "confirmation": [
+      "pinch"
+    ],
+    "targetDistance": [
+      "near"
+    ],
+    "handlesOcclusion": [
+      "partly"
+    ]
+  },
+  "tags": [
+    "face selection",
+    "freehand",
+    "component selection"
+  ],
+  "publications": [
+    {
+      "publication": "qi-2026-polyhedron-faces",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "pinch-rotate-face",
+      "type": "compared-with",
+      "note": "Introduced with seven other face-selection techniques in the same study."
+    },
+    {
+      "technique": "raycasting",
+      "type": "related",
+      "note": "The study's baseline (DragRotate) rotates the object with one hand and selects with a hand ray."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": []
+  }
+}

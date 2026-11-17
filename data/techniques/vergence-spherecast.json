@@ -1,0 +1,77 @@
+{
+  "id": "vergence-spherecast",
+  "name": "Vergence SphereCast",
+  "aliases": [],
+  "year": 2025,
+  "summary": "A thin capsule is swept along the gaze direction across the range of depth error around the vergence point, and the object closest to the vergence point is selected.",
+  "howItWorks": "The sweep length is twice the measured depth error at that distance, so the target is caught even when vergence depth is wrong. It performed about as well as a plain gaze ray, with slightly fewer tries. The study (Varjo Aero) had users select atoms in a cluttered molecule model, confirming with a wink, which beat dwell and double blink in an earlier test.",
+  "advantages": [
+    "Tolerates vergence depth error.",
+    "Fast, single step."
+  ],
+  "limitations": [
+    "Can pick a wrong object in clutter."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "volume"
+    ],
+    "toolOrigin": [
+      "eye"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "heuristic"
+    ],
+    "inputModality": [
+      "gaze"
+    ],
+    "confirmation": [
+      "gesture"
+    ],
+    "targetDistance": [
+      "near",
+      "far"
+    ],
+    "handlesOcclusion": [
+      "partly"
+    ]
+  },
+  "tags": [
+    "gaze",
+    "vergence",
+    "hands-free"
+  ],
+  "publications": [
+    {
+      "publication": "correia-2025-eyedepth",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "eye-gaze-selection",
+      "type": "compared-with",
+      "note": "Compared with a gaze ray through the vergence point."
+    },
+    {
+      "technique": "confidence-aware-gaze-depth",
+      "type": "related",
+      "note": "Both account for vergence depth error."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": []
+  }
+}

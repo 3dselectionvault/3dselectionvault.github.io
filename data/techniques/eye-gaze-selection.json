@@ -102,6 +102,14 @@
     {
       "publication": "severitt-2026-eps",
       "role": "evaluated"
+    },
+    {
+      "publication": "correia-2025-eyedepth",
+      "role": "evaluated"
+    },
+    {
+      "publication": "jo-2025-manual-free-gaze",
+      "role": "evaluated"
     }
   ],
   "relationships": [],

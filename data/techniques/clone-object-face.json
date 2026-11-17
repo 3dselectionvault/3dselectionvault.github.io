@@ -1,0 +1,81 @@
+{
+  "id": "clone-object-face",
+  "name": "CloneObject",
+  "aliases": [],
+  "year": 2026,
+  "summary": "A left-hand pinch puts a fixed-size copy of the polyhedron at the fingertips that turns with the palm; touching a face on the copy with the right index finger selects the same face on the original.",
+  "howItWorks": "The copy follows the left hand in 6 degrees of freedom, so users inspect it like a held object and touch faces directly. It was among the three best techniques, the fastest on small polyhedra, and held up on complex models (a drum, cup and gear). Tested with 16 participants selecting single faces on regular polyhedra (4, 6 or 12 faces, two sizes) with tracked hands.",
+  "advantages": [
+    "Fastest on small polyhedra.",
+    "Intuitive; rated highly."
+  ],
+  "limitations": [
+    "Needs both hands."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "point"
+    ],
+    "toolOrigin": [
+      "both-hands"
+    ],
+    "motorVisualSpace": [
+      "offset"
+    ],
+    "disambiguation": [
+      "manual"
+    ],
+    "inputModality": [
+      "hand"
+    ],
+    "confirmation": [
+      "touch"
+    ],
+    "targetDistance": [
+      "near"
+    ],
+    "handlesOcclusion": [
+      "partly"
+    ]
+  },
+  "tags": [
+    "face selection",
+    "freehand",
+    "component selection"
+  ],
+  "publications": [
+    {
+      "publication": "qi-2026-polyhedron-faces",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "worlds-in-miniature",
+      "type": "related",
+      "note": "Selects through a hand-held copy of the object."
+    },
+    {
+      "technique": "pinch-rotate-face",
+      "type": "compared-with",
+      "note": "Introduced with seven other face-selection techniques in the same study."
+    },
+    {
+      "technique": "raycasting",
+      "type": "related",
+      "note": "The study's baseline (DragRotate) rotates the object with one hand and selects with a hand ray."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": []
+  }
+}

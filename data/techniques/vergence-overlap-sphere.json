@@ -1,0 +1,71 @@
+{
+  "id": "vergence-overlap-sphere",
+  "name": "Vergence OverlapSphere",
+  "aliases": [],
+  "year": 2025,
+  "summary": "An invisible sphere is placed at the 3D point where the two eyes' gaze rays converge, and the object nearest its centre is selected.",
+  "howItWorks": "The sphere's radius covers the fovea plus the measured angular error; it ignores depth error, serving as a baseline. It was the least accurate of the four techniques because vergence depth is unreliable. The study (Varjo Aero) had users select atoms in a cluttered molecule model, confirming with a wink, which beat dwell and double blink in an earlier test.",
+  "advantages": [
+    "Simple; picks one object."
+  ],
+  "limitations": [
+    "Least accurate; fails when vergence depth is off."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "volume"
+    ],
+    "toolOrigin": [
+      "eye"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "heuristic"
+    ],
+    "inputModality": [
+      "gaze"
+    ],
+    "confirmation": [
+      "gesture"
+    ],
+    "targetDistance": [
+      "near",
+      "far"
+    ],
+    "handlesOcclusion": [
+      "partly"
+    ]
+  },
+  "tags": [
+    "gaze",
+    "vergence",
+    "hands-free"
+  ],
+  "publications": [
+    {
+      "publication": "correia-2025-eyedepth",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "vergence-spherecast",
+      "type": "compared-with",
+      "note": "Introduced with the other vergence-based techniques in the same thesis."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": []
+  }
+}

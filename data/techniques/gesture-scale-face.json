@@ -1,0 +1,75 @@
+{
+  "id": "gesture-scale-face",
+  "name": "GestureScale",
+  "aliases": [],
+  "year": 2026,
+  "summary": "A two-hand pinch scales and rotates the polyhedron so a face is large enough to touch directly with a fingertip.",
+  "howItWorks": "The scale follows the change in distance between the hands; the enlarged face is then touched. Tested with 16 participants selecting single faces on regular polyhedra (4, 6 or 12 faces, two sizes) with tracked hands.",
+  "advantages": [
+    "Fewer errors on small faces."
+  ],
+  "limitations": [
+    "Repeated adjusting takes time."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "point"
+    ],
+    "toolOrigin": [
+      "both-hands"
+    ],
+    "motorVisualSpace": [
+      "direct"
+    ],
+    "disambiguation": [
+      "manual"
+    ],
+    "inputModality": [
+      "hand"
+    ],
+    "confirmation": [
+      "touch"
+    ],
+    "targetDistance": [
+      "near"
+    ],
+    "handlesOcclusion": [
+      "partly"
+    ]
+  },
+  "tags": [
+    "face selection",
+    "freehand",
+    "component selection"
+  ],
+  "publications": [
+    {
+      "publication": "qi-2026-polyhedron-faces",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "pinch-rotate-face",
+      "type": "compared-with",
+      "note": "Introduced with seven other face-selection techniques in the same study."
+    },
+    {
+      "technique": "raycasting",
+      "type": "related",
+      "note": "The study's baseline (DragRotate) rotates the object with one hand and selects with a hand ray."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": []
+  }
+}

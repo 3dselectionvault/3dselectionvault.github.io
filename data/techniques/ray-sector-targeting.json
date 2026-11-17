@@ -1,0 +1,83 @@
+{
+  "id": "ray-sector-targeting",
+  "name": "Ray-Sector Targeting",
+  "aliases": [
+    "RST"
+  ],
+  "year": 2026,
+  "summary": "A ray locks onto all the objects it passes through; each one gets a sector-shaped marker, arranged clockwise by depth in a ring around the ray and drawn with the object's material and size, and the user slides a thumb on the touchpad toward the wanted sector.",
+  "howItWorks": "Point, press, slide, release: the user holds the trigger and points, objects the ray crosses turn translucent, and a light press on the touchpad locks the ray. One sector marker (SeTar) per intersected object is laid out in a circle facing the user, nearest object at the top and the rest clockwise by distance, each copying its object's material and scaled by its size. Sliding on the circular touchpad highlights the matching sector, sliding further corrects a wrong choice, and releasing selects. It works with a joystick too. In a study with 27 participants on a Vive Pro in dense scenes, it was faster and more accurate than RayCursor and ClockRay, and most participants preferred it.",
+  "advantages": [
+    "Faster and more accurate than RayCursor and ClockRay in dense scenes.",
+    "Lets users correct a wrong pick before releasing."
+  ],
+  "limitations": [
+    "Needs a touchpad or joystick.",
+    "Many intersected objects make sectors small."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "ray"
+    ],
+    "toolOrigin": [
+      "hand"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "manual"
+    ],
+    "inputModality": [
+      "controller"
+    ],
+    "confirmation": [
+      "release"
+    ],
+    "targetDistance": [
+      "far"
+    ],
+    "handlesOcclusion": [
+      "yes"
+    ]
+  },
+  "tags": [
+    "dense scenes",
+    "occlusion"
+  ],
+  "publications": [
+    {
+      "publication": "guo-2026-ray-sector",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "raycursor",
+      "type": "compared-with",
+      "note": "Compared in the same study."
+    },
+    {
+      "technique": "clockray",
+      "type": "compared-with",
+      "note": "Compared in the same study."
+    },
+    {
+      "technique": "depth-ray",
+      "type": "related",
+      "note": "Both disambiguate among objects along a ray."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": []
+  }
+}

@@ -72,6 +72,10 @@
     {
       "publication": "wu-2024-clockray",
       "role": "evaluated"
+    },
+    {
+      "publication": "guo-2026-ray-sector",
+      "role": "evaluated"
     }
   ],
   "relationships": [

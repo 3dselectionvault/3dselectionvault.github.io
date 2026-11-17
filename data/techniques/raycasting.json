@@ -200,6 +200,18 @@
     {
       "publication": "kim-2024-touchview",
       "role": "evaluated"
+    },
+    {
+      "publication": "rasoulifar-2026-dynamic-vac",
+      "role": "evaluated"
+    },
+    {
+      "publication": "jeong-2026-lost-in-bed",
+      "role": "evaluated"
+    },
+    {
+      "publication": "qi-2026-polyhedron-faces",
+      "role": "evaluated"
     }
   ],
   "relationships": [

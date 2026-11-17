@@ -47,6 +47,10 @@
     {
       "publication": "stenholt-2012-largescale",
       "role": "introduced"
+    },
+    {
+      "publication": "kerengil-2026-particle",
+      "role": "evaluated"
     }
   ],
   "relationships": [

@@ -1,0 +1,86 @@
+{
+  "id": "manual-free-gaze",
+  "name": "Manual-Free Gaze Selection",
+  "aliases": [
+    "Bayesian implicit-intention gaze selection"
+  ],
+  "year": 2025,
+  "summary": "Gaze points at objects, and a model reading only the eye-movement data decides when the user means to select, so no button, pinch or dwell is needed.",
+  "howItWorks": "Gaze features around each fixated object (fixation and saccade measures) are turned into log-likelihoods under a Bayesian framework, fitted per task context, and fed to a kernel SVM that predicts selection intention in real time. When the model predicts intent, the looked-at object is selected automatically. Models were trained on data from 20 participants and tested with 25 others on a Quest Pro in a word-category search task among distractors, against gaze pointing confirmed by controller trigger, by pinch, and by 600 ms dwell.",
+  "advantages": [
+    "No hand or dwell action needed.",
+    "Avoids the fixed time cost of dwell."
+  ],
+  "limitations": [
+    "Needs per-context training data.",
+    "Unintended selections remain possible (Midas touch)."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "ray"
+    ],
+    "toolOrigin": [
+      "eye"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "behavioural"
+    ],
+    "inputModality": [
+      "gaze"
+    ],
+    "confirmation": [],
+    "targetDistance": [
+      "near",
+      "far"
+    ],
+    "handlesOcclusion": [
+      "no"
+    ]
+  },
+  "tags": [
+    "gaze",
+    "machine learning",
+    "intent prediction"
+  ],
+  "publications": [
+    {
+      "publication": "jo-2025-manual-free-gaze",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "eye-gaze-selection",
+      "type": "compared-with",
+      "note": "Compared with gaze plus trigger and gaze plus dwell."
+    },
+    {
+      "technique": "gaze-pinch",
+      "type": "compared-with",
+      "note": "Compared in the same study."
+    },
+    {
+      "technique": "gazeintent",
+      "type": "related",
+      "note": "Also predicts selection intent from eye movements."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": [
+      "confirmation",
+      "disambiguation"
+    ]
+  }
+}

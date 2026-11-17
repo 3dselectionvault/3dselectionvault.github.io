@@ -83,6 +83,10 @@
     {
       "publication": "ozacar-2017-mobilearhmd",
       "role": "evaluated"
+    },
+    {
+      "publication": "maimon-2026-tactile-search",
+      "role": "evaluated"
     }
   ],
   "relationships": [

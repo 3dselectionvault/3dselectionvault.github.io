@@ -1,0 +1,67 @@
+{
+  "id": "throwing-selection",
+  "name": "Throwing Selection",
+  "aliases": [
+    "Ball throwing"
+  ],
+  "year": 2026,
+  "summary": "The user grabs a virtual ball with the controller and throws it at a distant target; the target the ball hits is selected, and the throw cannot be corrected after release.",
+  "howItWorks": "Holding the grip grabs the ball and letting go throws it with the controller's velocity under simulated physics. Unlike pointing, it is ballistic: the whole movement is planned before release. In a study with 16 participants on a Quest 3, the time from grab to release grew with target difficulty much like Fitts' law movement time, and landing points followed a bivariate Gaussian whose bias and spread depended on target width and distance, giving a model that predicts hit rate.",
+  "advantages": [
+    "Natural, embodied way to reach far targets.",
+    "Its accuracy can be predicted from target size and distance."
+  ],
+  "limitations": [
+    "No correction after release.",
+    "Less accurate than real-world throwing."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "other"
+    ],
+    "toolOrigin": [
+      "hand"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "none"
+    ],
+    "inputModality": [
+      "controller"
+    ],
+    "confirmation": [
+      "release"
+    ],
+    "targetDistance": [
+      "far"
+    ],
+    "handlesOcclusion": [
+      "no"
+    ]
+  },
+  "tags": [
+    "ballistic",
+    "modelling"
+  ],
+  "publications": [
+    {
+      "publication": "jeong-2026-throwing",
+      "role": "evaluated"
+    }
+  ],
+  "relationships": [],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team. No introducing paper found; the year is that of the modelling study, since throwing has long been used in VR applications.",
+    "uncertain": []
+  }
+}

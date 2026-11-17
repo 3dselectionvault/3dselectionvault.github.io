@@ -1,0 +1,21 @@
+{
+  "id": "li-2026-running",
+  "title": "Investigating 3D Selection Performance While Running in Extended Reality: an In-depth Study of the Effect of Speed",
+  "authors": [
+    "Ang Li",
+    "Jarrod Knibbe",
+    "Kiichiro Tatsuzawa",
+    "Gianluca Demartini",
+    "Stephen Viller",
+    "Guy Wallis",
+    "Wolfgang Stuerzlinger",
+    "Maxime Cordeil"
+  ],
+  "year": 2026,
+  "venue": "IEEE Transactions on Visualization and Computer Graphics (accepted)",
+  "doi": "10.1109/TVCG.2026.3722681",
+  "url": "https://doi.org/10.1109/TVCG.2026.3722681",
+  "type": "paper",
+  "citation": null,
+  "bibtex": null
+}
