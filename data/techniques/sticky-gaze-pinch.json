@@ -1,0 +1,80 @@
+{
+  "id": "sticky-gaze-pinch",
+  "name": "Sticky Gaze+Pinch",
+  "aliases": [
+    "Sticky selection"
+  ],
+  "year": 2026,
+  "summary": "Gaze+Pinch where the gaze cursor stays stuck on a target for 50 ms after the eyes leave it, so a pinch that comes slightly too late still selects it.",
+  "howItWorks": "The temporal buffer targets late-trigger errors, where gaze has moved on before the pinch lands. In a Fitts' task on a vertical ring of targets with 9 expert users on a Galaxy XR headset, it caught a significant number of would-be errors without changing throughput or selection time, though overall error rates did not differ from plain Gaze+Pinch.",
+  "advantages": [
+    "Rescues late pinches."
+  ],
+  "limitations": [
+    "Did not lower final error rates in the small study."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "ray"
+    ],
+    "toolOrigin": [
+      "eye"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "heuristic"
+    ],
+    "inputModality": [
+      "gaze",
+      "hand"
+    ],
+    "confirmation": [
+      "pinch"
+    ],
+    "targetDistance": [
+      "near",
+      "far"
+    ],
+    "handlesOcclusion": [
+      "no"
+    ]
+  },
+  "tags": [
+    "gaze",
+    "error correction"
+  ],
+  "publications": [
+    {
+      "publication": "collins-2026-sticky-magnetic",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "gaze-pinch",
+      "type": "variant-of",
+      "note": "Adds a 50 ms gaze hold after the eyes leave a target."
+    },
+    {
+      "technique": "magnetic-gaze-pinch",
+      "type": "compared-with",
+      "note": "Sticky and Magnetic were introduced and compared in the same study."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": [
+      "disambiguation"
+    ]
+  }
+}

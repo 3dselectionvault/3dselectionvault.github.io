@@ -130,6 +130,10 @@
     {
       "publication": "li-2026-running",
       "role": "evaluated"
+    },
+    {
+      "publication": "lystbaek-2024-handson",
+      "role": "evaluated"
     }
   ],
   "relationships": [

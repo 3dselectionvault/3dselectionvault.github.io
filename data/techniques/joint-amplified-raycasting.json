@@ -1,0 +1,80 @@
+{
+  "id": "joint-amplified-raycasting",
+  "name": "Joint-Amplified Raycasting",
+  "aliases": [
+    "JAR",
+    "RestfulRaycast"
+  ],
+  "year": 2025,
+  "summary": "A hand ray that starts at the elbow and follows the forearm, with wrist bending adding small scaled corrections, so the arm can stay low by the body while pointing at eye-level targets.",
+  "howItWorks": "Instead of the usual shoulder-through-palm ray, the forearm's angle from a forward vector sets the coarse direction and the wrist's angle relative to the forearm adds a fine one, each with its own gain (default 1 for the elbow and 0.2 for the wrist; 0.8 and 0.2 gave the best throughput). A thumb-index pinch selects. In a Fitts' law study with 17 participants on a Quest 3, it matched the shoulder-palm ray in throughput, time and errors, beat offset shoulder-palm and wrist-palm rays, lowered RULA strain by 16% versus shoulder-palm, and was ranked first.",
+  "advantages": [
+    "Less arm strain without losing precision.",
+    "Gains can be tuned per user or task."
+  ],
+  "limitations": [
+    "Relative mapping can feel less predictable.",
+    "Jitter during fine tasks such as writing."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "ray"
+    ],
+    "toolOrigin": [
+      "hand"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "none"
+    ],
+    "inputModality": [
+      "hand"
+    ],
+    "confirmation": [
+      "pinch"
+    ],
+    "targetDistance": [
+      "far"
+    ],
+    "handlesOcclusion": [
+      "no"
+    ]
+  },
+  "tags": [
+    "ergonomics",
+    "freehand",
+    "gain"
+  ],
+  "publications": [
+    {
+      "publication": "mao-2025-restfulraycast",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "raycasting",
+      "type": "variant-of",
+      "note": "A hand ray rigged from the elbow with amplified elbow and wrist angles instead of shoulder-to-palm."
+    },
+    {
+      "technique": "go-go",
+      "type": "related",
+      "note": "Both amplify arm movement to reduce effort."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": []
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "id": "handover",
+  "name": "HandOver",
+  "aliases": [],
+  "year": 2025,
+  "summary": "A desk mouse drives a depth-aware 3D cursor onto a distant object; lifting the hand to hover over the mouse spawns a virtual copy of the hand at the cursor, which pinches to grab the object.",
+  "howItWorks": "The cursor (after In-Depth Mouse) moves in screen space and takes the depth of the nearest surface along the camera ray, blending nearby colliders when nothing is hit. When the tracked hand rises into a zone just above the mouse and the cursor is still, the cursor fades out and a hand clone appears where it was, with movement gain; pinching grabs an object within 5 cm of the clone. In a seated docking study with 17 participants on a Quest 3, at 2, 4 and 6 m, it gave the lowest placement error and posture strain and was fastest to target at 6 m, against hand raycasting and a ray-plus-hand-clone hybrid.",
+  "advantages": [
+    "Mouse precision for targeting with a resting arm.",
+    "Lowest errors and strain in the study."
+  ],
+  "limitations": [
+    "Needs a desk and a mouse; seated use only.",
+    "Slower to target than the hybrid ray at near range."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection",
+    "manipulation"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "point"
+    ],
+    "toolOrigin": [
+      "screen",
+      "hand"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "heuristic"
+    ],
+    "inputModality": [
+      "mouse",
+      "hand"
+    ],
+    "confirmation": [
+      "pinch"
+    ],
+    "targetDistance": [
+      "near-distant",
+      "far"
+    ],
+    "handlesOcclusion": [
+      "no"
+    ]
+  },
+  "tags": [
+    "hybrid input",
+    "mouse in VR",
+    "ergonomics"
+  ],
+  "publications": [
+    {
+      "publication": "tutuncu-2025-handover",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "raycasting",
+      "type": "compared-with",
+      "note": "Compared with hand raycasting and a ray-plus-hand-clone hybrid."
+    },
+    {
+      "technique": "voodoo-dolls",
+      "type": "related",
+      "note": "Grabs distant objects with a proxy hand."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": [
+      "toolOrigin",
+      "disambiguation"
+    ]
+  }
+}

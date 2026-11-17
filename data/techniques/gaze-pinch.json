@@ -77,6 +77,14 @@
     {
       "publication": "jo-2025-manual-free-gaze",
       "role": "evaluated"
+    },
+    {
+      "publication": "lystbaek-2024-handson",
+      "role": "evaluated"
+    },
+    {
+      "publication": "collins-2026-sticky-magnetic",
+      "role": "evaluated"
     }
   ],
   "relationships": [

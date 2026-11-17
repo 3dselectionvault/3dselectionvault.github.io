@@ -212,6 +212,14 @@
     {
       "publication": "qi-2026-polyhedron-faces",
       "role": "evaluated"
+    },
+    {
+      "publication": "tutuncu-2025-handover",
+      "role": "evaluated"
+    },
+    {
+      "publication": "mao-2025-restfulraycast",
+      "role": "evaluated"
     }
   ],
   "relationships": [

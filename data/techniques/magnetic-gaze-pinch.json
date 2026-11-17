@@ -1,0 +1,81 @@
+{
+  "id": "magnetic-gaze-pinch",
+  "name": "Magnetic Gaze+Pinch",
+  "aliases": [
+    "Magnetic selection"
+  ],
+  "year": 2026,
+  "summary": "Gaze+Pinch where each target has a larger invisible field; a pinch while gaze is inside the field snaps the selection to the target, so a pinch that comes slightly before gaze arrives still selects it.",
+  "howItWorks": "The spatial field (20 distance-independent millimetres) targets early-trigger errors. In the study with 9 expert users it rescued by far the most would-be errors, but users adapted by pinching less precisely and earlier, relying on the snap; throughput, time and final error rate did not differ from plain Gaze+Pinch.",
+  "advantages": [
+    "Corrects early pinches; users could select less precisely."
+  ],
+  "limitations": [
+    "Users came to rely on it, which may cause wrong picks in dense layouts."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "ray"
+    ],
+    "toolOrigin": [
+      "eye"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "heuristic"
+    ],
+    "inputModality": [
+      "gaze",
+      "hand"
+    ],
+    "confirmation": [
+      "pinch"
+    ],
+    "targetDistance": [
+      "near",
+      "far"
+    ],
+    "handlesOcclusion": [
+      "no"
+    ]
+  },
+  "tags": [
+    "gaze",
+    "error correction",
+    "target expansion"
+  ],
+  "publications": [
+    {
+      "publication": "collins-2026-sticky-magnetic",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "gaze-pinch",
+      "type": "variant-of",
+      "note": "Adds a snapping field around each target."
+    },
+    {
+      "technique": "sticky-gaze-pinch",
+      "type": "compared-with",
+      "note": "Sticky and Magnetic were introduced and compared in the same study."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": [
+      "disambiguation"
+    ]
+  }
+}
