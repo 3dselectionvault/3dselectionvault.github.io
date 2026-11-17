@@ -1,0 +1,94 @@
+{
+  "id": "reality-proxy",
+  "name": "Reality Proxy",
+  "aliases": [],
+  "year": 2025,
+  "summary": "In mixed reality, gazing at a real object and pinching lays out small proxies of the real objects around it next to the hand, and the user selects a distant, crowded or partly hidden object by touching its proxy instead of the object itself.",
+  "howItWorks": "Built on Gaze + Pinch for physical objects on Apple Vision Pro. The user looks at a real object and pinches; the system detects the objects in the gaze region, slightly enlarged around the gaze point, and places a fixed-size proxy for each one near the hand, rescaled so their left/right and front/back layout matches the real scene. The proxies stay put after the pinch is released and lazily follow the hand. Touching a proxy with a fingertip selects its real object, which is highlighted in place; sliding the finger across proxies previews each object (skimming). AI adds semantic attributes and a spatial hierarchy to the proxies, so the same layout supports two-hand brushing to select several objects, selecting every object that shares an attribute, a two-hand zoom between a group and its parts (e.g. floors and rooms of a building), and user-made groups. Partly hidden objects can be reached through their proxies; fully hidden ones only when a digital twin or tracking data provides their positions. Evaluated in an expert review with 10 XR specialists (office information retrieval and building navigation tasks), with no baseline comparison.",
+  "advantages": [
+    "Distant, crowded or partly occluded real objects become easy to reach, without stretching the arm or precise aiming.",
+    "The same proxies support multi-object selection, attribute-based filtering and moving through a spatial hierarchy with familiar gestures."
+  ],
+  "limitations": [
+    "Objects that are fully hidden are not detected by the vision pipeline unless a digital twin or tracking data is available.",
+    "Touching a proxy can trigger unintended selections while the user is attending to the physical world.",
+    "Mapping proxies back to real objects adds cognitive load; only an expert review, with no baseline comparison."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "ar"
+    ],
+    "selectionTool": [
+      "ray",
+      "point",
+      "volume"
+    ],
+    "toolOrigin": [
+      "eye",
+      "hand",
+      "both-hands"
+    ],
+    "motorVisualSpace": [
+      "offset"
+    ],
+    "disambiguation": [
+      "manual",
+      "progressive"
+    ],
+    "inputModality": [
+      "gaze",
+      "hand"
+    ],
+    "confirmation": [
+      "pinch",
+      "touch"
+    ],
+    "targetDistance": [
+      "near-distant",
+      "far"
+    ],
+    "handlesOcclusion": [
+      "partly"
+    ]
+  },
+  "tags": [
+    "multi-object selection",
+    "dense targets",
+    "physical objects"
+  ],
+  "publications": [
+    {
+      "publication": "liu-2025-reality-proxy",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "gaze-pinch",
+      "type": "extends",
+      "note": "Keeps Gaze + Pinch to start a selection and moves it to physical objects in MR; proxies appear on the same pinch."
+    },
+    {
+      "technique": "worlds-in-miniature",
+      "type": "related",
+      "note": "Selects through a stand-in near the hand, but with fixed-size abstract proxies rather than a scaled copy of the scene."
+    },
+    {
+      "technique": "go-go",
+      "type": "related",
+      "note": "Discussed as an alternative way of reaching objects beyond arm's reach."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Suggested by sseanliu in GitHub issue #1 (Nov 2026) and checked against the full text (arXiv 2507.17248v2). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": [
+      "motorVisualSpace",
+      "targetDistance"
+    ]
+  }
+}
