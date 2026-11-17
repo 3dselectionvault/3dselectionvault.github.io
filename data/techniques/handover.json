@@ -71,6 +71,11 @@
       "technique": "voodoo-dolls",
       "type": "related",
       "note": "Grabs distant objects with a proxy hand."
+    },
+    {
+      "technique": "depth-adaptive-cursor",
+      "type": "extends",
+      "note": "Uses the Depth-Adaptive Cursor for targeting, then hands over to a hand clone."
     }
   ],
   "review": {

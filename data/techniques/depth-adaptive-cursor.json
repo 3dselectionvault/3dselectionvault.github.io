@@ -1,0 +1,83 @@
+{
+  "id": "depth-adaptive-cursor",
+  "name": "Depth-Adaptive Cursor",
+  "aliases": [
+    "In-Depth Mouse"
+  ],
+  "year": 2022,
+  "summary": "A desk mouse moves a cursor in VR along a ray from the eyes; on an object the cursor sits at its surface, and between objects its depth is blended from the nearest objects, so it glides in depth without double vision.",
+  "howItWorks": "Mouse motion rotates a cursor ray anchored at the head, using a control-display gain chosen from a model of mouse, headset and target sizes; moving the head does not move the cursor. If the ray hits an object, the cursor takes that depth; otherwise a Voronoi-based Laplacian interpolation of nearby objects' depths sets it. In a remote study with 16 participants on their own Quest 2, selecting 3D spheres after 2D buttons, it was 21% faster with 48% fewer errors than Perspective Cursor, which keeps the last object's depth and snaps, especially for small and distant targets.",
+  "advantages": [
+    "Mouse precision and low fatigue in VR.",
+    "Avoids double vision of the cursor between depths."
+  ],
+  "limitations": [
+    "Needs a desk; seated use.",
+    "Depth from object centres can jump on large slanted objects."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "ray",
+      "point"
+    ],
+    "toolOrigin": [
+      "head",
+      "screen"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "none"
+    ],
+    "inputModality": [
+      "mouse"
+    ],
+    "confirmation": [
+      "button"
+    ],
+    "targetDistance": [
+      "near",
+      "far"
+    ],
+    "handlesOcclusion": [
+      "no"
+    ]
+  },
+  "tags": [
+    "mouse in VR",
+    "productivity"
+  ],
+  "publications": [
+    {
+      "publication": "zhou-2022-indepth-mouse",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "handover",
+      "type": "related",
+      "note": "HandOver uses this cursor for its targeting phase."
+    },
+    {
+      "technique": "one-eyed-cursor",
+      "type": "related",
+      "note": "Another way to avoid double vision of a cursor in stereo."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": [
+      "toolOrigin"
+    ]
+  }
+}
