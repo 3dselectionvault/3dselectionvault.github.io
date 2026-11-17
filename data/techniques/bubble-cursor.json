@@ -76,6 +76,10 @@
     {
       "publication": "legacy-paper-bubble-raycasting",
       "role": "evaluated"
+    },
+    {
+      "publication": "winkler-2010-depth-bubble",
+      "role": "evaluated"
     }
   ],
   "relationships": [

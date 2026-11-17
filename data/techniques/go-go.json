@@ -111,6 +111,10 @@
     {
       "publication": "legacy-paper-bubble-raycasting",
       "role": "evaluated"
+    },
+    {
+      "publication": "jennings-2025-reimagining-gogo",
+      "role": "evaluated"
     }
   ],
   "relationships": [

@@ -188,6 +188,18 @@
     {
       "publication": "wolf-2022-socialslider",
       "role": "evaluated"
+    },
+    {
+      "publication": "jeong-2024-onset",
+      "role": "evaluated"
+    },
+    {
+      "publication": "looser-2007-lenses",
+      "role": "evaluated"
+    },
+    {
+      "publication": "kim-2024-touchview",
+      "role": "evaluated"
     }
   ],
   "relationships": [

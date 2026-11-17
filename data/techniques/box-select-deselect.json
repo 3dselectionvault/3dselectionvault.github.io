@@ -48,6 +48,10 @@
     {
       "publication": "wu-2023-pointvolume",
       "role": "introduced"
+    },
+    {
+      "publication": "liebers-2024-pointing-it-out",
+      "role": "evaluated"
     }
   ],
   "relationships": [

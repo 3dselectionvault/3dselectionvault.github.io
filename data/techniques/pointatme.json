@@ -1,0 +1,75 @@
+{
+  "id": "pointatme",
+  "name": "PointAtMe",
+  "aliases": [],
+  "year": 2019,
+  "summary": "For labelling objects in VR point clouds, a transparent box is held between the two controllers: its corners follow the controllers and its orientation follows the right controller, and a button labels the points inside.",
+  "howItWorks": "The box has 9 degrees of freedom: position and size come from anchors on both virtual controllers, and orientation from the right controller only, shown by a set of axes on it. The user fits the box to an object, such as a car or cyclist in a driving scene, and confirms; camera images are shown alongside the cloud. Compared with a baseline from the literature (control-point selection by Monica et al.), labelling took about half the time per object with fewer undo actions.",
+  "advantages": [
+    "About twice as fast per object as the baseline.",
+    "Released as an open-source tool."
+  ],
+  "limitations": [
+    "Suited to cuboid-like objects only.",
+    "The comparison used different scenes from the baseline's study."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "volume"
+    ],
+    "toolOrigin": [
+      "both-hands"
+    ],
+    "motorVisualSpace": [
+      "direct"
+    ],
+    "disambiguation": [
+      "none"
+    ],
+    "inputModality": [
+      "controller"
+    ],
+    "confirmation": [
+      "button"
+    ],
+    "targetDistance": [
+      "near"
+    ],
+    "handlesOcclusion": [
+      "partly"
+    ]
+  },
+  "tags": [
+    "point cloud",
+    "annotation",
+    "bounding box"
+  ],
+  "publications": [
+    {
+      "publication": "wirth-2019-pointatme",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "two-corners",
+      "type": "variant-of",
+      "note": "Two-handed box, but its orientation follows one controller instead of both hands."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": [
+      "motorVisualSpace",
+      "handlesOcclusion"
+    ]
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "id": "touchview",
+  "name": "TouchView",
+  "aliases": [
+    "Zoomable touch view"
+  ],
+  "year": 2024,
+  "summary": "A large virtual panel within arm's reach follows the head and shows a zoomable view of the scene; the user selects a distant object by poking its magnified image on the panel with the index finger.",
+  "howItWorks": "The panel covers the whole view and moves with the head, so it never needs placing. A pinch with either hand, moved up or down, zooms the view on the panel; turning the palm towards the face resets it. When the fingertip passes through the panel, a ray is cast from the view origin through the touched point and selects what it hits. It adapts ViewfinderVR so that view shifts need no panel manipulation. In a multi-target selection study with 23 participants on a Quest, it gave shorter movement times, lower workload and higher preference than Meta's freehand Hybrid Ray at all target sizes.",
+  "advantages": [
+    "Direct touch on magnified proxies of distant objects.",
+    "Works with frequent view shifts without repositioning a panel."
+  ],
+  "limitations": [
+    "Designed and tested for planar UI panels, not cluttered 3D scenes at varied depths.",
+    "Mid-air touch depends on hand-tracking quality."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "image-plane",
+      "ray"
+    ],
+    "toolOrigin": [
+      "hand"
+    ],
+    "motorVisualSpace": [
+      "offset"
+    ],
+    "disambiguation": [
+      "none"
+    ],
+    "inputModality": [
+      "hand"
+    ],
+    "confirmation": [
+      "touch"
+    ],
+    "targetDistance": [
+      "far"
+    ],
+    "handlesOcclusion": [
+      "no"
+    ]
+  },
+  "tags": [
+    "freehand",
+    "through-the-lens"
+  ],
+  "publications": [
+    {
+      "publication": "kim-2024-touchview",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "viewfindervr",
+      "type": "extends",
+      "note": "Same authors; the panel now follows the head and zooms with a pinch."
+    },
+    {
+      "technique": "raycasting",
+      "type": "compared-with",
+      "note": "Compared with Meta's freehand Hybrid Ray."
+    },
+    {
+      "technique": "through-the-lens-selection",
+      "type": "related",
+      "note": "Selects through a second view of the scene."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": [
+      "motorVisualSpace"
+    ]
+  }
+}

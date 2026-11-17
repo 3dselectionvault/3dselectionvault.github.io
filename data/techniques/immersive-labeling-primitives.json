@@ -1,0 +1,75 @@
+{
+  "id": "immersive-labeling-primitives",
+  "name": "Immersive Labeling Primitives",
+  "aliases": [
+    "Sphere, cube and clipping-plane primitives"
+  ],
+  "year": 2023,
+  "summary": "In VR, a sphere, cube or clipping plane attached to the controller labels or deletes every point inside it when the trigger is pressed, with instant visual feedback even in very large point clouds.",
+  "howItWorks": "Sphere and cube primitives are for painting labels on nearby points; their size is set with the left touchpad. The clipping plane cuts large sets of points off a wall or boundary at once. A chunk-based CPU/GPU data structure keeps rendering at high frame rates while labels change. Users move by teleporting, grabbing and scaling the cloud, or stepping along the controller. In a study with 25 participants on three room-scale scenes, labelling was faster than with Pointly.AI on a desktop and with Shooting Labels in VR, especially with heavy occlusion.",
+  "advantages": [
+    "Fast labelling with immediate feedback in large clouds.",
+    "Handled heavy occlusion better than the compared tools."
+  ],
+  "limitations": [
+    "Results come from a two-page abstract with limited detail."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "volume"
+    ],
+    "toolOrigin": [
+      "hand"
+    ],
+    "motorVisualSpace": [
+      "direct"
+    ],
+    "disambiguation": [
+      "none"
+    ],
+    "inputModality": [
+      "controller"
+    ],
+    "confirmation": [
+      "button"
+    ],
+    "targetDistance": [
+      "near"
+    ],
+    "handlesOcclusion": [
+      "partly"
+    ]
+  },
+  "tags": [
+    "point cloud",
+    "annotation",
+    "brush"
+  ],
+  "publications": [
+    {
+      "publication": "lin-2023-immersive-labeling",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "spherical-brush-3d",
+      "type": "related",
+      "note": "Both paint a selection with a sphere attached to the hand."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": [
+      "handlesOcclusion"
+    ]
+  }
+}

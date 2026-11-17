@@ -1,0 +1,80 @@
+{
+  "id": "z-squish",
+  "name": "Z-Squish",
+  "aliases": [
+    "Forward-axis compression"
+  ],
+  "year": 2025,
+  "summary": "Go-Go with the stretching moved from the arm to the world: the hand stays where it really is, and the scene is compressed along the viewing direction so the hand reaches the same far points Go-Go would.",
+  "howItWorks": "The mechanics are Go-Go's: beyond a fixed radius, the reach is multiplied non-linearly. Instead of showing a stretched virtual arm, Z-Squish renders the hand at its real position and compresses the scene along the camera-to-hand axis by the inverse of the Go-Go mapping, so whatever the Go-Go hand would touch now lies under the real hand. A sphere cursor matching the rendered hand selects with the controller trigger. In a study with 18 participants on a Quest 3, selection time and misclicks were comparable to Go-Go, and unlike Go-Go, time was not affected by target size or distance.",
+  "advantages": [
+    "The rendered hand stays at its real position.",
+    "Performance matched Go-Go in the study."
+  ],
+  "limitations": [
+    "The world visibly deforms as the hand moves.",
+    "Participants preferred standard Go-Go."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "point"
+    ],
+    "toolOrigin": [
+      "hand"
+    ],
+    "motorVisualSpace": [
+      "direct"
+    ],
+    "disambiguation": [
+      "none"
+    ],
+    "inputModality": [
+      "controller"
+    ],
+    "confirmation": [
+      "button"
+    ],
+    "targetDistance": [
+      "near-distant"
+    ],
+    "handlesOcclusion": [
+      "no"
+    ]
+  },
+  "tags": [
+    "signifiers",
+    "arm extension"
+  ],
+  "publications": [
+    {
+      "publication": "jennings-2025-reimagining-gogo",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "go-go",
+      "type": "variant-of",
+      "note": "Go-Go's distance multiplier is kept unchanged; only what the user sees changes."
+    },
+    {
+      "technique": "xyz-squish",
+      "type": "compared-with",
+      "note": "Introduced and compared in the same study."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": [
+      "motorVisualSpace"
+    ]
+  }
+}

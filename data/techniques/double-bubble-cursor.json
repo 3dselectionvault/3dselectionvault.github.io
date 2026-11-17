@@ -1,0 +1,80 @@
+{
+  "id": "double-bubble-cursor",
+  "name": "Double Bubble Cursor",
+  "aliases": [],
+  "year": 2010,
+  "summary": "A 3D Bubble Cursor inside a second semi-transparent sphere whose size depends only on the cursor's depth, so the outer sphere shows how deep the cursor is while the inner bubble grabs the nearest object.",
+  "howItWorks": "The cursor is moved in x and y with the mouse and in depth with the scroll wheel. The inner sphere behaves like the 3D Bubble Cursor, resizing to touch only the closest object, while the outer Depth Sphere keeps a size that encodes depth. Objects lying in front of the cursor's depth are made semi-transparent so hidden targets show through. In a study with 20 participants selecting a partly hidden goal among 180 distractors, its times were close to the other cursors, but the two overlapping transparent layers made it harder to see what lay behind.",
+  "advantages": [
+    "Shows the cursor's depth.",
+    "Reveals objects hidden in front of the cursor."
+  ],
+  "limitations": [
+    "The two transparent layers obstruct the view behind."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "desktop"
+    ],
+    "selectionTool": [
+      "volume"
+    ],
+    "toolOrigin": [
+      "screen"
+    ],
+    "motorVisualSpace": [
+      "offset"
+    ],
+    "disambiguation": [
+      "heuristic"
+    ],
+    "inputModality": [
+      "mouse"
+    ],
+    "confirmation": [
+      "button"
+    ],
+    "targetDistance": [],
+    "handlesOcclusion": [
+      "yes"
+    ]
+  },
+  "tags": [
+    "depth feedback",
+    "dense scenes"
+  ],
+  "publications": [
+    {
+      "publication": "winkler-2010-depth-bubble",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "bubble-cursor",
+      "type": "variant-of",
+      "note": "A 3D Bubble Cursor nested inside a depth indicator; objects in front of the cursor's depth become semi-transparent."
+    },
+    {
+      "technique": "bound-bubble-cursor",
+      "type": "compared-with",
+      "note": "Introduced and compared in the same study."
+    },
+    {
+      "technique": "depth-bubble-cursor",
+      "type": "compared-with",
+      "note": "Introduced and compared in the same study."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": [
+      "handlesOcclusion"
+    ]
+  }
+}

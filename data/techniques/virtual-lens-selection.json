@@ -1,0 +1,91 @@
+{
+  "id": "virtual-lens-selection",
+  "name": "Virtual Lens Selection",
+  "aliases": [
+    "Magic Lens selection",
+    "AR lens selection"
+  ],
+  "year": 2007,
+  "summary": "In tabletop AR, a handheld magnifying-glass lens doubles as the selector: the object under the crosshair at the lens centre, on the ray from the eye through it, is selected with a button.",
+  "howItWorks": "A virtual magnifying glass is rendered on a tracked handheld controller. The lens view can show a different layer or effect, as in Magic Lens interfaces, and the user enlarges it by bringing it closer to the eye. For selection, the ray from the eye through the centre of the lens (an image-plane technique) picks the first object it hits, so moving the lens in depth does not change the selection. In a study with 16 participants selecting among 48 or 192 targets, it was faster than Direct Touch and Ray-Casting, needed less head and hand movement, and was preferred; Direct Touch had fewer errors.",
+  "advantages": [
+    "Faster and less tiring than direct touch and ray-casting in the study.",
+    "Fits existing Magic Lens interfaces in AR."
+  ],
+  "limitations": [
+    "More errors than direct touch.",
+    "Tested only on a tabletop scene with expert AR users."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "ar"
+    ],
+    "selectionTool": [
+      "image-plane",
+      "ray"
+    ],
+    "toolOrigin": [
+      "eye",
+      "hand"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "none"
+    ],
+    "inputModality": [
+      "controller"
+    ],
+    "confirmation": [
+      "button"
+    ],
+    "targetDistance": [
+      "near"
+    ],
+    "handlesOcclusion": [
+      "no"
+    ]
+  },
+  "tags": [
+    "magic lens",
+    "tangible AR"
+  ],
+  "publications": [
+    {
+      "publication": "looser-2007-lenses",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "raycasting",
+      "type": "compared-with",
+      "note": "Compared in the same study."
+    },
+    {
+      "technique": "virtual-hand",
+      "type": "compared-with",
+      "note": "Compared with Direct Touch in the same study."
+    },
+    {
+      "technique": "lenselect",
+      "type": "related",
+      "note": "Both use a lens for selection."
+    },
+    {
+      "technique": "direct-image-plane",
+      "type": "related",
+      "note": "Selection follows the eye-through-lens ray."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": []
+  }
+}

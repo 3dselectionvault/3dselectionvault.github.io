@@ -1,0 +1,79 @@
+{
+  "id": "touching-the-cloud",
+  "name": "Touching the Cloud",
+  "aliases": [],
+  "year": 2014,
+  "summary": "In an HMD, the user's tracked bare hands appear in the point cloud; points are marked by touching them with a fingertip within a tolerance radius, then set as selected or unselected by voice or button.",
+  "howItWorks": "Hands are tracked by a depth camera on a tripod, and the cloud sits above a virtual table. A two-hand pinch rotates, scales and translates the cloud so small parts can be reached. Touching points with a fingertip marks those within a customisable radius; marked points can then be added to or removed from the selection. The finished selection is annotated by saying a label after the keyword 'annotate', and an exploded copy of it allows hierarchical annotation. Two people tried it informally.",
+  "advantages": [
+    "Natural direct touch with bare hands.",
+    "Hierarchical annotation via exploded views."
+  ],
+  "limitations": [
+    "Hand-tracking jitter and depth misjudgement make fingertip touch imprecise.",
+    "Only an informal trial."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection",
+    "manipulation"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "point",
+      "volume"
+    ],
+    "toolOrigin": [
+      "hand"
+    ],
+    "motorVisualSpace": [
+      "direct"
+    ],
+    "disambiguation": [
+      "none"
+    ],
+    "inputModality": [
+      "hand",
+      "voice"
+    ],
+    "confirmation": [
+      "voice",
+      "button"
+    ],
+    "targetDistance": [
+      "near"
+    ],
+    "handlesOcclusion": [
+      "no"
+    ]
+  },
+  "tags": [
+    "point cloud",
+    "annotation",
+    "3DUI contest",
+    "freehand"
+  ],
+  "publications": [
+    {
+      "publication": "lubos-2014-touching-cloud",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "virtual-hand",
+      "type": "extends",
+      "note": "Fingertip touch with a tolerance radius."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": [
+      "confirmation"
+    ]
+  }
+}

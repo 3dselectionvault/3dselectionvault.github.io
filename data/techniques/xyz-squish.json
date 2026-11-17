@@ -1,0 +1,86 @@
+{
+  "id": "xyz-squish",
+  "name": "XYZ-Squish",
+  "aliases": [
+    "Multi-axis compression"
+  ],
+  "year": 2025,
+  "summary": "Go-Go with the stretching moved from the arm to the world: the hand stays at its real position and the whole scene is scaled down towards the user, so the hand reaches the points Go-Go would.",
+  "howItWorks": "As with Z-Squish, the reach mapping is Go-Go's, but the scene is scaled uniformly around the user by the inverse of the mapping, so it shrinks along all axes as the hand extends. A sphere cursor at the rendered hand selects with the controller trigger. In a study with 18 participants it was slower, produced more misclicks and was liked least compared with Go-Go and Z-Squish. In a second study on illusory thresholds, the uniform scaling made the remapping go unnoticed at low distance multipliers, where Go-Go's arm stretch was noticed.",
+  "advantages": [
+    "The remapping can go unnoticed at low multipliers.",
+    "The rendered hand stays at its real position."
+  ],
+  "limitations": [
+    "Slower and more error-prone than Go-Go in the study.",
+    "Scaled targets appear smaller relative to the hand."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "point"
+    ],
+    "toolOrigin": [
+      "hand"
+    ],
+    "motorVisualSpace": [
+      "direct"
+    ],
+    "disambiguation": [
+      "none"
+    ],
+    "inputModality": [
+      "controller"
+    ],
+    "confirmation": [
+      "button"
+    ],
+    "targetDistance": [
+      "near-distant"
+    ],
+    "handlesOcclusion": [
+      "no"
+    ]
+  },
+  "tags": [
+    "signifiers",
+    "arm extension",
+    "world scaling"
+  ],
+  "publications": [
+    {
+      "publication": "jennings-2025-reimagining-gogo",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "go-go",
+      "type": "variant-of",
+      "note": "Go-Go's distance multiplier is kept unchanged; only what the user sees changes."
+    },
+    {
+      "technique": "z-squish",
+      "type": "compared-with",
+      "note": "Introduced and compared in the same study."
+    },
+    {
+      "technique": "scaled-world-grab",
+      "type": "related",
+      "note": "Both scale the world instead of extending the arm."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": [
+      "motorVisualSpace"
+    ]
+  }
+}

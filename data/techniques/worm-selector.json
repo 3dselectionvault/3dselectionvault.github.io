@@ -1,0 +1,73 @@
+{
+  "id": "worm-selector",
+  "name": "Worm Selector",
+  "aliases": [],
+  "year": 2017,
+  "summary": "On a desktop, the user draws free-form contours on a movable drawing plane; successive contours are joined into a tube-like envelope (the worm), and all points inside it are selected.",
+  "howItWorks": "The drawing plane is positioned and oriented separately from the camera; the camera can then turn to face it, and the user draws a closed contour of any shape with the mouse around the visible cross-section of the target. Each new contour, possibly at a different angle, is resampled to 360 points and linked point by point to the previous one, extending the envelope section by section; deleting a contour removes its section. In a study with 12 participants selecting irregular volumes in point clouds, it was significantly faster than a Sphere/Cuboid selector built from adjustable primitives, with similar precision and recall, and was preferred. It performed like a Parallel Contours variant restricted to parallel planes.",
+  "advantages": [
+    "Selects irregular and non-convex volumes.",
+    "Needs only a mouse."
+  ],
+  "limitations": [
+    "Twisted or folded envelopes can be hard to understand.",
+    "Many contours are needed for complex shapes."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "desktop"
+    ],
+    "selectionTool": [
+      "image-plane",
+      "volume"
+    ],
+    "toolOrigin": [
+      "screen"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "manual"
+    ],
+    "inputModality": [
+      "mouse"
+    ],
+    "confirmation": [
+      "release"
+    ],
+    "targetDistance": [],
+    "handlesOcclusion": [
+      "partly"
+    ]
+  },
+  "tags": [
+    "point cloud",
+    "volume selection"
+  ],
+  "publications": [
+    {
+      "publication": "dubois-2017-worm",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "cloudlasso",
+      "type": "related",
+      "note": "Both build a selection volume from contours drawn on the screen."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": [
+      "confirmation",
+      "handlesOcclusion"
+    ]
+  }
+}

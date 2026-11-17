@@ -1,0 +1,74 @@
+{
+  "id": "bound-bubble-cursor",
+  "name": "Bound Bubble Cursor",
+  "aliases": [],
+  "year": 2010,
+  "summary": "A 3D Bubble Cursor inside a flat 2D ring whose size depends only on the cursor's depth, so the ring shows depth while the inner bubble grabs the nearest object.",
+  "howItWorks": "The cursor moves with the mouse and the scroll wheel sets its depth. The inner sphere resizes like the 3D Bubble Cursor; the surrounding yellow ring keeps a size that encodes depth and contrasts with the scene. Objects in front of the cursor's depth turn semi-transparent. In the study with 20 participants it had the slowest times, yet participants rated it, with Depth Bubble Cursor, as the easiest to use and learn because the ring made depth clear.",
+  "advantages": [
+    "The ring makes depth easy to read and contrasts well with the scene."
+  ],
+  "limitations": [
+    "Slowest of the four cursors in the study."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "desktop"
+    ],
+    "selectionTool": [
+      "volume"
+    ],
+    "toolOrigin": [
+      "screen"
+    ],
+    "motorVisualSpace": [
+      "offset"
+    ],
+    "disambiguation": [
+      "heuristic"
+    ],
+    "inputModality": [
+      "mouse"
+    ],
+    "confirmation": [
+      "button"
+    ],
+    "targetDistance": [],
+    "handlesOcclusion": [
+      "yes"
+    ]
+  },
+  "tags": [
+    "depth feedback",
+    "dense scenes"
+  ],
+  "publications": [
+    {
+      "publication": "winkler-2010-depth-bubble",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "bubble-cursor",
+      "type": "variant-of",
+      "note": "A 3D Bubble Cursor inside a depth-sized ring; objects in front of the cursor's depth become semi-transparent."
+    },
+    {
+      "technique": "double-bubble-cursor",
+      "type": "compared-with",
+      "note": "Introduced and compared in the same study."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": [
+      "handlesOcclusion"
+    ]
+  }
+}

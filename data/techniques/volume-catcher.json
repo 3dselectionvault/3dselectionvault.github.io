@@ -1,0 +1,76 @@
+{
+  "id": "volume-catcher",
+  "name": "Volume Catcher",
+  "aliases": [],
+  "year": 2005,
+  "summary": "On a volume rendering, the user traces the outline of a structure with a 2D stroke; the system finds the stroke's depth along the structure's silhouette and segments the 3D region inside it.",
+  "howItWorks": "The stroke, drawn clockwise with the mouse so that its right-hand side is the inside, is swept along the viewing direction into a surface. On that surface, dynamic programming finds the path where the volume's gradient is most perpendicular to the view, i.e. the silhouette, which gives the stroke's depth. Foreground constraints are placed just inside this 3D path and background constraints just outside, and a region-merging segmentation returns the region as voxels or a surface. Open strokes handle partly hidden outlines; closed strokes restrict the result to the swept volume. Three people tested its speed on two datasets.",
+  "advantages": [
+    "No need to specify depth or draw on slices.",
+    "Works when only part of the target is visible."
+  ],
+  "limitations": [
+    "Fails when two structures share the same outline from the view, or for thin targets.",
+    "Depends on the segmentation algorithm."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "desktop"
+    ],
+    "selectionTool": [
+      "image-plane",
+      "volume"
+    ],
+    "toolOrigin": [
+      "screen"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "heuristic"
+    ],
+    "inputModality": [
+      "mouse"
+    ],
+    "confirmation": [
+      "release"
+    ],
+    "targetDistance": [],
+    "handlesOcclusion": [
+      "partly"
+    ]
+  },
+  "tags": [
+    "volume rendering",
+    "segmentation",
+    "scientific visualization"
+  ],
+  "publications": [
+    {
+      "publication": "owada-2005-volume-catcher",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "cloudlasso",
+      "type": "related",
+      "note": "Both infer a 3D region from a 2D outline drawn on the view."
+    },
+    {
+      "technique": "teddyselection",
+      "type": "related",
+      "note": "Both infer a 3D region from a 2D outline drawn on the view."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": []
+  }
+}

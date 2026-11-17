@@ -1,0 +1,80 @@
+{
+  "id": "depth-bubble-cursor",
+  "name": "Depth Bubble Cursor",
+  "aliases": [],
+  "year": 2010,
+  "summary": "A semi-transparent sphere whose size depends only on its depth; of the objects it touches, the one closest to its centre is selected, and objects in front of it turn semi-transparent.",
+  "howItWorks": "Unlike the 3D Bubble Cursor, the sphere does not shrink to fit a single object: its size changes only with depth, set with the scroll wheel, while the mouse moves it in x and y. Among the objects inside it, the one nearest to the centre is selected and highlighted. Objects in front of the cursor's depth become semi-transparent. In the study with 20 participants it was fastest in every analysis and was rated best overall, ahead of the 3D Bubble Cursor.",
+  "advantages": [
+    "Fastest and best rated in the study.",
+    "Its constant size at a given depth makes it easy to keep track of."
+  ],
+  "limitations": [
+    "Relies on the selected object changing colour for feedback."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "desktop"
+    ],
+    "selectionTool": [
+      "volume"
+    ],
+    "toolOrigin": [
+      "screen"
+    ],
+    "motorVisualSpace": [
+      "offset"
+    ],
+    "disambiguation": [
+      "heuristic"
+    ],
+    "inputModality": [
+      "mouse"
+    ],
+    "confirmation": [
+      "button"
+    ],
+    "targetDistance": [],
+    "handlesOcclusion": [
+      "yes"
+    ]
+  },
+  "tags": [
+    "depth feedback",
+    "dense scenes"
+  ],
+  "publications": [
+    {
+      "publication": "winkler-2010-depth-bubble",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "bubble-cursor",
+      "type": "variant-of",
+      "note": "Keeps the sphere's size tied to depth instead of fitting it to the nearest object, and picks the object closest to its centre."
+    },
+    {
+      "technique": "double-bubble-cursor",
+      "type": "compared-with",
+      "note": "Introduced and compared in the same study."
+    },
+    {
+      "technique": "silk-cursor",
+      "type": "related",
+      "note": "A semi-transparent volume cursor moved with a mouse."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": [
+      "handlesOcclusion"
+    ]
+  }
+}

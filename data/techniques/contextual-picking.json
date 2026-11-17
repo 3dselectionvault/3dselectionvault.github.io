@@ -1,0 +1,78 @@
+{
+  "id": "contextual-picking",
+  "name": "Contextual Picking",
+  "aliases": [
+    "Contextual picking of volumetric structures"
+  ],
+  "year": 2009,
+  "summary": "Clicking on a medical volume rendering picks the centre of the anatomical structure meant: the intensity profile along the viewing ray is matched to templates of structures such as vessels or vertebrae chosen from the context.",
+  "howItWorks": "A knowledge base holds sample ray profiles for anatomical structures. From the DICOM metadata and the workstation setup, the system decides which templates apply. When the user clicks, the profile along the viewing ray is compared with them at several scales, and the best-matching section gives the 3D point, typically the structure's centre rather than the first visible surface. The point drives linked 2D slice views, centreline tracing of tubular structures by dragging, and label placement. It was demonstrated on clinical datasets without a user study.",
+  "advantages": [
+    "Returns the clinically relevant point, such as a vessel's centre.",
+    "Supports linked slice views, centreline tracing and labelling."
+  ],
+  "limitations": [
+    "Needs templates prepared for each structure.",
+    "No user study."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "desktop"
+    ],
+    "selectionTool": [
+      "ray"
+    ],
+    "toolOrigin": [
+      "screen"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "heuristic"
+    ],
+    "inputModality": [
+      "mouse"
+    ],
+    "confirmation": [
+      "button"
+    ],
+    "targetDistance": [],
+    "handlesOcclusion": [
+      "partly"
+    ]
+  },
+  "tags": [
+    "volume rendering",
+    "medical visualization"
+  ],
+  "publications": [
+    {
+      "publication": "kohlmann-2009-contextual-picking",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "raycasting",
+      "type": "extends",
+      "note": "Chooses a depth along the picking ray by matching structure templates instead of the first hit."
+    },
+    {
+      "technique": "wysiwyp",
+      "type": "related",
+      "note": "Both choose a depth along the picking ray in a direct volume rendering."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": [
+      "handlesOcclusion"
+    ]
+  }
+}

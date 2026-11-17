@@ -122,6 +122,10 @@
       "publication": "spittle-2023",
       "role": "surveyed",
       "where": "Table 1 hand gesture (cites Özacar et al. 2017)"
+    },
+    {
+      "publication": "looser-2007-lenses",
+      "role": "evaluated"
     }
   ],
   "relationships": [

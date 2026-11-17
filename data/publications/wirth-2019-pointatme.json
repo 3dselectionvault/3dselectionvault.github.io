@@ -1,0 +1,17 @@
+{
+  "id": "wirth-2019-pointatme",
+  "title": "PointAtMe: Efficient 3D Point Cloud Labeling in Virtual Reality",
+  "authors": [
+    "Florian Wirth",
+    "Jannik Quehl",
+    "Jeffrey Ota",
+    "Christoph Stiller"
+  ],
+  "year": 2019,
+  "venue": "IEEE Intelligent Vehicles Symposium (IV), 1693-1698",
+  "doi": "10.1109/IVS.2019.8814115",
+  "url": "https://doi.org/10.1109/IVS.2019.8814115",
+  "type": "paper",
+  "citation": null,
+  "bibtex": null
+}

@@ -1,0 +1,84 @@
+{
+  "id": "go-then-tag",
+  "name": "Go'Then'Tag",
+  "aliases": [
+    "GTT"
+  ],
+  "year": 2014,
+  "summary": "For annotating point clouds on a projection wall, a tracked smartphone casts a ray to pick nodes of an automatic octree subdivision, refining the selection step by step; a shape on the ray adds or removes single points.",
+  "howItWorks": "The point cloud is pre-split into a tree of point sets (an octree in the prototype). Pointing the tracked phone and selecting a node activates its subdivision and refits the view to it, so the user drills down and adds the nodes closest to the wanted set, then merges them. A pencil tool attaches a sphere or cube to the ray; its size and position along the ray are set with touch gestures, and points inside it are added or removed. The phone's touchscreen is used to orient the data and to type and organise the tags. It was a 3DUI 2014 contest entry and was only tested informally.",
+  "advantages": [
+    "Progressive refinement simplifies selection in dense clouds.",
+    "Text entry and tag hierarchy stay on a familiar touchscreen."
+  ],
+  "limitations": [
+    "Node quality depends on the subdivision algorithm.",
+    "No formal evaluation."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "projection"
+    ],
+    "selectionTool": [
+      "ray",
+      "volume"
+    ],
+    "toolOrigin": [
+      "hand"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "progressive"
+    ],
+    "inputModality": [
+      "tangible",
+      "touchscreen"
+    ],
+    "confirmation": [
+      "touch"
+    ],
+    "targetDistance": [
+      "far"
+    ],
+    "handlesOcclusion": [
+      "partly"
+    ]
+  },
+  "tags": [
+    "point cloud",
+    "annotation",
+    "3DUI contest"
+  ],
+  "publications": [
+    {
+      "publication": "veit-2014-gothentag",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "squad",
+      "type": "related",
+      "note": "Applies Kopper et al.'s progressive refinement to point sets."
+    },
+    {
+      "technique": "raycasting",
+      "type": "extends",
+      "note": "Ray-casting from a tracked phone picks tree nodes, with a shape on the ray for fine edits."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": [
+      "confirmation",
+      "handlesOcclusion"
+    ]
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "id": "t2iray",
+  "name": "T2IRay",
+  "aliases": [
+    "Thumb-to-index ray"
+  ],
+  "year": 2025,
+  "summary": "A ray from the headset is steered by sliding the thumb along the side of the index finger, so the hand can rest anywhere while pointing; a thumb tap on the index finger selects.",
+  "howItWorks": "A local coordinate system is built on the tracked hand from the thumb and index joints, with its origin at a comfortable semi-fist pose. The thumb's position in that frame is mapped absolutely onto an intersection plane that is centred on the head ray and moves with the head, so head movement brings a region into view while only the thumb moves the pointer inside it. Several transfer functions were compared in a Fitts' law study with 16 participants on a Quest 3 (targets at 1 m and 2 m); a logistic mapping gave the best throughput. A second study characterised thumb clicks (on-skin versus in-air taps) to derive detection thresholds that avoid ray jitter and false positives.",
+  "advantages": [
+    "Hands can stay low and relaxed, outside the camera's central view.",
+    "Small thumb movements give fine control."
+  ],
+  "limitations": [
+    "The pointer range is limited to the head-centred plane; reaching further requires turning the head.",
+    "Thumb-click detection can shift the ray at the moment of selection."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr",
+      "ar"
+    ],
+    "selectionTool": [
+      "ray"
+    ],
+    "toolOrigin": [
+      "head"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "none"
+    ],
+    "inputModality": [
+      "hand",
+      "head"
+    ],
+    "confirmation": [
+      "gesture"
+    ],
+    "targetDistance": [
+      "near",
+      "far"
+    ],
+    "handlesOcclusion": [
+      "no"
+    ]
+  },
+  "tags": [
+    "microgesture",
+    "freehand"
+  ],
+  "publications": [
+    {
+      "publication": "kim-2025-t2iray",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "raycasting",
+      "type": "variant-of",
+      "note": "The ray comes from the head and its direction is set by the thumb on the index finger, not by the hand's pose."
+    },
+    {
+      "technique": "head-gaze-pointing",
+      "type": "related",
+      "note": "Uses head direction to centre the pointing plane."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": [
+      "environment",
+      "confirmation"
+    ]
+  }
+}
