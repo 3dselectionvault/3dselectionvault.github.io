@@ -51,6 +51,10 @@
     {
       "publication": "besancon-2019-tangiblebrush",
       "role": "evaluated"
+    },
+    {
+      "publication": "chen-2020-lassonet",
+      "role": "evaluated"
     }
   ],
   "relationships": [

@@ -1,0 +1,84 @@
+{
+  "id": "lassonet",
+  "name": "LassoNet",
+  "aliases": [
+    "Deep lasso selection"
+  ],
+  "year": 2020,
+  "summary": "For 3D point clouds on a desktop screen, the user draws a lasso with the mouse and a deep neural network infers which points they meant, using the lasso and the current viewpoint, so occluded regions can be selected without rotating the view.",
+  "howItWorks": "The user draws a lasso on the 2D view of a point cloud. Points are moved into the camera's coordinate frame, a naive frustum selection finds candidates, an intention filter and farthest-point sampling reduce them, and a hierarchical point network trained on over 30,000 lasso-selection records predicts the intended subset. Selections can be combined with union, intersection and subtraction. In a user study it was compared with CylinderSelection and SpaceCast and improved selection effectiveness and efficiency across point clouds, viewpoints and lasso sizes.",
+  "advantages": [
+    "Learns the user's intent rather than relying on hand-crafted density heuristics.",
+    "Can select occluded clusters without changing the viewpoint."
+  ],
+  "limitations": [
+    "Needs a large set of training selections; limited to mouse lassos on a 2D display."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "desktop"
+    ],
+    "selectionTool": [
+      "image-plane"
+    ],
+    "toolOrigin": [
+      "screen"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "heuristic"
+    ],
+    "inputModality": [
+      "mouse"
+    ],
+    "confirmation": [
+      "release"
+    ],
+    "targetDistance": [],
+    "handlesOcclusion": [
+      "partly"
+    ]
+  },
+  "tags": [
+    "point clouds",
+    "multi-object selection",
+    "machine learning"
+  ],
+  "publications": [
+    {
+      "publication": "chen-2020-lassonet",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "spacecast",
+      "type": "compared-with",
+      "source": "chen-2020-lassonet"
+    },
+    {
+      "technique": "tablet-lasso",
+      "type": "compared-with",
+      "source": "chen-2020-lassonet",
+      "note": "Compared with CylinderSelection."
+    },
+    {
+      "technique": "cloudlasso",
+      "type": "related",
+      "note": "Earlier density-based lasso selection for point clouds."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": [
+      "handlesOcclusion"
+    ]
+  }
+}

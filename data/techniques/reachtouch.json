@@ -1,0 +1,73 @@
+{
+  "id": "reachtouch",
+  "name": "ReachTouch",
+  "aliases": [],
+  "year": 2026,
+  "summary": "With hand tracking, extending the index finger shows a ray cursor on a distant target, and pushing the hand forward as if touching it selects the target, using the cursor position from just before the push.",
+  "howItWorks": "Built for Meta Quest 3 hand tracking. A small neural network (MLP) recognises the pointing hand pose and shows a cursor only while the index finger is extended; an LSTM detects the forward touch motion. Because the push moves the cursor, the system selects at the cursor position recorded just before the push began. In a study with 16 participants on a panel 2 m away, ReachTouch was 26.5% faster than hand raycasting with pinch (35.2% for the smallest targets), with fewer errors in some conditions and a higher SUS score. It was not yet tested with 3D objects.",
+  "advantages": [
+    "Touch-like confirmation that does not shift the cursor the way a pinch can.",
+    "No controller needed."
+  ],
+  "limitations": [
+    "Evaluated only on a flat panel at a fixed distance; 3D objects and multiple panels remain to be tested.",
+    "Relies on gesture-recognition models."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr",
+      "ar"
+    ],
+    "selectionTool": [
+      "ray"
+    ],
+    "toolOrigin": [
+      "hand"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "none"
+    ],
+    "inputModality": [
+      "hand"
+    ],
+    "confirmation": [
+      "gesture"
+    ],
+    "targetDistance": [
+      "near-distant"
+    ],
+    "handlesOcclusion": [
+      "no"
+    ]
+  },
+  "tags": [],
+  "publications": [
+    {
+      "publication": "yuasa-2026-reachtouch",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "raycasting",
+      "type": "compared-with",
+      "source": "yuasa-2026-reachtouch",
+      "note": "Compared with hand raycasting confirmed by a pinch."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": [
+      "environment",
+      "targetDistance"
+    ]
+  }
+}

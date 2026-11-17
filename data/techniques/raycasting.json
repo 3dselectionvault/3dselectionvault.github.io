@@ -180,6 +180,10 @@
     {
       "publication": "legacy-paper-bubble-raycasting",
       "role": "evaluated"
+    },
+    {
+      "publication": "yuasa-2026-reachtouch",
+      "role": "evaluated"
     }
   ],
   "relationships": [

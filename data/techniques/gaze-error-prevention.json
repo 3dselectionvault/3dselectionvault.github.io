@@ -1,0 +1,89 @@
+{
+  "id": "gaze-error-prevention",
+  "name": "Gaze Selection with Anomaly-Based Error Prevention",
+  "aliases": [
+    "EPS",
+    "Error Prevention System"
+  ],
+  "year": 2026,
+  "summary": "A neural network watches the gaze around each gaze selection and cancels selections whose gaze dynamics look unlike correct ones, reducing Midas-touch errors for dwell, gaze-head alignment and nod confirmation.",
+  "howItWorks": "Built for an HTC Vive Pro Eye. A temporal convolutional autoencoder is trained on the gaze angular velocity just before and after correct selections; at run time, a selection whose gaze pattern is reconstructed poorly is treated as an anomaly and blocked. It is a layer on top of an existing gaze confirmation: dwell time, aligning gaze and head direction, or a head nod. In a visual-search game with 37 participants (flying robots at 18 positions across 180°, select the one marked 'C'), the system cut incorrect selections by up to 95% for dwell and gaze-head alignment and improved performance in those conditions; effects for nodding were smaller and more variable.",
+  "advantages": [
+    "Removes most wrong gaze selections without changing how users select.",
+    "Works with several confirmation methods."
+  ],
+  "limitations": [
+    "Needs training data and eye tracking; benefits varied across users and were small for nod confirmation.",
+    "Can also block some intended selections."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "ray"
+    ],
+    "toolOrigin": [
+      "eye"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "behavioural"
+    ],
+    "inputModality": [
+      "gaze",
+      "head"
+    ],
+    "confirmation": [
+      "dwell",
+      "gesture"
+    ],
+    "targetDistance": [
+      "far"
+    ],
+    "handlesOcclusion": [
+      "no"
+    ]
+  },
+  "tags": [
+    "Midas touch",
+    "machine learning"
+  ],
+  "publications": [
+    {
+      "publication": "severitt-2026-eps",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "eye-gaze-selection",
+      "type": "extends",
+      "note": "Adds error prevention to dwell-based gaze selection."
+    },
+    {
+      "technique": "eye-and-head",
+      "type": "extends",
+      "note": "Adds error prevention to gaze-head alignment confirmation."
+    },
+    {
+      "technique": "nod-and-roll",
+      "type": "extends",
+      "note": "Adds error prevention to gaze selection confirmed by a nod."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": [
+      "disambiguation",
+      "targetDistance"
+    ]
+  }
+}

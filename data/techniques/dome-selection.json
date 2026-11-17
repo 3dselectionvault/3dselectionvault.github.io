@@ -1,0 +1,79 @@
+{
+  "id": "dome-selection",
+  "name": "Dome",
+  "aliases": [
+    "Dome selection",
+    "Parabolic sphere selection"
+  ],
+  "year": 2026,
+  "summary": "A parabolic ray from the hand places a translucent selection sphere where it lands, so the user can arc over people in a crowd and select one or several agents behind them.",
+  "howItWorks": "Built for Meta Quest 3 controllers. A parabolic ray, like the arcs used for teleporting, extends from the right controller and spawns a translucent selection sphere where it hits the ground, a wall or an agent. Pushing the right thumbstick up or down grows or shrinks the sphere, from a single agent to a whole group. Holding the trigger selects every agent inside the sphere and opens a slider for adjusting their volume. Because the arc goes over occluders, agents hidden behind others can be reached. In a study with 24 participants (volume adjustment in a crowd of 28 avatars, in a row and in occluding groups), Dome was as fast as a resizable Flashlight cone but caused more unnecessary adjustments, overshoots and undershoots, and 20 of 24 participants preferred Flashlight; some found Dome useful for clustered groups when no occlusion-handling aid was available.",
+  "advantages": [
+    "Arcs over occluding avatars to reach targets behind them.",
+    "An adjustable sphere selects one target or a whole group."
+  ],
+  "limitations": [
+    "Harder to aim and size than a straight cone; more unintended selections in the study.",
+    "Most participants preferred the Flashlight cone."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "volume"
+    ],
+    "toolOrigin": [
+      "hand"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "manual"
+    ],
+    "inputModality": [
+      "controller"
+    ],
+    "confirmation": [
+      "button"
+    ],
+    "targetDistance": [
+      "near-distant",
+      "far"
+    ],
+    "handlesOcclusion": [
+      "yes"
+    ]
+  },
+  "tags": [
+    "multi-object selection",
+    "crowds"
+  ],
+  "publications": [
+    {
+      "publication": "rasch-2026-crowded",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "cone-casting",
+      "type": "compared-with",
+      "source": "rasch-2026-crowded",
+      "note": "Compared with a resizable Flashlight cone that selects all agents inside it."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": [
+      "targetDistance",
+      "handlesOcclusion"
+    ]
+  }
+}

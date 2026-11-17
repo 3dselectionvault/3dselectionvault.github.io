@@ -49,6 +49,10 @@
     {
       "publication": "legacy-paper-port",
       "role": "introduced"
+    },
+    {
+      "publication": "chen-2020-lassonet",
+      "role": "evaluated"
     }
   ],
   "relationships": [

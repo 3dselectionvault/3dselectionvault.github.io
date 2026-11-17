@@ -1,0 +1,84 @@
+{
+  "id": "control-point-annotation",
+  "name": "Control-Point Selection for Point Cloud Annotation",
+  "aliases": [
+    "Gaze or hand control-point selection"
+  ],
+  "year": 2026,
+  "summary": "In a VR point cloud, the user points at one point with the controller or with the eyes and presses a button; nearby points with similar local features are labelled automatically, so a few control points annotate a whole object.",
+  "howItWorks": "Built for a Meta Quest Pro. In one mode the ray comes from the hand controller, in the other from eye tracking; in both, a button on the controller confirms. The point picked is the one inside a narrow cone-shaped volume around the ray (limited near the origin) that best matches the ray, with filtering over several frames to reduce ray noise in dense clouds. A shortest-path-tree algorithm then spreads the label from each control point to neighbouring points using local features. Compared with bounding-box selection for VR annotation, both modes improved annotation quality and reduced annotation time.",
+  "advantages": [
+    "Annotates irregular shapes with a few clicks instead of drawing boxes.",
+    "Works with gaze or hand pointing."
+  ],
+  "limitations": [
+    "Designed for point cloud labelling; accuracy depends on the automatic segmentation around each control point."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "ray",
+      "cone"
+    ],
+    "toolOrigin": [
+      "hand",
+      "eye"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "heuristic"
+    ],
+    "inputModality": [
+      "controller",
+      "gaze"
+    ],
+    "confirmation": [
+      "button"
+    ],
+    "targetDistance": [
+      "near",
+      "near-distant"
+    ],
+    "handlesOcclusion": [
+      "no"
+    ]
+  },
+  "tags": [
+    "point clouds",
+    "dense targets"
+  ],
+  "publications": [
+    {
+      "publication": "monica-2026-pointcloud",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "eye-gaze-selection",
+      "type": "related",
+      "note": "Uses a gaze ray as one of its two pointing modes."
+    },
+    {
+      "technique": "raycasting",
+      "type": "related",
+      "note": "Uses a controller ray as one of its two pointing modes."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": [
+      "selectionTool",
+      "targetDistance"
+    ]
+  }
+}
