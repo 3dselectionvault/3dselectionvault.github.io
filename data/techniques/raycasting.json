@@ -184,6 +184,10 @@
     {
       "publication": "yuasa-2026-reachtouch",
       "role": "evaluated"
+    },
+    {
+      "publication": "wolf-2022-socialslider",
+      "role": "evaluated"
     }
   ],
   "relationships": [

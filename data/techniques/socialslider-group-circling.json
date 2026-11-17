@@ -1,0 +1,79 @@
+{
+  "id": "socialslider-group-circling",
+  "name": "SocialSlider Group Circling",
+  "aliases": [
+    "Co-located group selection",
+    "Mid-air circling selection"
+  ],
+  "year": 2022,
+  "summary": "In social VR, the user points at a group of avatars and draws a circle around them in the air with the controller; releasing the trigger selects the whole group, for example to make them transparent.",
+  "howItWorks": "Built for Oculus Rift with Touch controllers as part of SocialSlider, which changes the transparency of other avatars. While holding the right trigger, the user points at a group and draws a circle around it in mid-air; a gesture recogniser detects the circle and releasing the trigger confirms the selection, with outlines showing the selected avatars. The same system offers ray selection of single avatars, a sweeping line gesture to select everyone, and pointing at oneself to select a predefined group. In a study with 24 participants in a virtual exhibition with 43 avatars, circling, single-avatar raycasting and select-all had similar high usability (median SUS 83), while pointing at oneself scored lower.",
+  "advantages": [
+    "Selects a whole co-located group with one gesture.",
+    "Rated as usable as single-target raycasting."
+  ],
+  "limitations": [
+    "Usability only; no time or accuracy measured.",
+    "Relies on gesture recognition of the drawn circle."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "image-plane"
+    ],
+    "toolOrigin": [
+      "hand"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "manual"
+    ],
+    "inputModality": [
+      "controller"
+    ],
+    "confirmation": [
+      "release"
+    ],
+    "targetDistance": [
+      "near-distant",
+      "far"
+    ],
+    "handlesOcclusion": [
+      "no"
+    ]
+  },
+  "tags": [
+    "multi-object selection",
+    "crowds"
+  ],
+  "publications": [
+    {
+      "publication": "wolf-2022-socialslider",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "raycasting",
+      "type": "compared-with",
+      "source": "wolf-2022-socialslider",
+      "note": "Compared with ray selection of single avatars."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": [
+      "selectionTool",
+      "targetDistance"
+    ]
+  }
+}

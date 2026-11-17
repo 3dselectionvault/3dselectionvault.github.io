@@ -1,0 +1,74 @@
+{
+  "id": "wysiwyp",
+  "name": "WYSIWYP",
+  "aliases": [
+    "What You See Is What You Pick",
+    "Visibility-based volume picking"
+  ],
+  "year": 2012,
+  "summary": "In a direct volume rendering, clicking a pixel picks the 3D position of the structure the user actually sees there: along the viewing ray, the interval with the largest jump in accumulated opacity is chosen.",
+  "howItWorks": "The click is turned into a ray through the volume, and the accumulated opacity is computed along it as in the rendering. Using its first and second derivatives, the ray is split into intervals where opacity rises, and the interval with the largest rise, the one contributing most to the visible pixel, is taken as the picked structure; its front or its centre is returned, for example to place a slice through it. It needs no segmentation or metadata, only the data and the transfer function, and it can pick a structure seen through semi-transparent ones in front. In a study with 20 participants on 36 test cases, the picked position fell within one standard deviation of the positions participants perceived in 89% of cases; it also handles renderings where first-hit and opacity-threshold picking fail.",
+  "advantages": [
+    "Picks what is visible rather than the first non-transparent sample.",
+    "Works for any volume data without segmentation or metadata."
+  ],
+  "limitations": [
+    "Designed for emission-absorption volume rendering without local illumination.",
+    "Nearby clicks can map to very different depths in noisy data."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "desktop"
+    ],
+    "selectionTool": [
+      "ray"
+    ],
+    "toolOrigin": [
+      "screen"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "heuristic"
+    ],
+    "inputModality": [
+      "mouse"
+    ],
+    "confirmation": [
+      "button"
+    ],
+    "targetDistance": [],
+    "handlesOcclusion": [
+      "partly"
+    ]
+  },
+  "tags": [
+    "volume rendering",
+    "scientific visualization"
+  ],
+  "publications": [
+    {
+      "publication": "wiebel-2012-wysiwyp",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "raycasting",
+      "type": "extends",
+      "note": "Chooses a depth along the picking ray from the accumulated opacity instead of the first hit."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": [
+      "handlesOcclusion"
+    ]
+  }
+}

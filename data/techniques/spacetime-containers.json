@@ -1,0 +1,79 @@
+{
+  "id": "spacetime-containers",
+  "name": "Spacetime Containers",
+  "aliases": [
+    "Containers"
+  ],
+  "year": 2018,
+  "summary": "In a VR scene editor, the user holds a Container in the hand and points its ray at objects to select them; a small proxy of each selected object appears inside the Container, which then stands for the selection.",
+  "howItWorks": "Built for Oculus Rift with Touch controllers. Pressing the trigger with the hand in empty space creates a Container held in the hand. A ray comes out of it; pointing at an object and pushing the thumbstick selects it and summons a proxy of it into the Container, and further objects can be added one by one. The proxies keep their spatial arrangement and show nearby unselected objects for context, so the Container acts as a miniature view of the selection; manipulating the proxies manipulates the real objects, and Containers can be nested, stored and shared between collaborators. Evaluated in an exploratory study of the whole Spacetime system, not as a selection technique on its own.",
+  "advantages": [
+    "Builds a multi-object selection that stays visible and reusable as an object in the hand.",
+    "Proxies keep spatial context, like a world in miniature of the selection."
+  ],
+  "limitations": [
+    "Objects are added one at a time; no controlled evaluation of the selection itself."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "ray"
+    ],
+    "toolOrigin": [
+      "hand"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "manual"
+    ],
+    "inputModality": [
+      "controller"
+    ],
+    "confirmation": [
+      "button"
+    ],
+    "targetDistance": [
+      "near-distant",
+      "far"
+    ],
+    "handlesOcclusion": [
+      "no"
+    ]
+  },
+  "tags": [
+    "multi-object selection"
+  ],
+  "publications": [
+    {
+      "publication": "xia-2018-spacetime",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "raycasting",
+      "type": "extends",
+      "note": "Ray selection from a hand-held Container that collects proxies."
+    },
+    {
+      "technique": "worlds-in-miniature",
+      "type": "related",
+      "note": "Selected objects appear as proxies in a hand-held miniature."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": [
+      "disambiguation"
+    ]
+  }
+}
