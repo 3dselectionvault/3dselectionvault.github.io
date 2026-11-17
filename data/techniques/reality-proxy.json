@@ -4,7 +4,7 @@
   "aliases": [],
   "year": 2025,
   "summary": "In mixed reality, gazing at a real object and pinching lays out small proxies of the real objects around it next to the hand, and the user selects a distant, crowded or partly hidden object by touching its proxy instead of the object itself.",
-  "howItWorks": "Built on Gaze + Pinch for physical objects on Apple Vision Pro. The user looks at a real object and pinches; the system detects the objects in the gaze region, slightly enlarged around the gaze point, and places a fixed-size proxy for each one near the hand, rescaled so their left/right and front/back layout matches the real scene. The proxies stay put after the pinch is released and lazily follow the hand. Touching a proxy with a fingertip selects its real object, which is highlighted in place; sliding the finger across proxies previews each object (skimming). AI adds semantic attributes and a spatial hierarchy to the proxies, so the same layout supports two-hand brushing to select several objects, selecting every object that shares an attribute, a two-hand zoom between a group and its parts (e.g. floors and rooms of a building), and user-made groups. Partly hidden objects can be reached through their proxies; fully hidden ones only when a digital twin or tracking data provides their positions. Evaluated in an expert review with 10 XR specialists (office information retrieval and building navigation tasks), with no baseline comparison.",
+  "howItWorks": "In passthrough MR, the user looks at a physical object and pinches (Gaze + Pinch); the system detects the real objects around the gaze point and lays out small proxies for them next to the hand, keeping their relative spatial layout, and the user then selects the target by touching its proxy instead of the distant physical object. The proxies carry an AI-built spatial hierarchy and semantic attributes, so the same proxies also support skimming, brushing for multi-object selection, filtering by attribute, and zooming between a group and its parts (e.g. shelf vs. book). Fully hidden objects can be reached only when a digital twin or tracking data is available (e.g. rooms in a building). Evaluated in an expert review with XR specialists, with Gaze + Pinch as the reference condition and no formal baseline comparison.",
   "advantages": [
     "Distant, crowded or partly occluded real objects become easy to reach, without stretching the arm or precise aiming.",
     "The same proxies support multi-object selection, attribute-based filtering and moving through a spatial hierarchy with familiar gestures."
@@ -33,7 +33,7 @@
       "both-hands"
     ],
     "motorVisualSpace": [
-      "offset"
+      "remote"
     ],
     "disambiguation": [
       "manual",
@@ -70,25 +70,27 @@
     {
       "technique": "gaze-pinch",
       "type": "extends",
-      "note": "Keeps Gaze + Pinch to start a selection and moves it to physical objects in MR; proxies appear on the same pinch."
+      "note": "The default gaze-and-pinch selection is kept, and the proxies appear on the same pinch for refinement. Gaze + Pinch (with a pop-up menu for inspection and multi-selection) was the reference condition in the expert evaluation (no formal baseline comparison)."
     },
     {
       "technique": "worlds-in-miniature",
       "type": "related",
-      "note": "Selects through a stand-in near the hand, but with fixed-size abstract proxies rather than a scaled copy of the scene."
+      "note": "Conceptually related, but proxies are abstract, fixed-size and laid out for interaction rather than a scaled copy of the scene."
+    },
+    {
+      "technique": "voodoo-dolls",
+      "type": "related",
+      "note": "Conceptually related, but proxies are abstract, fixed-size and laid out for interaction rather than a scaled copy of the scene."
     },
     {
       "technique": "go-go",
       "type": "related",
-      "note": "Discussed as an alternative way of reaching objects beyond arm's reach."
+      "note": "Discussed against reach-extension techniques such as Go-Go."
     }
   ],
   "review": {
     "status": "draft",
-    "notes": "Suggested by sseanliu in GitHub issue #1 (Nov 2026) and checked against the full text (arXiv 2507.17248v2). Attributes coded by Claude; not yet reviewed by the team.",
-    "uncertain": [
-      "motorVisualSpace",
-      "targetDistance"
-    ]
+    "notes": "Suggested by sseanliu in GitHub issue #1 (Nov 2026); description, attributes and related techniques as given by the suggester, checked against the full text (arXiv 2507.17248v2). Not yet reviewed by the team.",
+    "uncertain": []
   }
 }
