@@ -30,7 +30,6 @@
       "hand"
     ],
     "motorVisualSpace": [
-      "direct",
       "remote"
     ],
     "disambiguation": [
@@ -85,7 +84,7 @@
   ],
   "review": {
     "status": "draft",
-    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team. Motor-visual space is direct for near targets (pinch on the object) and remote otherwise; coded remote.",
     "uncertain": [
       "disambiguation",
       "motorVisualSpace"
