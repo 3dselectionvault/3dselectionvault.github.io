@@ -1,0 +1,94 @@
+{
+  "id": "triselect",
+  "name": "TriSelect",
+  "aliases": [],
+  "year": 2026,
+  "summary": "Selection fuses a gaze ray, a hand pinch and a spoken command, weighting each by how far the target is: pinch dominates within reach, gaze in the middle range and voice for distant objects, and at least two must agree.",
+  "howItWorks": "Each modality reports a binary signal: the gaze ray dwelling 0.3 s on an object, a thumb-index pinch, or a recognised command such as 'select' or 'grab'. The distance to the candidate object puts it in a zone (near under 1.5 m, mid 1.5-4 m, far beyond 4 m) with its own weights (near: hand 0.7, gaze 0.2, voice 0.1; mid: gaze 0.5, voice 0.3, hand 0.2; far: voice 0.5, gaze 0.4, hand 0.1). A selection fires when the weighted sum reaches 0.55 and two modalities activate within 1.2 s. On a Quest 2 without eye tracking, 'gaze' is the head's forward ray. It was demonstrated in a VR classroom, from desk objects to a whiteboard, with no user study.",
+  "advantages": [
+    "No explicit mode switching across distances.",
+    "Two-modality agreement guards against accidental selections."
+  ],
+  "limitations": [
+    "No user study yet.",
+    "Head direction stands in for eye gaze; voice needs a network connection."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "ray",
+      "point"
+    ],
+    "toolOrigin": [
+      "head",
+      "hand"
+    ],
+    "motorVisualSpace": [
+      "direct",
+      "remote"
+    ],
+    "disambiguation": [
+      "heuristic"
+    ],
+    "inputModality": [
+      "head",
+      "hand",
+      "voice"
+    ],
+    "confirmation": [
+      "dwell",
+      "pinch",
+      "voice"
+    ],
+    "targetDistance": [
+      "near",
+      "near-distant",
+      "far"
+    ],
+    "handlesOcclusion": [
+      "no"
+    ]
+  },
+  "tags": [
+    "multimodal",
+    "voice",
+    "distance-adaptive"
+  ],
+  "publications": [
+    {
+      "publication": "sachdeva-2026-triselect",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "head-gaze-pointing",
+      "type": "extends",
+      "note": "Uses the head ray with a short dwell as its gaze signal."
+    },
+    {
+      "technique": "gaze-voice",
+      "type": "related",
+      "note": "Also pairs looking with a spoken command."
+    },
+    {
+      "technique": "virtual-hand",
+      "type": "related",
+      "note": "Near-field selection by pinching the object."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Added from the paper the user provided; coded from the full text (Nov 2026). Attributes coded by Claude; not yet reviewed by the team.",
+    "uncertain": [
+      "disambiguation",
+      "motorVisualSpace"
+    ]
+  }
+}
