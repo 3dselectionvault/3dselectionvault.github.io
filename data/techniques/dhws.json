@@ -1,0 +1,93 @@
+{
+  "id": "dhws",
+  "name": "Double-Hand Widget Selection (DHWS)",
+  "aliases": [
+    "DHWS"
+  ],
+  "year": 2026,
+  "summary": "The two-hand version of SHGWS: a cone around one hand's ray pre-selects candidates into a 2D list beside that hand, and the other hand's ray scrolls and picks the target in the list.",
+  "howItWorks": "Pre-selection is identical to SHGWS: a cone around the dominant hand's ray outlines candidates and a held pinch opens a 2D widget near the hand listing them, closest to the ray first. Instead of finger scrolling and a wrist twist, the non-dominant hand points at the widget with a ray to scroll and select the item. It was built as an intermediate condition between raycasting and SHGWS; in a 27-participant Quest 3 study it had lower error rates and workload and higher usability than raycasting, and did not differ significantly from SHGWS.",
+  "advantages": [
+    "Uses the familiar ray interaction to operate the widget.",
+    "Lower error rate than raycasting in dense scenes."
+  ],
+  "limitations": [
+    "Needs both hands.",
+    "Preprint, not yet peer reviewed."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "cone",
+      "ray"
+    ],
+    "toolOrigin": [
+      "both-hands"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "manual"
+    ],
+    "inputModality": [
+      "hand"
+    ],
+    "confirmation": [
+      "pinch"
+    ],
+    "targetDistance": [
+      "far"
+    ],
+    "handlesOcclusion": [
+      "yes"
+    ]
+  },
+  "tags": [
+    "two-phase",
+    "dense-environments",
+    "bare-hand",
+    "bimanual",
+    "widget",
+    "menu-based-disambiguation"
+  ],
+  "publications": [
+    {
+      "publication": "mun-2026-shgws",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "shgws",
+      "type": "variant-of",
+      "note": "Bimanual variant built as a comparison condition.",
+      "source": "mun-2026-shgws"
+    },
+    {
+      "technique": "raycasting",
+      "type": "compared-with",
+      "note": "Lower error rate than raycasting; time did not differ significantly.",
+      "source": "mun-2026-shgws"
+    },
+    {
+      "technique": "disambiguation-canvas",
+      "type": "related",
+      "note": "Also a two-hand pick from a 2D interface."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Coded from the SHGWS preprint, where it is a comparison condition. The paper says the other hand uses raycasting to scroll and select in the widget; the confirmation gesture is not stated, coded pinch as on the raycasting baseline.",
+    "uncertain": [
+      "confirmation",
+      "targetDistance"
+    ]
+  }
+}

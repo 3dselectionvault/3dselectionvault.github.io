@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { attributes, editUrl, getPublication, getTechnique, techniques, valueLabel } from '../lib/data';
 import { nearest } from '../lib/similarity';
+import { isPreprintOnly } from '../lib/search';
 import { downloadBibtex, toBibtex } from '../lib/bibtex';
 import ToolGlyph from '../ToolGlyph';
 import { citationGraphHref, citePubsOf, inCitationGraph } from '../lib/citations';
@@ -98,7 +99,14 @@ export default function TechniquePage() {
             <ToolGlyph tool={t.attributes.selectionTool?.[0]} size={44} />
           </div>
           <div className="tech-title">
-            <h1>{t.name}</h1>
+            <h1>
+              {t.name}
+              {isPreprintOnly(t) && (
+                <span className="badge badge-preprint" title="Introduced in a preprint that has not been peer reviewed yet">
+                  Preprint
+                </span>
+              )}
+            </h1>
             <p>
               {[
                 t.year != null ? String(t.year) : 'Year unknown',
@@ -109,6 +117,11 @@ export default function TechniquePage() {
                 .filter(Boolean)
                 .join(' · ')}
             </p>
+            {isPreprintOnly(t) && (
+              <p className="preprint-note">
+                Known so far only from a preprint that has not been peer reviewed. The entry will be updated when the published version appears.
+              </p>
+            )}
           </div>
           <div className="tech-actions">
             <button type="button" className="hero-btn primary" disabled={!allPubs.length} onClick={() => downloadBibtex(allPubs)}>
@@ -193,6 +206,11 @@ export default function TechniquePage() {
                           </a>
                         ) : (
                           p.title
+                        )}
+                        {p.type === 'preprint' && (
+                          <span className="badge badge-preprint" title="Not peer reviewed yet">
+                            Preprint
+                          </span>
                         )}
                       </span>
                       <span className="pr-meta">

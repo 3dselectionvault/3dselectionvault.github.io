@@ -73,6 +73,10 @@
     {
       "publication": "maslych-2023-minimap",
       "role": "evaluated"
+    },
+    {
+      "publication": "luo-2026-pointgrasp",
+      "role": "evaluated"
     }
   ],
   "relationships": [

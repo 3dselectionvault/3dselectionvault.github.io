@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { attributes, techniques, valueLabel } from '../lib/data';
-import { countValues, readFilters, search, type SortKey } from '../lib/search';
+import { countValues, hidesPreprints, isPreprintOnly, readFilters, search, type SortKey } from '../lib/search';
 import { citePubsOf } from '../lib/citations';
 import SelectionBar from '../SelectionBar';
 import ToolGlyph from '../ToolGlyph';
@@ -52,8 +52,9 @@ export default function Catalogue() {
   const sort = (params.get('sort') as SortKey) ?? 'name';
   const filters = useMemo(() => readFilters(params), [params]);
 
-  const results = useMemo(() => search(techniques, query, filters, sort), [query, filters, sort]);
-  const isFiltered = query.trim() !== '' || Object.keys(filters).length > 0;
+  const hidePre = hidesPreprints(params);
+  const results = useMemo(() => search(techniques, query, filters, sort, hidePre), [query, filters, sort, hidePre]);
+  const isFiltered = query.trim() !== '' || Object.keys(filters).length > 0 || hidePre;
   // The graph re-runs the same search, so it gets the filter part of the URL (not the sort).
   const graphFrom = (() => {
     const p = new URLSearchParams(params);
@@ -78,7 +79,8 @@ export default function Catalogue() {
     : isFiltered && results.length
       ? { to: `/graph?from=${encodeURIComponent(graphFrom)}`, label: `Show ${results.length === 1 ? 'this one' : `these ${results.length}`} in the graph` }
       : null;
-  const active = Object.values(filters).reduce((n, v) => n + v.length, 0);
+  const active = Object.values(filters).reduce((n, v) => n + v.length, 0) + (hidePre ? 1 : 0);
+  const preprintCount = techniques.filter(isPreprintOnly).length;
 
   const update = (key: string, value: string | null) => {
     const next = new URLSearchParams(params);
@@ -194,6 +196,13 @@ export default function Catalogue() {
               </details>
             );
           })}
+          {preprintCount > 0 && (
+            <label className={hidePre ? 'facet-option preprint-toggle on' : 'facet-option preprint-toggle'} title="Leave out techniques whose papers are preprints that have not been peer reviewed yet">
+              <input type="checkbox" checked={hidePre} onChange={() => update('preprints', hidePre ? null : 'hide')} />
+              <span className="facet-label">Hide preprints</span>
+              <span className="count">{preprintCount}</span>
+            </label>
+          )}
           <p className="filters-note">
             What each filter means: <Link to="/about#attributes">attribute scheme</Link>.
           </p>
@@ -264,6 +273,7 @@ export default function Catalogue() {
                     </td>
                     <td className="nm">
                       <Link to={`/technique/${t.id}`}>{t.name}</Link>
+                      {isPreprintOnly(t) && <span className="badge badge-preprint" title="Introduced in a preprint that has not been peer reviewed yet">Preprint</span>}
                       <span>{t.summary}</span>
                     </td>
                     <td className="n">{t.year ?? '—'}</td>

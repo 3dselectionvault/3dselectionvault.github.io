@@ -1,6 +1,15 @@
 import type { Technique } from './types';
 import { attributes, getPublication } from './data';
 
+/** A technique whose introducing papers are all preprints (not yet peer reviewed). */
+export function isPreprintOnly(t: Technique): boolean {
+  const intro = t.publications.filter((l) => l.role === 'introduced').map((l) => getPublication(l.publication));
+  return intro.length > 0 && intro.every((p) => p?.type === 'preprint');
+}
+
+/** `preprints=hide` in the URL leaves out techniques known only from preprints. */
+export const hidesPreprints = (params: URLSearchParams) => params.get('preprints') === 'hide';
+
 /** Selected values per attribute id. Within one attribute values are OR-ed; across attributes AND-ed. */
 export type Filters = Record<string, string[]>;
 export type SortKey = 'name' | 'year-asc' | 'year-desc';
@@ -62,8 +71,11 @@ export function search(
   query: string,
   filters: Filters,
   sort: SortKey = 'name',
+  hidePreprints = false,
 ): Technique[] {
-  const out = rows.filter((t) => matchesQuery(t, query) && matchesFilters(t, filters));
+  const out = rows.filter(
+    (t) => matchesQuery(t, query) && matchesFilters(t, filters) && !(hidePreprints && isPreprintOnly(t)),
+  );
   if (sort === 'name') return out;
   const dir = sort === 'year-asc' ? 1 : -1;
   // Techniques without a year go last either way.

@@ -4,7 +4,7 @@ import SelectionBar from '../SelectionBar';
 import { citePubsOf, citationGraphHref, inCitationGraph, isReview, pubHref, shortAuthors, sortedPublications, techniquesOfPub } from '../lib/citations';
 
 type Sort = 'year' | 'title';
-type Kind = 'all' | 'papers' | 'reviews';
+type Kind = 'all' | 'papers' | 'reviews' | 'peer' | 'preprints';
 
 const norm = (s: string) =>
   s
@@ -29,6 +29,8 @@ export default function Papers() {
     const list = sortedPublications.filter((p) => {
       if (kind === 'papers' && isReview(p)) return false;
       if (kind === 'reviews' && !isReview(p)) return false;
+      if (kind === 'peer' && p.type === 'preprint') return false;
+      if (kind === 'preprints' && p.type !== 'preprint') return false;
       if (!words.length) return true;
       const hay = norm(`${p.title} ${p.authors.join(' ')} ${p.venue ?? ''} ${p.year ?? ''}`);
       return words.every((w) => hay.includes(w));
@@ -71,6 +73,8 @@ export default function Papers() {
           <option value="all">All types</option>
           <option value="papers">Technique papers</option>
           <option value="reviews">Surveys and theses</option>
+          <option value="peer">Peer-reviewed only</option>
+          <option value="preprints">Preprints</option>
         </select>
         <select value={sort} onChange={(e) => set('sort', e.target.value === 'year' ? null : e.target.value)} aria-label="Sort">
           <option value="year">Newest first</option>
@@ -126,6 +130,7 @@ export default function Papers() {
                     p.title
                   )}
                   {isReview(p) && <span className="badge">{p.type === 'thesis' ? 'Thesis' : 'Survey'}</span>}
+                  {p.type === 'preprint' && <span className="badge badge-preprint" title="Not peer reviewed yet">Preprint</span>}
                 </p>
                 <p className="paper-meta">
                   {shortAuthors(p)}

@@ -4,7 +4,7 @@ import ForceGraph3D, { type ForceGraph3DInstance } from '3d-force-graph';
 import SpriteText from 'three-spritetext';
 import { attributes, getTechnique, techniques, valueLabel } from '../lib/data';
 import { citePubsOf } from '../lib/citations';
-import { readFilters, search } from '../lib/search';
+import { hidesPreprints, readFilters, search } from '../lib/search';
 import { downloadBibtex } from '../lib/bibtex';
 import { nearest, similarityLinks, type Coding, type Neighbour } from '../lib/similarity';
 import CitationGraph from './CitationGraph';
@@ -102,7 +102,7 @@ function SimilarityGraph({ mode }: { mode: 'explore' | 'mine' }) {
     }
     if (!from) return null;
     const p = new URLSearchParams(from);
-    const hits = search(techniques, p.get('q') ?? '', readFilters(p), 'name');
+    const hits = search(techniques, p.get('q') ?? '', readFilters(p), 'name', hidesPreprints(p));
     return hits.length ? hits : null;
   }, [from, idsParam]);
   const fromIds = useMemo(() => new Set(fromSet?.map((t) => t.id) ?? []), [fromSet]);

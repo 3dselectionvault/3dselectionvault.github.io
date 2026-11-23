@@ -1,0 +1,107 @@
+{
+  "id": "shgws",
+  "name": "Single-Hand Gesture Widget Selection (SHGWS)",
+  "aliases": [
+    "SHGWS"
+  ],
+  "year": 2026,
+  "summary": "A cone around the hand ray pre-selects nearby objects; holding a pinch opens a small 2D list of them beside the hand, the other three fingers scroll it and an outward wrist twist confirms, all with one bare hand.",
+  "howItWorks": "Objects inside a detection cone centred on the hand ray get a white outline. Pinching thumb and index opens a 2D widget that follows the hand and lists the candidates, the one closest to the ray on top as the preliminary choice (red outline in the list and on the 3D object). Lifting the middle, ring and little fingers beyond 30 degrees scrolls up and curling them beyond 70 degrees scrolls down, using their average angle with state filtering and a 0.2 s refractory period against recoil. Rotating the wrist outward at least 50 degrees from its orientation at pinch onset confirms; releasing the pinch closes the widget. In a Quest 3 hand-tracking study (27 participants, 50-100 spheres) it was faster than raycasting, and it and the two-hand DHWS had lower error rates and workload and higher usability than raycasting, with no difference between the two widget techniques.",
+  "advantages": [
+    "One hand does pre-selection, disambiguation and confirmation, leaving the other free.",
+    "Ordering candidates by distance to the ray usually puts the target first, so little scrolling is needed.",
+    "Occluded objects inside the cone can still be picked from the list."
+  ],
+  "limitations": [
+    "Gestures were designed top-down without user input.",
+    "Compared only with raycasting and its own two-hand variant, not with HandConeGrid, MultiFingerBubble or PianoFinger.",
+    "Preprint, not yet peer reviewed."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "cone"
+    ],
+    "toolOrigin": [
+      "hand"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "manual"
+    ],
+    "inputModality": [
+      "hand"
+    ],
+    "confirmation": [
+      "gesture"
+    ],
+    "targetDistance": [
+      "far"
+    ],
+    "handlesOcclusion": [
+      "yes"
+    ]
+  },
+  "tags": [
+    "two-phase",
+    "dense-environments",
+    "bare-hand",
+    "widget",
+    "menu-based-disambiguation"
+  ],
+  "publications": [
+    {
+      "publication": "mun-2026-shgws",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "raycasting",
+      "type": "compared-with",
+      "note": "Baseline in the study; SHGWS was faster with fewer errors.",
+      "source": "mun-2026-shgws"
+    },
+    {
+      "technique": "dhws",
+      "type": "compared-with",
+      "note": "Its two-hand variant; no significant differences.",
+      "source": "mun-2026-shgws"
+    },
+    {
+      "technique": "cone-casting",
+      "type": "extends",
+      "note": "Pre-selects with a cone around the hand ray."
+    },
+    {
+      "technique": "handconegrid",
+      "type": "related",
+      "note": "Also lists cone candidates in a 2D layout for a one-hand pick."
+    },
+    {
+      "technique": "disambiguation-canvas",
+      "type": "related",
+      "note": "Also moves the final choice to a 2D interface."
+    },
+    {
+      "technique": "multifingerbubble",
+      "type": "related",
+      "note": "Another one-hand finger-based technique for dense scenes."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Coded from the full text of the Research Square preprint (posted 2026-11-20, under review at Virtual Reality). Target distance coded far: spheres were placed in front of the user beyond reach; exact distances not given.",
+    "uncertain": [
+      "targetDistance"
+    ]
+  }
+}

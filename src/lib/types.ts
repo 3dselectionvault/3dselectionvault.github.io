@@ -66,7 +66,7 @@ export interface Publication {
   venue?: string | null;
   doi?: string | null;
   url?: string | null;
-  type: 'paper' | 'survey' | 'thesis' | 'book' | 'other';
+  type: 'paper' | 'preprint' | 'survey' | 'thesis' | 'book' | 'other';
   citation?: string | null;
   bibtex?: string | null;
 }

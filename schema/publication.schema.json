@@ -14,7 +14,7 @@
     "venue": { "type": ["string", "null"] },
     "doi": { "type": ["string", "null"], "pattern": "^10\\.\\S+$" },
     "url": { "type": ["string", "null"] },
-    "type": { "enum": ["paper", "survey", "thesis", "book", "other"] },
+    "type": { "enum": ["paper", "preprint", "survey", "thesis", "book", "other"] },
     "citation": { "type": ["string", "null"], "description": "Free-text citation, kept from the old catalogue." },
     "bibtex": { "type": ["string", "null"] }
   }

@@ -72,6 +72,10 @@
     {
       "publication": "legacy-paper-voiceray",
       "role": "evaluated"
+    },
+    {
+      "publication": "luo-2026-pointgrasp",
+      "role": "evaluated"
     }
   ],
   "relationships": [

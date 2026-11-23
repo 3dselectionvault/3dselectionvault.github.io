@@ -1,0 +1,100 @@
+{
+  "id": "point-and-grasp",
+  "name": "Point & Grasp",
+  "aliases": [
+    "Point&Grasp"
+  ],
+  "year": 2026,
+  "summary": "To select an out-of-reach object, the user points at it and shapes the hand as if to grasp it; a Bayesian model combines the pointing direction with a learned grasp-gesture likelihood and selects the most probable object.",
+  "howItWorks": "Each cue gives a likelihood over the scene's objects: the pointing direction by the angle between the hand ray and each object, and the grasp posture by a neural model trained on the Out-of-Reach Grasping (ORG) dataset collected from 19 people, matching hand configuration to object shape. Bayes' rule fuses them into a posterior and the object with the maximum posterior is selected, so a cluttered layout can be resolved by shape and similar-shaped objects by direction. In the Quest 2 hand-tracking studies the right hand pointed and grasped and the left pressed the space bar to confirm. Study 1 (12 participants) showed it faster and more accurate than pointing or grasping alone; Study 2 (12 participants), with a ray-end cursor added, was faster than Expand under low spatial ambiguity and faster than BubbleRay under high spatial ambiguity, with completion rates close to Expand and well above BubbleRay.",
+  "advantages": [
+    "Robust when one cue is ambiguous: shape separates crowded objects, direction separates similar-shaped ones.",
+    "No refinement step, so it avoids Expand's overhead in sparse layouts.",
+    "Runs in real time; grasping felt natural and easy to learn."
+  ],
+  "limitations": [
+    "Needs a trained gesture model and object shape information.",
+    "Confirmation used a keyboard key in the studies.",
+    "Less accurate than Expand when objects are both crowded and similar in shape."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "ray"
+    ],
+    "toolOrigin": [
+      "hand"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "behavioural"
+    ],
+    "inputModality": [
+      "hand"
+    ],
+    "confirmation": [
+      "button"
+    ],
+    "targetDistance": [
+      "near-distant",
+      "far"
+    ],
+    "handlesOcclusion": [
+      "partly"
+    ]
+  },
+  "tags": [
+    "probabilistic",
+    "bayesian",
+    "grasp-gesture",
+    "intent-inference",
+    "multimodal-cues",
+    "bare-hand"
+  ],
+  "publications": [
+    {
+      "publication": "luo-2026-pointgrasp",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "bubble-raycasting",
+      "type": "compared-with",
+      "note": "Study 2: faster under high spatial ambiguity and a higher completion rate.",
+      "source": "luo-2026-pointgrasp"
+    },
+    {
+      "technique": "expand",
+      "type": "compared-with",
+      "note": "Study 2: faster under low spatial ambiguity; Expand was slightly more accurate.",
+      "source": "luo-2026-pointgrasp"
+    },
+    {
+      "technique": "raycasting",
+      "type": "extends",
+      "note": "Pointing direction is one of the two fused cues."
+    },
+    {
+      "technique": "gg-interaction",
+      "type": "related",
+      "note": "Also uses the grasp posture to infer the target."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Coded from the CHI 2026 full text. Framed as mixed reality, but the studies ran in VR on a Quest 2. Confirmation was a keyboard space bar pressed by the other hand; the authors note it could be replaced. Occlusion coded partly: occluded layouts were part of the high spatial ambiguity condition.",
+    "uncertain": [
+      "handlesOcclusion",
+      "targetDistance"
+    ]
+  }
+}

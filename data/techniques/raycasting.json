@@ -220,6 +220,10 @@
     {
       "publication": "mao-2025-restfulraycast",
       "role": "evaluated"
+    },
+    {
+      "publication": "mun-2026-shgws",
+      "role": "evaluated"
     }
   ],
   "relationships": [

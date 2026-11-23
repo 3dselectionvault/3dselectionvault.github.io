@@ -26,6 +26,7 @@ function entryType(p: Publication) {
   if (p.type === 'thesis') return /master/i.test(v) ? 'mastersthesis' : 'phdthesis';
   if (/technical report/i.test(v)) return 'techreport';
   if (p.type === 'book') return 'book';
+  if (p.type === 'preprint') return 'misc';
   if (!v) return 'misc';
   return JOURNAL.test(v) ? 'article' : 'inproceedings';
 }
