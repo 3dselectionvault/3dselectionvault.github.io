@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { attributes, techniques, valueLabel } from '../lib/data';
-import { countValues, hidesPreprints, isPreprintOnly, readFilters, search, type SortKey } from '../lib/search';
+import { countValues, hidesPreprints, isPreprintOnly, parseSort, readFilters, search, type SortKey } from '../lib/search';
 import { citePubsOf } from '../lib/citations';
 import SelectionBar from '../SelectionBar';
 import ToolGlyph from '../ToolGlyph';
@@ -22,6 +22,28 @@ const COLUMNS: { attr: string; label: string; className?: string }[] = [
 const short = (attr: string, v: string) => valueLabel(attr, v).replace(/ \(.*\)/, '');
 const cell = (vals: string[] | undefined, attr: string) =>
   vals && vals.length ? vals.map((v) => short(attr, v)).join(', ') : '—';
+
+const DEFAULT_SORTS = ['name', 'year-desc', 'year-asc'];
+function sortLabel(sort: SortKey): string {
+  const { col, dir } = parseSort(sort);
+  const label = col === 'name' ? 'Name' : col === 'year' ? 'Year' : (COLUMNS.find((c) => c.attr === col)?.label ?? col);
+  return `${label} ${dir === 'asc' ? '↑' : '↓'}`;
+}
+
+/** A column header that sorts the table: first click ascending, then it toggles. */
+function SortTh({ col, label, className, sort, onSort }: { col: string; label: string; className?: string; sort: SortKey; onSort: (s: SortKey) => void }) {
+  const cur = parseSort(sort);
+  const active = cur.col === col;
+  const next = active && cur.dir === 'asc' ? `${col}-desc` : `${col}-asc`;
+  return (
+    <th className={[className, 'sortable', active ? 'sorted' : ''].filter(Boolean).join(' ')} aria-sort={active ? (cur.dir === 'asc' ? 'ascending' : 'descending') : 'none'}>
+      <button type="button" onClick={() => onSort(next)} title={`Sort by ${label.toLowerCase()}`}>
+        {label}
+        <span className="sort-arrow" aria-hidden="true">{active ? (cur.dir === 'asc' ? '▲' : '▼') : '↕'}</span>
+      </button>
+    </th>
+  );
+}
 
 export default function Catalogue() {
   const [params, setParams] = useSearchParams();
@@ -49,7 +71,9 @@ export default function Catalogue() {
   }, []);
   const narrow = typeof window !== 'undefined' && window.matchMedia('(max-width: 860px)').matches;
   const query = params.get('q') ?? '';
-  const sort = (params.get('sort') as SortKey) ?? 'name';
+  const rawSort = params.get('sort') ?? 'name';
+  const sort: SortKey = rawSort === 'name' || parseSort(rawSort).col !== 'name' || rawSort === 'name-desc' ? rawSort : 'name';
+  const setSort = (s: SortKey) => update('sort', s === 'name' || s === 'name-asc' ? null : s);
   const filters = useMemo(() => readFilters(params), [params]);
 
   const hidePre = hidesPreprints(params);
@@ -228,6 +252,7 @@ export default function Catalogue() {
               <option value="name">Name A–Z</option>
               <option value="year-desc">Newest first</option>
               <option value="year-asc">Oldest first</option>
+              {!DEFAULT_SORTS.includes(sort) && <option value={sort}>{sortLabel(sort)}</option>}
             </select>
           </div>
 
@@ -243,12 +268,10 @@ export default function Catalogue() {
               <thead>
                 <tr>
                   <th className="g" aria-label="Selection tool" />
-                  <th>Technique</th>
-                  <th className="n">Year</th>
+                  <SortTh col="name" label="Technique" sort={sort} onSort={setSort} />
+                  <SortTh col="year" label="Year" className="n" sort={sort} onSort={setSort} />
                   {COLUMNS.map((c) => (
-                    <th key={c.attr} className={c.className}>
-                      {c.label}
-                    </th>
+                    <SortTh key={c.attr} col={c.attr} label={c.label} className={c.className} sort={sort} onSort={setSort} />
                   ))}
                   <th className="ck">
                     <label title={allShownPicked ? 'Unselect all shown' : 'Select all shown for BibTeX'}>

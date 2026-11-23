@@ -3,7 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import ForceGraph3D, { type ForceGraph3DInstance } from '3d-force-graph';
 import SpriteText from 'three-spritetext';
 import { attributes, getTechnique, techniques, valueLabel } from '../lib/data';
-import { citePubsOf } from '../lib/citations';
+import { citePubsOf, pubHref, shortAuthors } from '../lib/citations';
 import { hidesPreprints, readFilters, search } from '../lib/search';
 import { downloadBibtex } from '../lib/bibtex';
 import { nearest, similarityLinks, type Coding, type Neighbour } from '../lib/similarity';
@@ -151,6 +151,22 @@ function SimilarityGraph({ mode }: { mode: 'explore' | 'mine' }) {
     const i = groupValues.findIndex((v) => v.id === group);
     return i < 0 ? PALETTE[PALETTE.length - 1] : PALETTE[i % PALETTE.length];
   };
+  // Legend values picked to highlight (?hl=cone,ray); techniques with any of them stay coloured.
+  const hlParam = params.get('hl') ?? '';
+  const highlight = useMemo(
+    () => new Set(hlParam.split(',').filter((v) => groupValues.some((g) => g.id === v))),
+    [hlParam, groupValues],
+  );
+  const toggleHighlight = (v: string) => {
+    const next = new Set(highlight);
+    if (next.has(v)) next.delete(v);
+    else next.add(v);
+    setParam('hl', [...next].join(',') || null);
+  };
+  const hlCount = useMemo(
+    () => (highlight.size ? techniques.filter((t) => (t.attributes[colorBy] ?? []).some((v) => highlight.has(v))).length : 0),
+    [highlight, colorBy],
+  );
 
   const baseLinks = useMemo(() => {
     const links = similarityLinks(attributes, techniques, 3);
@@ -259,17 +275,26 @@ function SimilarityGraph({ mode }: { mode: 'explore' | 'mine' }) {
     const accent = cssVar('--accent');
     const focused = focusSet.size > 0;
     const inSet = !focused && fromIds.size > 0;
+    // With a legend highlight, a technique matches on any of its values, and is drawn in that value's colour.
+    const hlValue = (id: string) => {
+      if (!highlight.size) return undefined;
+      return (getTechnique(id)?.attributes[colorBy] ?? []).find((v) => highlight.has(v)) ?? null;
+    };
     g.nodeColor((n: object) => {
       const node = n as GNode;
       if (node.mine) return accent;
       if (focused && !focusSet.has(node.id)) return dim;
       if (inSet && !fromIds.has(node.id)) return dim;
-      return colorOf(node.group);
+      if (node.id === focusId) return colorOf(node.group);
+      const hv = hlValue(node.id);
+      if (hv === null) return dim;
+      return colorOf(hv ?? node.group);
     })
       .nodeVal((n: object) => {
         const id = (n as GNode).id;
         if (id === focusId) return 3;
         if (focusSet.has(id)) return 1.6;
+        if (highlight.size && hlValue(id)) return 1.6;
         return inSet && fromIds.has(id) ? 1.8 : 1;
       })
       .nodeLabel((n: object) => {
@@ -301,7 +326,7 @@ function SimilarityGraph({ mode }: { mode: 'explore' | 'mine' }) {
         if (inSet) return fromIds.has(idOf(link.source)) && fromIds.has(idOf(link.target)) ? 1 : 0;
         return focused && (idOf(link.source) === focusId || idOf(link.target) === focusId) && focusSet.has(idOf(link.source)) && focusSet.has(idOf(link.target)) ? 1.4 : 0;
       });
-  }, [focusSet, focusId, fromIds, colorBy, groupValues, themeTick]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [focusSet, focusId, fromIds, colorBy, groupValues, highlight, themeTick]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Fly to the focused node once the layout has placed it.
   useEffect(() => {
@@ -356,7 +381,15 @@ function SimilarityGraph({ mode }: { mode: 'explore' | 'mine' }) {
           <div className="graph-legend">
             <label>
               Colour by{' '}
-              <select value={colorBy} onChange={(e) => setParam('color', e.target.value)}>
+              <select
+                value={colorBy}
+                onChange={(e) => {
+                  const next = new URLSearchParams(params);
+                  next.set('color', e.target.value);
+                  next.delete('hl');
+                  setParams(next, { replace: true });
+                }}
+              >
                 {COLOR_BY.map((id) => (
                   <option key={id} value={id}>
                     {attributes.find((a) => a.id === id)!.label}
@@ -367,12 +400,28 @@ function SimilarityGraph({ mode }: { mode: 'explore' | 'mine' }) {
             <ul>
               {groupValues.map((v, i) => (
                 <li key={v.id}>
-                  <span className="dot" style={{ background: PALETTE[i % PALETTE.length] }} />
-                  {v.label}
+                  <button
+                    type="button"
+                    className={highlight.has(v.id) ? 'on' : highlight.size ? 'off' : undefined}
+                    aria-pressed={highlight.has(v.id)}
+                    onClick={() => toggleHighlight(v.id)}
+                    title={highlight.has(v.id) ? 'Stop highlighting' : `Highlight ${v.label}`}
+                  >
+                    <span className="dot" style={{ background: PALETTE[i % PALETTE.length] }} />
+                    {v.label}
+                  </button>
                 </li>
               ))}
             </ul>
-            <p className="small muted">Drag to rotate · scroll to zoom · click a dot</p>
+            {highlight.size > 0 && (
+              <p className="small">
+                {hlCount} highlighted ·{' '}
+                <button type="button" className="link-button" onClick={() => setParam('hl', null)}>
+                  Show all
+                </button>
+              </p>
+            )}
+            <p className="small muted">Click a colour to highlight it · drag to rotate · scroll to zoom · click a dot</p>
           </div>
         </div>
 
@@ -449,6 +498,25 @@ function SimilarityGraph({ mode }: { mode: 'explore' | 'mine' }) {
                   <div className="graph-selected">
                     <h2>{sel.name}</h2>
                     <p className="small muted">{sel.summary}</p>
+                    {citePubsOf(sel).map((p) => {
+                      const href = pubHref(p);
+                      return (
+                        <p key={p.id} className="small graph-paper">
+                          Paper:{' '}
+                          {href ? (
+                            <a href={href} target="_blank" rel="noreferrer">
+                              {p.title} ↗
+                            </a>
+                          ) : (
+                            p.title
+                          )}{' '}
+                          <span className="muted">
+                            ({shortAuthors(p)}, {p.year ?? 'n.d.'})
+                          </span>
+                          {p.type === 'preprint' && <span className="badge badge-preprint">Preprint</span>}
+                        </p>
+                      );
+                    })}
                     <p className="small">
                       <Link to={`/technique/${sel.id}`}>Open technique page</Link> ·{' '}
                       <button type="button" className="link-button" onClick={() => setParam('t', null)}>

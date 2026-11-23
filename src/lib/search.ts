@@ -12,7 +12,16 @@ export const hidesPreprints = (params: URLSearchParams) => params.get('preprints
 
 /** Selected values per attribute id. Within one attribute values are OR-ed; across attributes AND-ed. */
 export type Filters = Record<string, string[]>;
-export type SortKey = 'name' | 'year-asc' | 'year-desc';
+/** `name` (default), or `<column>-asc` / `<column>-desc`, where column is name, year or an attribute id. */
+export type SortKey = string;
+export type SortDir = 'asc' | 'desc';
+
+export function parseSort(sort: SortKey): { col: string; dir: SortDir } {
+  const m = /^(.+)-(asc|desc)$/.exec(sort);
+  if (!m) return { col: 'name', dir: 'asc' };
+  const ok = m[1] === 'name' || m[1] === 'year' || attributes.some((a) => a.id === m[1]);
+  return ok ? { col: m[1], dir: m[2] as SortDir } : { col: 'name', dir: 'asc' };
+}
 
 /** Filter state lives in the URL (one parameter per attribute, values comma-separated) so a filtered view can be shared. */
 export function readFilters(params: URLSearchParams): Filters {
@@ -76,14 +85,26 @@ export function search(
   const out = rows.filter(
     (t) => matchesQuery(t, query) && matchesFilters(t, filters) && !(hidePreprints && isPreprintOnly(t)),
   );
-  if (sort === 'name') return out;
-  const dir = sort === 'year-asc' ? 1 : -1;
-  // Techniques without a year go last either way.
+  const { col, dir } = parseSort(sort);
+  if (col === 'name' && dir === 'asc') return out;
+  const sign = dir === 'asc' ? 1 : -1;
+  if (col === 'name') return [...out].reverse();
+  // Attribute columns sort in the scheme's value order (as in the filters), by each technique's first value.
+  const order = col === 'year' ? null : attributes.find((a) => a.id === col)!.values.map((v) => v.id);
+  const key = (t: Technique): number | null => {
+    if (!order) return t.year ?? null;
+    const vals = t.attributes[col] ?? [];
+    if (!vals.length) return null;
+    return Math.min(...vals.map((v) => (order.indexOf(v) < 0 ? order.length : order.indexOf(v))));
+  };
+  // Missing values go last either way; ties keep name order (the sort is stable).
   return [...out].sort((a, b) => {
-    if (a.year == null && b.year == null) return 0;
-    if (a.year == null) return 1;
-    if (b.year == null) return -1;
-    return dir * (a.year - b.year);
+    const ka = key(a);
+    const kb = key(b);
+    if (ka == null && kb == null) return 0;
+    if (ka == null) return 1;
+    if (kb == null) return -1;
+    return sign * (ka - kb);
   });
 }
 

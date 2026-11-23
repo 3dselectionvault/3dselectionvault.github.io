@@ -784,3 +784,20 @@ td.nm .badge-preprint { margin-left: 6px; vertical-align: 1px; }
 .filters .preprint-toggle input { position: static; opacity: 1; pointer-events: auto; }
 .filters .preprint-toggle .count { margin-left: auto; }
 .tech-table td.nm a { display: inline; }
+
+/* Sortable table headers */
+.tech-table th.sortable button { all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; }
+.tech-table th.sortable button:hover, .tech-table th.sorted button { color: var(--text); }
+.tech-table th.sortable button:focus-visible { outline: 2px solid var(--accent-text); outline-offset: 2px; }
+.tech-table th .sort-arrow { font-size: 10px; opacity: .35; }
+.tech-table th.sorted .sort-arrow { opacity: 1; }
+
+/* Graph legend: click a colour to highlight it */
+.graph-legend li button { all: unset; display: flex; align-items: center; gap: 7px; cursor: pointer; padding: 1px 4px; margin: 0 -4px; border-radius: 3px; width: 100%; box-sizing: border-box; }
+.graph-legend li button:hover { background: var(--surface-2); }
+.graph-legend li button:focus-visible { outline: 2px solid var(--accent-text); }
+.graph-legend li button.on { font-weight: 600; }
+.graph-legend li button.off { opacity: .45; }
+.graph-legend .link-button { font-size: inherit; }
+.graph-paper { margin: 6px 0; }
+.graph-paper .badge-preprint { margin-left: 6px; }
