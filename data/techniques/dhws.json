@@ -50,12 +50,11 @@
     ]
   },
   "tags": [
+    "Hand tracking",
+    "Dense targets",
+    "Disambiguation",
     "two-phase",
-    "dense-environments",
-    "bare-hand",
-    "bimanual",
-    "widget",
-    "menu-based-disambiguation"
+    "Bimanual"
   ],
   "publications": [
     {

@@ -56,6 +56,10 @@
     {
       "publication": "legacy-paper-multifingerbubble",
       "role": "reference"
+    },
+    {
+      "publication": "sun-2025-frozen",
+      "role": "evaluated"
     }
   ],
   "relationships": [

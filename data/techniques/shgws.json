@@ -51,11 +51,10 @@
     ]
   },
   "tags": [
-    "two-phase",
-    "dense-environments",
-    "bare-hand",
-    "widget",
-    "menu-based-disambiguation"
+    "Hand tracking",
+    "Dense targets",
+    "Disambiguation",
+    "two-phase"
   ],
   "publications": [
     {

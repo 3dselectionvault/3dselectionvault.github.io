@@ -1,0 +1,19 @@
+{
+  "id": "yan-2018-virtualgrasp",
+  "title": "VirtualGrasp: Leveraging Experience of Interacting with Physical Objects to Facilitate Digital Object Retrieval",
+  "authors": [
+    "Yukang Yan",
+    "Chun Yu",
+    "Xiaojuan Ma",
+    "Xin Yi",
+    "Ke Sun",
+    "Yuanchun Shi"
+  ],
+  "year": 2018,
+  "venue": "Proceedings of the 2018 CHI Conference on Human Factors in Computing Systems (CHI '18)",
+  "doi": "10.1145/3173574.3173652",
+  "url": "https://doi.org/10.1145/3173574.3173652",
+  "type": "paper",
+  "citation": null,
+  "bibtex": null
+}

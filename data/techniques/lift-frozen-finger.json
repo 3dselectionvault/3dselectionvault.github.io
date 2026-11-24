@@ -1,0 +1,99 @@
+{
+  "id": "lift-frozen-finger",
+  "name": "LiftFrozenFinger",
+  "aliases": [
+    "LiftFinger+SHFG",
+    "Single-Hand Frozen Gestures (SHFG)"
+  ],
+  "year": 2025,
+  "summary": "A MultiFingerBubble variant for dense scenes: clenching the fist freezes the hand-controlled bubble in place, and lifting the thumb, index or middle finger out of the fist selects the matching target inside it.",
+  "howItWorks": "With the palm open, a transparent bubble follows the hand and captures up to three nearby targets, each coloured to match a finger in left-to-right order. Clenching the fist freezes the bubble (Single-Hand Frozen Gestures, SHFG), so further hand movement no longer changes which targets it holds, which prevents the last-second change of colours caused by the Heisenberg effect. Lifting the corresponding finger from the fist selects that target; opening the palm unfreezes the bubble to correct it. In a 16-participant study (Vive Pro with a Leap Motion) selecting small atoms in dense clusters, LiftFrozenFinger raised the success rate by 15.71% and PianoFrozenFinger by 34.29% over MultiFingerBubble, with less hand fatigue; both were slower than MultiFingerBubble, PianoFrozenFinger was more accurate than LiftFrozenFinger, and 12 of 16 participants ranked it first.",
+  "advantages": [
+    "Freezing the bubble stops targets changing at the moment of selection.",
+    "Lifting a finger from a fist is easier to track and less tiring than bending fingers from an open hand."
+  ],
+  "limitations": [
+    "Slower than MultiFingerBubble because of the extra fist step.",
+    "Only three fingers are used, so a bubble holds at most three targets.",
+    "Tested only on near targets in a molecule-like scene."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "volume"
+    ],
+    "toolOrigin": [
+      "hand"
+    ],
+    "motorVisualSpace": [
+      "direct"
+    ],
+    "disambiguation": [
+      "manual"
+    ],
+    "inputModality": [
+      "hand"
+    ],
+    "targetDistance": [
+      "near"
+    ],
+    "handlesOcclusion": [
+      "partly"
+    ],
+    "confirmation": [
+      "gesture"
+    ]
+  },
+  "tags": [
+    "Hand tracking",
+    "Finger input",
+    "Bubble cursor",
+    "Dense targets",
+    "Small targets"
+  ],
+  "publications": [
+    {
+      "publication": "sun-2025-frozen",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "multifingerbubble",
+      "type": "extends",
+      "note": "Adds the fist freeze and replaces bending fingers with lifting them.",
+      "source": "sun-2025-frozen"
+    },
+    {
+      "technique": "multifingerbubble",
+      "type": "compared-with",
+      "note": "Higher success rate and less fatigue, but slower.",
+      "source": "sun-2025-frozen"
+    },
+    {
+      "technique": "piano-frozen-finger",
+      "type": "compared-with",
+      "note": "PianoFrozenFinger was more accurate; times did not differ.",
+      "source": "sun-2025-frozen"
+    },
+    {
+      "technique": "bubble-cursor",
+      "type": "related",
+      "note": "Bubble capture of nearby targets."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Coded from the IJHCI full text. Motor-visual space follows the MultiFingerBubble entry (bubble moved by the palm); the targets sat about 50 cm to 1 m in front of the user. The paper does not address occlusion directly.",
+    "uncertain": [
+      "motorVisualSpace",
+      "handlesOcclusion"
+    ]
+  }
+}

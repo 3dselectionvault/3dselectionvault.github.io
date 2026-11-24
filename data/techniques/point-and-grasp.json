@@ -52,12 +52,10 @@
     ]
   },
   "tags": [
-    "probabilistic",
-    "bayesian",
-    "grasp-gesture",
-    "intent-inference",
-    "multimodal-cues",
-    "bare-hand"
+    "Hand tracking",
+    "Far targets",
+    "Disambiguation",
+    "machine learning"
   ],
   "publications": [
     {
@@ -87,6 +85,11 @@
       "technique": "gg-interaction",
       "type": "related",
       "note": "Also uses the grasp posture to infer the target."
+    },
+    {
+      "technique": "virtualgrasp",
+      "type": "extends",
+      "note": "Builds on grasp-gesture-based object retrieval and adds pointing direction."
     }
   ],
   "review": {

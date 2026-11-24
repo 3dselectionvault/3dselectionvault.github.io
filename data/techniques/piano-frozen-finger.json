@@ -1,0 +1,99 @@
+{
+  "id": "piano-frozen-finger",
+  "name": "PianoFrozenFinger",
+  "aliases": [
+    "PianoFinger+SHFG"
+  ],
+  "year": 2025,
+  "summary": "A frozen-bubble technique for dense scenes: a fist freezes the hand-controlled bubble, and the user picks the target by pressing the matching coloured key on a small virtual piano that travels with the hand.",
+  "howItWorks": "With the palm open, a transparent bubble and a small virtual piano move with the hand; the bubble captures several nearby targets, each matched in colour to a piano key. Clenching the fist freezes both the bubble and the piano (Single-Hand Frozen Gestures), so the hand can drop to the keys without moving the bubble. Pressing the key with the target's colour selects it; opening the palm unfreezes them. The number of keys can be adapted to the scene. In a 16-participant study (Vive Pro with a Leap Motion) selecting small atoms in dense clusters, LiftFrozenFinger raised the success rate by 15.71% and PianoFrozenFinger by 34.29% over MultiFingerBubble, with less hand fatigue; both were slower than MultiFingerBubble, PianoFrozenFinger was more accurate than LiftFrozenFinger, and 12 of 16 participants ranked it first.",
+  "advantages": [
+    "Highest success rate of the four techniques tested, and the most preferred.",
+    "Pressing keys is a familiar, low-effort finger motion; the piano can hold more than three candidates."
+  ],
+  "limitations": [
+    "Slower than MultiFingerBubble.",
+    "Needs the piano to stay frozen; without SHFG the palm drops when pressing keys.",
+    "Tested only on near targets in a molecule-like scene."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "volume"
+    ],
+    "toolOrigin": [
+      "hand"
+    ],
+    "motorVisualSpace": [
+      "direct"
+    ],
+    "disambiguation": [
+      "manual"
+    ],
+    "inputModality": [
+      "hand"
+    ],
+    "targetDistance": [
+      "near"
+    ],
+    "handlesOcclusion": [
+      "partly"
+    ],
+    "confirmation": [
+      "touch"
+    ]
+  },
+  "tags": [
+    "Hand tracking",
+    "Finger input",
+    "Bubble cursor",
+    "Dense targets",
+    "Small targets"
+  ],
+  "publications": [
+    {
+      "publication": "sun-2025-frozen",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "multifingerbubble",
+      "type": "extends",
+      "note": "Adds the fist freeze and a piano-key aid for picking within the bubble.",
+      "source": "sun-2025-frozen"
+    },
+    {
+      "technique": "multifingerbubble",
+      "type": "compared-with",
+      "note": "34.29% higher success rate and less fatigue, but slower.",
+      "source": "sun-2025-frozen"
+    },
+    {
+      "technique": "lift-frozen-finger",
+      "type": "variant-of",
+      "note": "Same SHFG freeze, different finger action.",
+      "source": "sun-2025-frozen"
+    },
+    {
+      "technique": "shgws",
+      "type": "related",
+      "note": "Also moves the final pick to a small hand-anchored widget."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Coded from the IJHCI full text. Confirmation coded touch (pressing a virtual key). Motor-visual space follows the MultiFingerBubble entry.",
+    "uncertain": [
+      "motorVisualSpace",
+      "handlesOcclusion",
+      "confirmation"
+    ]
+  }
+}

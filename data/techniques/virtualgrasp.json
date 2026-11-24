@@ -1,0 +1,80 @@
+{
+  "id": "virtualgrasp",
+  "name": "VirtualGrasp",
+  "aliases": [],
+  "year": 2018,
+  "summary": "Retrieves a virtual object by performing, with bare hands, the gesture one would use to grasp its physical counterpart (holding a mug, aiming a gun); a classifier maps the hand posture to the object, so no pointing or menu is needed.",
+  "howItWorks": "Both hands are tracked and their posture (16 joint positions per hand) is classified by a linear SVM trained on object-gesture pairs elicited from users; the classifier ranks the candidate objects and the three most likely are shown to choose from. Because the target is named by its shape and use rather than its position, it also works for occluded, densely packed or out-of-view objects. Study 1 (20 participants, 49 objects) found high agreement on gestures (0.68); Study 2 (12 participants, 101 gesture pairs) reached 70.96% top-1 and 89.65% top-3 accuracy; in Study 3 (12 new participants) users retrieved 76% of objects without having seen the gestures, and recalled the gestures for 93% of objects a week later.",
+  "advantages": [
+    "Self-revealing: users can guess the gesture from experience with the real object.",
+    "Independent of where the object is, so occlusion and density do not matter.",
+    "Replaces deep menus for retrieving graspable objects."
+  ],
+  "limitations": [
+    "Only works for graspable everyday objects with distinct grasps.",
+    "Similar grasps (pen vs toothbrush) get confused; top-1 accuracy is moderate.",
+    "Retrieves an object by type from a catalogue rather than pointing at a particular instance in the scene."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "other"
+    ],
+    "toolOrigin": [
+      "both-hands"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "manual"
+    ],
+    "inputModality": [
+      "hand"
+    ],
+    "confirmation": [
+      "gesture"
+    ],
+    "targetDistance": [
+      "near-distant"
+    ],
+    "handlesOcclusion": [
+      "yes"
+    ]
+  },
+  "tags": [
+    "Hand tracking",
+    "Gesture",
+    "machine learning",
+    "object retrieval"
+  ],
+  "publications": [
+    {
+      "publication": "yan-2018-virtualgrasp",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "point-and-grasp",
+      "type": "related",
+      "note": "Point & Grasp combines a grasp-gesture likelihood like this one with pointing direction."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Coded from the CHI 2018 full text. Borderline for the vault: it retrieves an object by its type (like a gesture shortcut for a menu) rather than pointing at a scene object; included because it is framed as object selection in VR and is cited as a selection technique. Gestures were captured with Perception Neuron sensors; the paper does not say whether Study 3 used a headset. How the user chose among the three candidates is not described. Target distance and motor-visual space do not really apply.",
+    "uncertain": [
+      "motorVisualSpace",
+      "targetDistance",
+      "confirmation",
+      "disambiguation"
+    ]
+  }
+}
