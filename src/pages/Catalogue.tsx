@@ -296,7 +296,8 @@ export default function Catalogue() {
                     </td>
                     <td className="nm">
                       <Link to={`/technique/${t.id}`}>{t.name}</Link>
-                      {isPreprintOnly(t) && <span className="badge badge-preprint" title="Introduced in a preprint that has not been peer reviewed yet">Preprint</span>}
+                      {' '}
+                      {isPreprintOnly(t) && <span className="badge badge-preprint" title="Introduced in a preprint that has not been peer reviewed yet">Preprint</span>}{' '}
                       <span>{t.summary}</span>
                     </td>
                     <td className="n">{t.year ?? '—'}</td>
