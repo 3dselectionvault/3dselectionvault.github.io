@@ -1,0 +1,83 @@
+{
+  "id": "magic-tap",
+  "name": "Magic-Tap",
+  "aliases": [],
+  "year": 2025,
+  "summary": "A virtual-hand selection technique that triggers from finger kinematics: when the fingertip enters a target, a characteristic deceleration pattern signals a deliberate tap, so no dwell or pinch is needed.",
+  "howItWorks": "While the fingertip is inside a target, speed and acceleration thresholds tuned in a first study separate intentional taps from passing through; a pre-trigger state and switch logic prevent accidental selections. In a second study (Meta Quest), Magic-Tap was compared with Touch, Dwell-Time and Pinch: its completion time was comparable to Touch while keeping a significantly lower error rate.",
+  "advantages": [
+    "As fast as touch with fewer accidental selections.",
+    "No explicit confirmation gesture."
+  ],
+  "limitations": [
+    "Thresholds must be tuned per user or setting.",
+    "Only for targets within reach."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr",
+      "ar"
+    ],
+    "selectionTool": [
+      "point"
+    ],
+    "toolOrigin": [
+      "hand"
+    ],
+    "motorVisualSpace": [
+      "direct"
+    ],
+    "disambiguation": [
+      "behavioural"
+    ],
+    "inputModality": [
+      "hand"
+    ],
+    "confirmation": [
+      "touch"
+    ],
+    "targetDistance": [
+      "near"
+    ],
+    "handlesOcclusion": [
+      "no"
+    ]
+  },
+  "tags": [
+    "Hand tracking",
+    "Kinematics",
+    "Intent detection"
+  ],
+  "publications": [
+    {
+      "publication": "yu-2025-magictap",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "virtual-hand",
+      "type": "extends",
+      "note": "Adds kinematic intent detection to touch-based virtual-hand selection.",
+      "source": "yu-2025-magictap"
+    },
+    {
+      "technique": "virtual-hand",
+      "type": "compared-with",
+      "note": "Compared with Touch, Dwell-Time and Pinch variants.",
+      "source": "yu-2025-magictap"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Coded from the TVCG 2025 full text. Disambiguation coded behavioural (intent inferred from motion).",
+    "uncertain": [
+      "environment",
+      "disambiguation"
+    ]
+  }
+}

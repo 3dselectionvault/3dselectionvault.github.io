@@ -1,0 +1,75 @@
+{
+  "id": "triangle-cursor",
+  "name": "Triangle Cursor",
+  "aliases": [],
+  "year": 2011,
+  "summary": "An indirect multi-touch technique for stereoscopic tabletops: two fingers on the surface form a triangle whose apex is a 3D cursor floating above the table, so objects shown above the surface can be selected without touching them.",
+  "howItWorks": "The thumb and a finger of one hand touch the surface; the cursor sits above the midpoint between them, its height set by the distance between the fingers and its yaw by their orientation, giving simultaneous control of 3D position and rotation (4 DOF) without the hand occluding the stereo image. In a formal study it was compared with Balloon Selection; users performed all tasks significantly faster with Triangle Cursor without losing precision.",
+  "advantages": [
+    "One-handed control of 3D position and height.",
+    "Avoids occluding the stereoscopic image above the surface."
+  ],
+  "limitations": [
+    "Height range is limited by finger spread.",
+    "Requires a multi-touch stereoscopic tabletop."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "projection"
+    ],
+    "selectionTool": [
+      "point"
+    ],
+    "toolOrigin": [
+      "hand"
+    ],
+    "motorVisualSpace": [
+      "offset"
+    ],
+    "disambiguation": [
+      "none"
+    ],
+    "inputModality": [
+      "touchscreen"
+    ],
+    "confirmation": [
+      "touch"
+    ],
+    "targetDistance": [
+      "near"
+    ],
+    "handlesOcclusion": [
+      "no"
+    ]
+  },
+  "tags": [
+    "Tabletop",
+    "Multi-touch",
+    "Stereoscopic"
+  ],
+  "publications": [
+    {
+      "publication": "strothoff-2011-triangle",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "balloon-selection",
+      "type": "compared-with",
+      "note": "Faster than Balloon Selection with similar precision.",
+      "source": "strothoff-2011-triangle"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Coded from the ITS 2011 full text. How a selection is confirmed is not clear from the text; confirmation coded touch.",
+    "uncertain": [
+      "confirmation"
+    ]
+  }
+}

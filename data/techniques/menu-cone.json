@@ -1,0 +1,80 @@
+{
+  "id": "menu-cone",
+  "name": "Menu Cone",
+  "aliases": [],
+  "year": 2013,
+  "summary": "Freehand two-phase selection: the hand points a cone at the target, a pull gesture confirms the candidate set, and the target is picked with a directional gesture from an eight-item marking menu.",
+  "howItWorks": "Up to eight objects inside the cone are captured when the user pulls the hand back; they appear in a marking menu, and a quick hand movement in the target's direction selects it (direction taken from hand speed exceeding a threshold), with a push gesture to cancel. Using a Kinect and a stereoscopic large display, menu cone (2.17 s) was significantly faster than marker cone (3.85 s) with no difference in errors, had lower physical demand and effort, and was preferred.",
+  "advantages": [
+    "Faster and less tiring than Marker Cone.",
+    "Only small, quick hand movements for disambiguation."
+  ],
+  "limitations": [
+    "At most eight candidates per menu.",
+    "Needs reliable gesture detection."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "projection"
+    ],
+    "selectionTool": [
+      "cone"
+    ],
+    "toolOrigin": [
+      "hand"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "manual"
+    ],
+    "inputModality": [
+      "hand"
+    ],
+    "confirmation": [
+      "gesture"
+    ],
+    "targetDistance": [
+      "far"
+    ],
+    "handlesOcclusion": [
+      "yes"
+    ]
+  },
+  "tags": [
+    "Freehand",
+    "Dense targets",
+    "Marking menu"
+  ],
+  "publications": [
+    {
+      "publication": "ren-2013-freehand",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "marker-cone",
+      "type": "compared-with",
+      "note": "Faster than Marker Cone with similar errors.",
+      "source": "ren-2013-freehand"
+    },
+    {
+      "technique": "squad",
+      "type": "related",
+      "note": "Also disambiguates through an out-of-context menu."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Coded from the Computers & Graphics full text (Study 1).",
+    "uncertain": [
+      "environment"
+    ]
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "id": "bagginghook",
+  "name": "BaggingHook",
+  "aliases": [],
+  "year": 2024,
+  "summary": "Hook with manual pruning for moving targets: a semi-transparent sphere around the cursor lets the user repeatedly 'bag' the target, discarding every object outside the sphere until few distractors remain.",
+  "howItWorks": "The user follows the moving target with a controller cursor; pressing the button prunes all objects outside a sphere centred on the cursor (sized to about a third of the scene volume at first, then shrinking), and Hook's score heuristic then picks among the remaining objects. Both build on Hook's score heuristic. Pruned distractors turn grey and semi-transparent, reducing occlusion. In a VR study (Meta Quest Pro, one controller) with molecular-dynamics-like scenes of fast, unpredictably moving objects, AutoBaggingHook was the fastest without more errors, while BaggingHook was preferred by most participants for its sense of control; both were compared with Hook.",
+  "advantages": [
+    "Users keep control of how distractors are removed.",
+    "Pruning also reduces visual occlusion in dense scenes."
+  ],
+  "limitations": [
+    "Needs several pruning presses for very dense scenes.",
+    "Slower than the automatic variant."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "volume"
+    ],
+    "toolOrigin": [
+      "hand"
+    ],
+    "motorVisualSpace": [
+      "offset"
+    ],
+    "disambiguation": [
+      "progressive"
+    ],
+    "inputModality": [
+      "controller"
+    ],
+    "confirmation": [
+      "button"
+    ],
+    "targetDistance": [
+      "near"
+    ],
+    "handlesOcclusion": [
+      "partly"
+    ]
+  },
+  "tags": [
+    "Moving targets",
+    "Dense targets",
+    "score-based",
+    "intent prediction"
+  ],
+  "publications": [
+    {
+      "publication": "boffi-2024-bagginghook",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "hook",
+      "type": "extends",
+      "note": "Adds manual distractor pruning to Hook.",
+      "source": "boffi-2024-bagginghook"
+    },
+    {
+      "technique": "hook",
+      "type": "compared-with",
+      "note": "Compared in the VR study.",
+      "source": "boffi-2024-bagginghook"
+    },
+    {
+      "technique": "autobagginghook",
+      "type": "compared-with",
+      "note": "AutoBaggingHook was faster; BaggingHook was preferred.",
+      "source": "boffi-2024-bagginghook"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Coded from the IEEE VR 2024 full text. Motor-visual space coded offset (controller-driven 3D cursor in a volume in front of the user); check against the paper.",
+    "uncertain": [
+      "motorVisualSpace"
+    ]
+  }
+}

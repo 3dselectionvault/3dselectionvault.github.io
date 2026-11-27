@@ -52,6 +52,10 @@
     {
       "publication": "benko-2007-balloon",
       "role": "introduced"
+    },
+    {
+      "publication": "strothoff-2011-triangle",
+      "role": "evaluated"
     }
   ],
   "relationships": [

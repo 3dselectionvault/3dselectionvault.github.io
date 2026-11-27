@@ -1,0 +1,74 @@
+{
+  "id": "eyes-free-acquisition",
+  "name": "Eyes-Free Target Acquisition",
+  "aliases": [],
+  "year": 2018,
+  "summary": "Acquiring virtual objects placed around the body without looking at them, relying on spatial memory and proprioception, like reaching for a gear stick while driving.",
+  "howItWorks": "Targets such as tools sit at fixed positions on a sphere around the user's body; the user reaches to the remembered location with a tracked controller and presses to acquire, without turning the head. Three studies on HTC Vive explored acceptance, pointing accuracy at different body-relative positions and a usability comparison; eyes-free acquisition was significantly faster than looking at the target, with acceptable accuracy, less fatigue and sickness, and 13 of 16 participants preferred it. The paper gives layout recommendations for eyes-free targets.",
+  "advantages": [
+    "Fast access to frequently used items without head movement.",
+    "Reduces fatigue and sickness."
+  ],
+  "limitations": [
+    "Accuracy limits how many targets fit around the body.",
+    "Users must learn the layout."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "point"
+    ],
+    "toolOrigin": [
+      "hand"
+    ],
+    "motorVisualSpace": [
+      "direct"
+    ],
+    "disambiguation": [
+      "none"
+    ],
+    "inputModality": [
+      "controller"
+    ],
+    "confirmation": [
+      "button"
+    ],
+    "targetDistance": [
+      "near"
+    ],
+    "handlesOcclusion": [
+      "yes"
+    ]
+  },
+  "tags": [
+    "Proprioception",
+    "Eyes-free",
+    "Out-of-view targets"
+  ],
+  "publications": [
+    {
+      "publication": "yan-2018-eyesfree",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "virtual-hand",
+      "type": "related",
+      "note": "A virtual-hand reach to remembered, out-of-view locations."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Coded from the CHI 2018 full text. Occlusion coded yes because targets need not be visible.",
+    "uncertain": [
+      "handlesOcclusion"
+    ]
+  }
+}

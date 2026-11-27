@@ -80,6 +80,14 @@
     {
       "publication": "winkler-2010-depth-bubble",
       "role": "evaluated"
+    },
+    {
+      "publication": "ortega-2013-hook",
+      "role": "evaluated"
+    },
+    {
+      "publication": "vanacken-2009-multimodal",
+      "role": "evaluated"
     }
   ],
   "relationships": [

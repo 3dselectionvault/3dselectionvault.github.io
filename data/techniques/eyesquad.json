@@ -1,0 +1,87 @@
+{
+  "id": "eyesquad",
+  "name": "EyeSQUAD",
+  "aliases": [],
+  "year": 2021,
+  "summary": "SQUAD driven by the eyes: a selection sphere centred where the user looks captures nearby objects, which are spread over a quad menu and narrowed down by looking at the quadrant containing the target.",
+  "howItWorks": "Eye-controlled sphere-casting picks a set of objects around the stabilised point of regard; the candidates are distributed evenly over four quadrants of an out-of-context menu, and the user refines by gazing at the quadrant with the target, each step triggered by a button press, until one object remains. Compared with ray-casting and SQUAD under different target sizes and densities, EyeSQUAD outperformed previous eye-tracking selection techniques, was more accurate than ray-casting with similar speed, and was less accurate and slower than SQUAD.",
+  "advantages": [
+    "Low precision demands make imprecise eye tracking usable for small targets.",
+    "Hands only press a button."
+  ],
+  "limitations": [
+    "Slower and less accurate than hand-based SQUAD.",
+    "Each refinement step needs a button press."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "volume"
+    ],
+    "toolOrigin": [
+      "eye"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "progressive"
+    ],
+    "inputModality": [
+      "gaze"
+    ],
+    "confirmation": [
+      "button"
+    ],
+    "targetDistance": [
+      "far"
+    ],
+    "handlesOcclusion": [
+      "partly"
+    ]
+  },
+  "tags": [
+    "Eye tracking",
+    "Progressive refinement",
+    "Dense targets"
+  ],
+  "publications": [
+    {
+      "publication": "wang-2021-eyesquad",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "squad",
+      "type": "extends",
+      "note": "Gaze-driven version of SQUAD.",
+      "source": "wang-2021-eyesquad"
+    },
+    {
+      "technique": "squad",
+      "type": "compared-with",
+      "note": "Slower and less accurate than SQUAD.",
+      "source": "wang-2021-eyesquad"
+    },
+    {
+      "technique": "raycasting",
+      "type": "compared-with",
+      "note": "More accurate than ray-casting at similar speed.",
+      "source": "wang-2021-eyesquad"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Coded from the Frontiers in VR full text. Input coded gaze; confirmation is a button press on a controller.",
+    "uncertain": [
+      "targetDistance"
+    ]
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "id": "point-and-portal",
+  "name": "Point & Portal",
+  "aliases": [],
+  "year": 2023,
+  "summary": "Action at a distance through portals placed by pointing, like Point & Teleport: instead of moving the user, a portal opens near the pointed location so distant or occluded objects can be reached and operated with the hand.",
+  "howItWorks": "Using Quest Pro controllers, the user points with a teleport-style arc to place a portal at a distant location, including beyond line of sight, and interacts through it within arm's reach; portals stay level and can be kept as persistent alternatives to teleporting. In a study pressing non-occluded and occluded buttons, Point & Portal was faster than Point & Teleport when obstacles were present, with lower cognitive load, less physical movement and fewer pointing actions, and was preferred.",
+  "advantages": [
+    "Reaches occluded targets without navigating.",
+    "Familiar pointing interaction from Point & Teleport."
+  ],
+  "limitations": [
+    "Mixes navigation and selection.",
+    "Portal views can be disorienting."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "point"
+    ],
+    "toolOrigin": [
+      "hand"
+    ],
+    "motorVisualSpace": [
+      "offset"
+    ],
+    "disambiguation": [
+      "none"
+    ],
+    "inputModality": [
+      "controller"
+    ],
+    "confirmation": [
+      "button"
+    ],
+    "targetDistance": [
+      "far"
+    ],
+    "handlesOcclusion": [
+      "yes"
+    ]
+  },
+  "tags": [
+    "Portal",
+    "Action at a distance",
+    "Occluded targets"
+  ],
+  "publications": [
+    {
+      "publication": "ablett-2023-pointportal",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "portal",
+      "type": "related",
+      "note": "Earlier portal technique for remote target acquisition."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Coded from the ISMAR 2023 full text. Borderline: action at a distance mixed with navigation; the baseline (Point & Teleport) is a navigation technique.",
+    "uncertain": [
+      "selectionTool"
+    ]
+  }
+}

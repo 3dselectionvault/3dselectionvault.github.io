@@ -1,0 +1,75 @@
+{
+  "id": "multi-finger-roi",
+  "name": "Multi-Finger Region-of-Interest Selection",
+  "aliases": [],
+  "year": 2023,
+  "summary": "Selecting an arbitrary region of a 3D surface in VR by shaping the hand: the fingers define several cutting planes whose combined volume, including concave shapes, selects that part of the model.",
+  "howItWorks": "Using a Leap Motion for bare-hand input, the user 'grasps' a shape with several fingers facing the surface; each finger defines a non-parallel infinite cutting plane, and the region bounded by them is selected, for example to edit or annotate a mesh. The selection can be refined and navigated with gestures. A user study compared it with a state-of-the-art manual ROI technique for usability and efficiency.",
+  "advantages": [
+    "Selects arch- or concave-shaped regions that boxes or spheres cannot.",
+    "Natural shape-grasping metaphor."
+  ],
+  "limitations": [
+    "Leap Motion tracking range and accuracy limit precision.",
+    "Designed for surface regions rather than individual objects."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "volume"
+    ],
+    "toolOrigin": [
+      "hand"
+    ],
+    "motorVisualSpace": [
+      "direct"
+    ],
+    "disambiguation": [
+      "manual"
+    ],
+    "inputModality": [
+      "hand"
+    ],
+    "confirmation": [
+      "gesture"
+    ],
+    "targetDistance": [
+      "near"
+    ],
+    "handlesOcclusion": [
+      "partly"
+    ]
+  },
+  "tags": [
+    "Region selection",
+    "Hand tracking",
+    "Mesh editing"
+  ],
+  "publications": [
+    {
+      "publication": "zhang-2023-multifingerroi",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "tablet-lasso",
+      "type": "related",
+      "note": "Another volume/region selection technique."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Coded from the IJHCI full text. The exact baseline technique and study results should be checked.",
+    "uncertain": [
+      "handlesOcclusion",
+      "confirmation"
+    ]
+  }
+}

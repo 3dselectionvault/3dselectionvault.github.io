@@ -1,0 +1,18 @@
+{
+  "id": "boffi-2024-bagginghook",
+  "title": "BaggingHook: Selecting Moving Targets by Pruning Distractors Away for Intention-Prediction Heuristics in Dense 3D Environments",
+  "authors": [
+    "Paolo Boffi",
+    "Alexandre Kouyoumdjian",
+    "Manuela Waldner",
+    "Pier Luca Lanzi",
+    "Ivan Viola"
+  ],
+  "year": 2024,
+  "venue": "IEEE Conference on Virtual Reality and 3D User Interfaces (VR 2024)",
+  "doi": "10.1109/VR58804.2024.00110",
+  "url": "https://doi.org/10.1109/VR58804.2024.00110",
+  "type": "paper",
+  "citation": null,
+  "bibtex": null
+}

@@ -224,6 +224,18 @@
     {
       "publication": "mun-2026-shgws",
       "role": "evaluated"
+    },
+    {
+      "publication": "wang-2021-eyesquad",
+      "role": "evaluated"
+    },
+    {
+      "publication": "dalsgaard-2021-modeling",
+      "role": "evaluated"
+    },
+    {
+      "publication": "bergstrom-2021-evaluate",
+      "role": "surveyed"
     }
   ],
   "relationships": [

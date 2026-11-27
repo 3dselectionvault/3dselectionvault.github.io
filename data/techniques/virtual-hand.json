@@ -134,6 +134,18 @@
     {
       "publication": "lystbaek-2024-handson",
       "role": "evaluated"
+    },
+    {
+      "publication": "yu-2025-magictap",
+      "role": "evaluated"
+    },
+    {
+      "publication": "moore-2019-intersection",
+      "role": "evaluated"
+    },
+    {
+      "publication": "bergstrom-2021-evaluate",
+      "role": "surveyed"
     }
   ],
   "relationships": [

@@ -1,0 +1,84 @@
+{
+  "id": "hook",
+  "name": "Hook",
+  "aliases": [],
+  "year": 2013,
+  "summary": "For selecting fast-moving targets in dense 3D scenes: while the user follows the target with the cursor, each object gains a score for staying among the closest to it, and the object with the highest score is 'hooked' and selected on release.",
+  "howItWorks": "When the button is pressed all scores reset to zero. At every frame the objects are ranked by distance to the cursor; the closest few (NCT) gain score in proportion to their rank and all others lose score, so an object that stays near the cursor over time accumulates the highest score and is highlighted with a thin link to the cursor. Releasing the button selects the hooked object. The visual feedback is deliberately minimal so the moving scene is not cluttered or paused. Two versions were evaluated: a 2-DOF mouse version on a desktop screen and a 3-DOF version with a hand-tracked 3D cursor in front of a large passive-stereo projection screen. In both, Hook had the lowest error rates (about 7%) and outperformed unassisted pointing and the Bubble Cursor at high target velocities.",
+  "advantages": [
+    "Works for small targets moving quickly and unpredictably, where pausing or enlarging cursors fail.",
+    "Adds almost no visual clutter.",
+    "Tolerates imprecise tracking because it integrates over time."
+  ],
+  "limitations": [
+    "Needs time to converge, so it can be slower for slow or static targets.",
+    "The number of candidates (NCT) must be tuned to target density and speed."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "projection",
+      "desktop"
+    ],
+    "selectionTool": [
+      "point"
+    ],
+    "toolOrigin": [
+      "hand"
+    ],
+    "motorVisualSpace": [
+      "direct"
+    ],
+    "disambiguation": [
+      "heuristic"
+    ],
+    "inputModality": [
+      "controller",
+      "mouse"
+    ],
+    "confirmation": [
+      "release"
+    ],
+    "targetDistance": [
+      "near"
+    ],
+    "handlesOcclusion": [
+      "partly"
+    ]
+  },
+  "tags": [
+    "Moving targets",
+    "Dense targets",
+    "score-based",
+    "intent prediction"
+  ],
+  "publications": [
+    {
+      "publication": "ortega-2013-hook",
+      "role": "introduced"
+    },
+    {
+      "publication": "boffi-2024-bagginghook",
+      "role": "evaluated"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "bubble-cursor",
+      "type": "compared-with",
+      "note": "Hook had lower error rates, especially for fast targets.",
+      "source": "ortega-2013-hook"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Coded from the 3DUI 2013 full text. Environment covers both studies (desktop mouse; stereo projection with a hand-tracked 3-DOF cursor). Input in the 3-DOF study was a tracked hand-held device with a button.",
+    "uncertain": [
+      "inputModality",
+      "motorVisualSpace"
+    ]
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "id": "eyeshadows",
+  "name": "EyeShadows",
+  "aliases": [],
+  "year": 2024,
+  "summary": "Gaze-only selection with peripheral copies: looking at an object makes a small copy of it appear in the periphery, and a quick glance at the copy confirms the selection, avoiding the Midas touch without dwell.",
+  "howItWorks": "When gaze rests on a selectable element, a context-specific virtual copy is shown at a peripheral position away from the target; a saccade to the copy confirms. Leader lines link copies to their targets when several are nearby, and the copies can also act as handles for sliders and other analogue controls. In a VR study with 17 participants, EyeShadows was significantly faster than dwell and also beat head-crossing and Duo-Reticles in some respects, with higher error in some conditions; MR versions were demonstrated on HoloLens 2 and Varjo XR-3.",
+  "advantages": [
+    "Hands-free and faster than dwell.",
+    "Copies show what will be selected, so poor eye-tracking accuracy matters less."
+  ],
+  "limitations": [
+    "Error rate was higher than the baselines in some conditions.",
+    "Peripheral copies need free space in the view."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr",
+      "ar"
+    ],
+    "selectionTool": [
+      "ray"
+    ],
+    "toolOrigin": [
+      "eye"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "none"
+    ],
+    "inputModality": [
+      "gaze"
+    ],
+    "confirmation": [
+      "gesture"
+    ],
+    "targetDistance": [
+      "near-distant"
+    ],
+    "handlesOcclusion": [
+      "no"
+    ]
+  },
+  "tags": [
+    "Eye tracking",
+    "Hands-free",
+    "Midas touch"
+  ],
+  "publications": [
+    {
+      "publication": "orlosky-2024-eyeshadows",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "eye-gaze-selection",
+      "type": "compared-with",
+      "note": "Faster than gaze dwell.",
+      "source": "orlosky-2024-eyeshadows"
+    },
+    {
+      "technique": "duo-reticles",
+      "type": "compared-with",
+      "note": "Compared in the VR study.",
+      "source": "orlosky-2024-eyeshadows"
+    },
+    {
+      "technique": "radi-eye",
+      "type": "compared-with",
+      "note": "Head-crossing baseline in the VR study.",
+      "source": "orlosky-2024-eyeshadows"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Coded from the IEEE VR 2024 full text. Confirmation coded gesture (a saccade to the copy). The head-crossing baseline is linked to Radi-Eye; check whether a different head-crossing technique was meant.",
+    "uncertain": [
+      "confirmation",
+      "targetDistance"
+    ]
+  }
+}

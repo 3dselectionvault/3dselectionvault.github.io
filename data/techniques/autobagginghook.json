@@ -1,0 +1,88 @@
+{
+  "id": "autobagginghook",
+  "name": "AutoBaggingHook",
+  "aliases": [],
+  "year": 2024,
+  "summary": "Hook with automatic pruning for moving targets: objects whose scores stay low are removed from consideration over time, so the candidate set shrinks without extra input.",
+  "howItWorks": "As with Hook, the user follows the moving target with a controller cursor and objects gain or lose score by their distance to it; AutoBaggingHook periodically prunes away objects with low scores, which converge faster than plain Hook in crowded, fast-moving scenes. Both build on Hook's score heuristic. Pruned distractors turn grey and semi-transparent, reducing occlusion. In a VR study (Meta Quest Pro, one controller) with molecular-dynamics-like scenes of fast, unpredictably moving objects, AutoBaggingHook was the fastest without more errors, while BaggingHook was preferred by most participants for its sense of control; both were compared with Hook.",
+  "advantages": [
+    "Fastest of the three techniques tested.",
+    "No extra actions beyond following the target."
+  ],
+  "limitations": [
+    "Less sense of control; fewer participants preferred it."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "point"
+    ],
+    "toolOrigin": [
+      "hand"
+    ],
+    "motorVisualSpace": [
+      "offset"
+    ],
+    "disambiguation": [
+      "heuristic"
+    ],
+    "inputModality": [
+      "controller"
+    ],
+    "confirmation": [
+      "release"
+    ],
+    "targetDistance": [
+      "near"
+    ],
+    "handlesOcclusion": [
+      "partly"
+    ]
+  },
+  "tags": [
+    "Moving targets",
+    "Dense targets",
+    "score-based",
+    "intent prediction"
+  ],
+  "publications": [
+    {
+      "publication": "boffi-2024-bagginghook",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "hook",
+      "type": "extends",
+      "note": "Adds automatic score-based pruning to Hook.",
+      "source": "boffi-2024-bagginghook"
+    },
+    {
+      "technique": "bagginghook",
+      "type": "variant-of",
+      "note": "Automatic counterpart of BaggingHook.",
+      "source": "boffi-2024-bagginghook"
+    },
+    {
+      "technique": "hook",
+      "type": "compared-with",
+      "note": "Faster than Hook without more errors.",
+      "source": "boffi-2024-bagginghook"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Coded from the IEEE VR 2024 full text. Confirmation coded release as in Hook; check.",
+    "uncertain": [
+      "motorVisualSpace",
+      "confirmation"
+    ]
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "id": "auto-select",
+  "name": "Auto-Select",
+  "aliases": [],
+  "year": 2013,
+  "summary": "A framework that switches between selection techniques in real time: each technique reports how suitable it is for the current scene density and object speed, and the best-suited one is used at that moment.",
+  "howItWorks": "Each technique implements a suitability index computed every frame from scene attributes such as the number of nearby objects and cursor velocity; an analyser picks the highest one. The prototype combined Bendcast (suited to sparse, slow scenes) and Expand (suited to dense, fast ones), on a 50-inch HDTV with a PlayStation Move controller. In the study, Auto-Select was significantly faster than Expand but slower than Bendcast; the authors judged the approach promising but noted that switching can introduce drawbacks.",
+  "advantages": [
+    "Combines the strengths of techniques suited to different conditions.",
+    "Extensible to any technique that can report a suitability score."
+  ],
+  "limitations": [
+    "Switching techniques mid-task can confuse users.",
+    "Slower than Bendcast in the tested scenes."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "desktop"
+    ],
+    "selectionTool": [
+      "ray",
+      "cone"
+    ],
+    "toolOrigin": [
+      "hand"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "heuristic"
+    ],
+    "inputModality": [
+      "controller"
+    ],
+    "confirmation": [
+      "button"
+    ],
+    "targetDistance": [
+      "far"
+    ],
+    "handlesOcclusion": [
+      "partly"
+    ]
+  },
+  "tags": [
+    "Adaptive",
+    "Dense targets",
+    "Moving targets"
+  ],
+  "publications": [
+    {
+      "publication": "cashion-2013-autoselect",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "expand",
+      "type": "compared-with",
+      "note": "Auto-Select was faster than Expand.",
+      "source": "cashion-2013-autoselect"
+    },
+    {
+      "technique": "bent-pick-ray",
+      "type": "related",
+      "note": "Its other component is Bendcast, a bending-ray technique."
+    },
+    {
+      "technique": "adaptique",
+      "type": "related",
+      "note": "Also adapts the selection technique to context."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Coded from the 3DUI 2013 full text. Environment coded desktop to match the vault's Expand entry (large TV, tracked controller). Bendcast is not a separate vault entry; related to Bent Pick Ray.",
+    "uncertain": [
+      "environment",
+      "selectionTool"
+    ]
+  }
+}

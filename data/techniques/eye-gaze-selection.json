@@ -110,6 +110,10 @@
     {
       "publication": "jo-2025-manual-free-gaze",
       "role": "evaluated"
+    },
+    {
+      "publication": "orlosky-2024-eyeshadows",
+      "role": "evaluated"
     }
   ],
   "relationships": [],

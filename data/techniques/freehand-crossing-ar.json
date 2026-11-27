@@ -1,0 +1,80 @@
+{
+  "id": "freehand-crossing-ar",
+  "name": "Freehand Crossing Selection (AR)",
+  "aliases": [],
+  "year": 2021,
+  "summary": "Selecting in an AR headset by crossing: a ray from the hand is swept through the target's boundary, which selects it without a separate air-tap.",
+  "howItWorks": "On a HoloLens, a ray cast from the tracked hand is moved across the target; crossing its edge selects it, so pointing and confirmation become one motion. Three studies (15 participants in the first) compared it with HoloLens head-gaze and air-tap: crossing outperformed head gaze across target arrangements on planes at different depths, was explored in radial menus and dynamic interfaces, and was used for operations in a drawing app.",
+  "advantages": [
+    "No separate confirmation gesture.",
+    "Faster than gaze-and-commit for many target layouts."
+  ],
+  "limitations": [
+    "Targets were mostly on planes; dense 3D layouts were not tested.",
+    "Crossing can trigger accidentally when passing over targets."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "ar"
+    ],
+    "selectionTool": [
+      "ray"
+    ],
+    "toolOrigin": [
+      "hand"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "none"
+    ],
+    "inputModality": [
+      "hand"
+    ],
+    "confirmation": [
+      "gesture"
+    ],
+    "targetDistance": [
+      "near-distant"
+    ],
+    "handlesOcclusion": [
+      "no"
+    ]
+  },
+  "tags": [
+    "Crossing",
+    "Hand tracking",
+    "Head-mounted AR"
+  ],
+  "publications": [
+    {
+      "publication": "uzor-2021-crossing",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "crossing-selection-vr",
+      "type": "related",
+      "note": "Crossing selection in VR with controllers."
+    },
+    {
+      "technique": "head-gaze-pointing",
+      "type": "compared-with",
+      "note": "Faster than gaze-and-commit with air-tap.",
+      "source": "uzor-2021-crossing"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Coded from the TOCHI full text. Many targets were 2D elements on planes in 3D space; check scope.",
+    "uncertain": [
+      "targetDistance"
+    ]
+  }
+}

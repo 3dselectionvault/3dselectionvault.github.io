@@ -1,0 +1,81 @@
+{
+  "id": "marker-cone",
+  "name": "Marker Cone",
+  "aliases": [],
+  "year": 2013,
+  "summary": "Freehand dense-scene selection: the hand points a cone and moves a depth marker along it, and the object closest to the marker is selected; raising the other hand confirms.",
+  "howItWorks": "Hand movement in a vertical plane steers the cone; moving the hand towards or away from the screen moves the marker along the cone's axis, combining cone-casting with the depth-marker idea of Depth Ray and the closest-object rule of the 3D Bubble Cursor. Because any motion of the pointing hand changes the selection, a 'hands up' gesture with the other hand confirms. Using a Kinect and a stereoscopic large display, menu cone (2.17 s) was significantly faster than marker cone (3.85 s) with no difference in errors, had lower physical demand and effort, and was preferred.",
+  "advantages": [
+    "One-phase selection and disambiguation.",
+    "Tolerates noisy freehand tracking."
+  ],
+  "limitations": [
+    "High physical demand; the marker is hard to control.",
+    "Slower than Menu Cone."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "projection"
+    ],
+    "selectionTool": [
+      "cone"
+    ],
+    "toolOrigin": [
+      "hand"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "manual"
+    ],
+    "inputModality": [
+      "hand"
+    ],
+    "confirmation": [
+      "gesture"
+    ],
+    "targetDistance": [
+      "far"
+    ],
+    "handlesOcclusion": [
+      "yes"
+    ]
+  },
+  "tags": [
+    "Freehand",
+    "Dense targets",
+    "Depth marker"
+  ],
+  "publications": [
+    {
+      "publication": "ren-2013-freehand",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "depth-ray",
+      "type": "extends",
+      "note": "Applies the depth marker to a cone.",
+      "source": "ren-2013-freehand"
+    },
+    {
+      "technique": "menu-cone",
+      "type": "compared-with",
+      "note": "Slower than Menu Cone.",
+      "source": "ren-2013-freehand"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Coded from the Computers & Graphics full text (Study 1). Environment coded projection (stereoscopic large display).",
+    "uncertain": [
+      "environment"
+    ]
+  }
+}

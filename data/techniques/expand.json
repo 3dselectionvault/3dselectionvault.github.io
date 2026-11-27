@@ -77,6 +77,10 @@
     {
       "publication": "luo-2026-pointgrasp",
       "role": "evaluated"
+    },
+    {
+      "publication": "cashion-2013-autoselect",
+      "role": "evaluated"
     }
   ],
   "relationships": [

@@ -1,0 +1,76 @@
+{
+  "id": "explosion-list-combination",
+  "name": "Explosion + List Combination",
+  "aliases": [],
+  "year": 2021,
+  "summary": "Combines an exploded 3D view of tightly packed cells with a linked list of cells, so users can find a cell in either and select it, with selections mirrored between the two.",
+  "howItWorks": "The exploded view (with user-controlled spacing) and the list are shown together; clicking a cell in either highlights it in both, letting users traverse neighbours in the list and check them spatially in the 3D view. In a remote study with botanists' cell-division data (a 3D view operated with the mouse on a desktop), List and Explosion performed similarly for surface cells, List was better for traversing inner cells, and most participants preferred the Combination.",
+  "advantages": [
+    "Most preferred: users could control cell distance and fall back on the list.",
+    "Linked views help traverse neighbours."
+  ],
+  "limitations": [
+    "More interface elements to manage.",
+    "Desktop, mouse-only."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "desktop"
+    ],
+    "selectionTool": [
+      "point"
+    ],
+    "toolOrigin": [
+      "screen"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "manual"
+    ],
+    "inputModality": [
+      "mouse"
+    ],
+    "confirmation": [
+      "button"
+    ],
+    "targetDistance": [
+      "near"
+    ],
+    "handlesOcclusion": [
+      "yes"
+    ]
+  },
+  "tags": [
+    "Dense targets",
+    "Exploded view",
+    "Linked views",
+    "Scientific visualization"
+  ],
+  "publications": [
+    {
+      "publication": "hong-2021-celllineage",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "explosion-selection",
+      "type": "extends",
+      "note": "Adds a linked cell list to the exploded view.",
+      "source": "hong-2021-celllineage"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Coded from the GI 2021 full text.",
+    "uncertain": [
+      "selectionTool"
+    ]
+  }
+}

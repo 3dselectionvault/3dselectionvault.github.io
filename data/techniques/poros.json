@@ -1,0 +1,83 @@
+{
+  "id": "poros",
+  "name": "Poros",
+  "aliases": [],
+  "year": 2021,
+  "summary": "Configurable proxies for distant interaction: the user marks a portion of distant space, which is mirrored as a proxy near them so objects there can be reached and handled directly by hand.",
+  "howItWorks": "With hand tracking (HTC Vive with a Leap Motion), the user marks a region of space at a distance; its content appears in a nearby proxy that is part of the scene and can be moved, rotated, scaled, anchored to objects or the body, merged and aligned. Interacting with objects inside the proxy acts on the distant originals, combining ideas from worlds-in-miniature and portals.",
+  "advantages": [
+    "Several distant places can be brought within reach at once.",
+    "Bare-hand direct interaction with distant objects."
+  ],
+  "limitations": [
+    "Mainly a system demonstration; no comparative selection study.",
+    "Proxies add clutter and must be managed."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "vr"
+    ],
+    "selectionTool": [
+      "volume",
+      "point"
+    ],
+    "toolOrigin": [
+      "hand"
+    ],
+    "motorVisualSpace": [
+      "offset"
+    ],
+    "disambiguation": [
+      "manual"
+    ],
+    "inputModality": [
+      "hand"
+    ],
+    "confirmation": [
+      "gesture"
+    ],
+    "targetDistance": [
+      "far"
+    ],
+    "handlesOcclusion": [
+      "partly"
+    ]
+  },
+  "tags": [
+    "Proxy",
+    "World in miniature",
+    "Action at a distance",
+    "Hand tracking"
+  ],
+  "publications": [
+    {
+      "publication": "pohl-2021-poros",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "portal",
+      "type": "related",
+      "note": "Also brings distant space within reach."
+    },
+    {
+      "technique": "point-and-portal",
+      "type": "related",
+      "note": "Portals for action at a distance."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Coded from the CHI 2021 full text. Borderline for the vault: covers selection and manipulation at a distance.",
+    "uncertain": [
+      "selectionTool",
+      "confirmation",
+      "handlesOcclusion"
+    ]
+  }
+}

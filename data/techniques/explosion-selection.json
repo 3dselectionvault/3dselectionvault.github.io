@@ -1,0 +1,80 @@
+{
+  "id": "explosion-selection",
+  "name": "3D Explosion Selection",
+  "aliases": [],
+  "year": 2021,
+  "summary": "For tightly packed 3D objects such as cells in a plant embryo: the user pushes all cells apart in an exploded view, controlling the spacing, so inner cells become visible and can be clicked directly.",
+  "howItWorks": "The user controls the explosion distance, which moves every cell outward from the embryo centre while keeping neighbourhoods recognisable; the user then clicks the target cell and its neighbours in the 3D view. In a remote study with botanists' cell-division data (a 3D view operated with the mouse on a desktop), List and Explosion performed similarly for surface cells, List was better for traversing inner cells, and most participants preferred the Combination.",
+  "advantages": [
+    "Reveals and lets users directly click otherwise enclosed objects.",
+    "Users can tune the spacing."
+  ],
+  "limitations": [
+    "Spreading changes spatial context.",
+    "Mouse-based desktop setup."
+  ],
+  "primaryTask": "selection",
+  "tasks": [
+    "selection"
+  ],
+  "attributes": {
+    "environment": [
+      "desktop"
+    ],
+    "selectionTool": [
+      "point"
+    ],
+    "toolOrigin": [
+      "screen"
+    ],
+    "motorVisualSpace": [
+      "remote"
+    ],
+    "disambiguation": [
+      "manual"
+    ],
+    "inputModality": [
+      "mouse"
+    ],
+    "confirmation": [
+      "button"
+    ],
+    "targetDistance": [
+      "near"
+    ],
+    "handlesOcclusion": [
+      "yes"
+    ]
+  },
+  "tags": [
+    "Dense targets",
+    "Exploded view",
+    "Scientific visualization"
+  ],
+  "publications": [
+    {
+      "publication": "hong-2021-celllineage",
+      "role": "introduced"
+    }
+  ],
+  "relationships": [
+    {
+      "technique": "explosion-list-combination",
+      "type": "compared-with",
+      "note": "The combination was preferred by most participants.",
+      "source": "hong-2021-celllineage"
+    },
+    {
+      "technique": "expanding-targets-disocclusion",
+      "type": "related",
+      "note": "Also pushes objects apart to disocclude targets."
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "notes": "Coded from the GI 2021 full text. The third technique, List selection, picks cells from a text list and is not a 3D selection technique, so it is not a separate entry.",
+    "uncertain": [
+      "selectionTool"
+    ]
+  }
+}
